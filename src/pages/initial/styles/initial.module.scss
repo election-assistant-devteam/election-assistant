@@ -1,0 +1,28 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+
+  &__contents {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+
+    &__logoBox {
+      width: 200px;
+      height: 200px;
+      background-image: url("src/assets/icons/RunningMateLogo.svg");
+      background-size: cover;
+      background-position: center;
+    }
+    &__titleBox {
+      margin-top: 1rem;
+    }
+  }
+}
