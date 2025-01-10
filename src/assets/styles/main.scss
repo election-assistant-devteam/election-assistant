@@ -1,0 +1,14 @@
+@forward "./color";
+@font-face {
+  font-family: "LINESeedKR";
+  font-weight: normal;
+  src: url("/src/assets/fonts/LINESeedKR-Bd.ttf") format("truetype");
+}
+
+* {
+  padding: 0;
+  margin: 0;
+
+  box-sizing: border-box;
+  font-family: "LINESeedKR";
+}
