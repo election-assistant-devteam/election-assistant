@@ -1,0 +1,22 @@
+.button {
+  width: 40%;
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: $color-purple-500;
+  border-radius: 10px;
+  margin-top: 3rem;
+
+  &__innerText {
+    text-align: center;
+    color: white;
+    line-height: 0;
+  }
+}
+
+// @media screen and (min-width: 375px) and (max-width: 1439px) {
+//   .button {
+//     width: 60vw;
+//   }
+// }
