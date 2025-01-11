@@ -12,7 +12,12 @@
     align-items: center;
     justify-content: center;
 
-    width: 50%;
+    @include mobile {
+      width: 60%;
+    }
+    @include desktop {
+      width: 50%;
+    }
 
     &__logoBox {
       width: 200px;
@@ -23,6 +28,10 @@
     }
     &__titleBox {
       margin-top: 1rem;
+    }
+    &__buttonBox {
+      margin-top: 7rem;
+      width: 100%;
     }
   }
 }
