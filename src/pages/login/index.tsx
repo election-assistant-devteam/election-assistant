@@ -3,6 +3,7 @@ import styles from "./styles/login.module.scss";
 import Title from "@/components/common/title/Title";
 import Button from "@/components/common/button/Button";
 import InputBox from "@/components/common/input/InputBox";
+import { Link } from "react-router-dom";
 
 function index() {
   const [id, setId] = useState<string>();
@@ -26,7 +27,9 @@ function index() {
             <Button text={"로그인"} data={[id, pw]}></Button>
             <Button text={"회원가입"} data={null}></Button>
           </div>
-          <div className={styles.page__contents__loginBox__forget}>아이디/비밀번호를 잊으셨나요?</div>
+          <Link to={"/recall"}>
+            <div className={styles.page__contents__loginBox__forget}>아이디/비밀번호를 잊으셨나요?</div>
+          </Link>
         </div>
       </div>
     </div>
