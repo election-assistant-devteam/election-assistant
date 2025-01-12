@@ -9,7 +9,7 @@ $desktop2: 1400px;
   }
 }
 @mixin desktop {
-  @media (min-width: $desktop1) and (max-width: $desktop2) {
+  @media (min-width: $desktop1) {
     @content;
   }
 }
