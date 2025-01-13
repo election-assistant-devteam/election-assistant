@@ -40,9 +40,10 @@
 
       .button {
         background-color: $color-purple-500;
+        cursor: pointer;
         color: white;
         width: 5rem;
-        height: 2.5rem;
+        height: 3rem;
         border-radius: 10px;
       }
     }
