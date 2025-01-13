@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles/recall.module.scss";
 import NavBar from "@/components/common/navigation/NavBar";
-import IdView from "./ideview";
+import IdView from "./idview";
 import PwView from "./pwview";
 
 function index() {
