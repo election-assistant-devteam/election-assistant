@@ -27,3 +27,15 @@
   color: $color-purple-500;
   margin-bottom: 0.5rem;
 }
+
+.errorMsg {
+  color: red;
+  font-size: small;
+  margin-top: 0.5rem;
+}
+
+.noErrorMsg {
+  visibility: hidden;
+  font-size: small;
+  margin-top: 0.5rem;
+}
