@@ -37,10 +37,12 @@ function index() {
   // }, [idValidation, pwValidation]);
 
   const handleLogin = async () => {
+    //아이디 and 비밀번호 정합성 체크
     if (id === undefined || pw === undefined) {
       alert("아이디나 패스워드를 입력하세요!");
       return;
     }
+
     idFormatCheck(id);
     pwFormatCheck(pw);
     const isIdValid = /^[a-zA-Z0-9]{4,12}$/.test(id); // id 유효성 체크
@@ -49,6 +51,7 @@ function index() {
     if (!isIdValid || !isPwValid) {
       return;
     }
+    //
 
     const response = await fetch("https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/login/success", {
       method: "POST",
@@ -61,6 +64,11 @@ function index() {
       }),
     });
     const result = await response.json();
+
+    if (result.ACCESS_TOKEN) {
+      //ACCESS_TOKEN 저장
+      sessionStorage.setItem("login-token", result.ACCESS_TOKEN);
+    }
 
     if (response.status === 200) {
       console.log(result);
@@ -83,7 +91,7 @@ function index() {
           <div className={idValidation ? styles.noErrorMsg : styles.errorMsg}>아이디 형식이 올바르지 않습니다 (4~12자 영문자 또는 숫자)</div>
           <div className={styles.page__contents__loginBox__label}>비밀번호</div>
           <InputBox placeHolder={"비밀번호를 입력하세요"} handleData={setPw}></InputBox>
-          <div className={pwValidation ? styles.noErrorMsg : styles.errorMsg}>비밀번호 형식이 올바르지 않습니다 (9~12자 영문자, 숫자, 특수문자 조합)</div>
+          <div className={pwValidation ? styles.noErrorMsg : styles.errorMsg}>비밀번호 형식이 올바르지 않습니다 (9~12자 영문자, 숫자 조합)</div>
           <div className={styles.page__contents__loginBox__button}>
             <Button text={"로그인"} data={[id, pw]} onClick={handleLogin}></Button>
             <Link to={"/register"}>
