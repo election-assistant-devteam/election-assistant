@@ -7,10 +7,12 @@ import { IoIosArrowForward } from "react-icons/io";
 import { LuCalendar } from "react-icons/lu";
 import { FaHotjar } from "react-icons/fa";
 import { MdArrowForwardIos } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 function index() {
   const data = "홍길동";
   const politicianName = "봉길창";
+  const navigate = useNavigate();
   return (
     <div className={styles.page}>
       <div className={styles.page__searchSection}>
@@ -61,7 +63,12 @@ function index() {
             <div className={styles.page__contents__etcSection__issueCalendar__icon}>
               <LuCalendar size="50" />
             </div>
-            <div className={styles.page__contents__etcSection__issueCalendar__text}>
+            <div
+              className={styles.page__contents__etcSection__issueCalendar__text}
+              onClick={() => {
+                navigate("/calendar");
+              }}
+            >
               이슈
               <br />
               캘린더

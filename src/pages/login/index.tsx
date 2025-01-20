@@ -63,14 +63,12 @@ function index() {
         pw: pw,
       }),
     });
-    const result = await response.json();
-
-    if (result.ACCESS_TOKEN) {
-      //ACCESS_TOKEN 저장
-      sessionStorage.setItem("login-token", result.ACCESS_TOKEN);
-    }
 
     if (response.status === 200) {
+      const result = await response.json();
+      sessionStorage.setItem("access-token", result.data.access);
+      sessionStorage.setItem("refresh-token", result.data.refresh);
+      sessionStorage.setItem("id", id);
       console.log(result);
       navigate("/main");
     }
