@@ -4,6 +4,7 @@ import NavBar from "@/components/common/navigation/NavBar";
 import InputBox from "@/components/common/input/InputBox";
 import Button from "@/components/common/button/Button";
 import RegisterSuccess from "./registersuccess";
+import { useNavigate } from "react-router-dom";
 
 function index() {
   const [email, setEmail] = useState<string>();
@@ -16,6 +17,7 @@ function index() {
   const [pwValidation, setPwValidation] = useState<boolean>(true);
   const [emailValidation, setEmailValidation] = useState<boolean>(true);
   const [pwRepeatValidation, setPwRepeatValidation] = useState<boolean>(true);
+  const navigate = useNavigate();
 
   const idFormatCheck = (id: string) => {
     const regex = /^[a-zA-Z0-9]{4,12}$/;
@@ -67,13 +69,14 @@ function index() {
 
     const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const isIdValid = /^[a-zA-Z0-9]{4,12}$/.test(id);
-    const isPwValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(pw);
+    const isPwValid = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/.test(pw);
     const isPwRepeatValid = pw === pwRepeat ? true : false;
     if (!isEmailValid || !isIdValid || !isPwValid || !isPwRepeatValid) {
       return;
     }
-
+    console.log("flag");
     const payload = {
+      nickname: nickname,
       email: email,
       id: id,
       pw: pw,
@@ -87,13 +90,17 @@ function index() {
         },
         body: JSON.stringify(payload),
       });
-      const data = await response.json();
+
+      const result = await response.json();
 
       if (response.status === 201) {
-        console.log(data);
-        setSuccess(true);
+        if (result.success === true) {
+          setSuccess(true);
+        } else if (result.success === false) {
+          alert(result.message);
+        }
       } else {
-        alert("회원가입 실패");
+        alert(`에러코드 : ${response.status}`);
       }
     } catch (error) {
       console.error("오류 발생: ", error);
@@ -116,6 +123,7 @@ function index() {
             <div className={styles.page__contents__inputBox__nicknameBox}>
               <div className={styles.label}>닉네임</div>
               <InputBox placeHolder={"닉네임을 입력하세요"} handleData={setNickname} />
+              <div className={styles.noErrorMsg}></div>
             </div>
             <div className={styles.page__contents__inputBox__idBox}>
               <div className={styles.label}>아이디</div>

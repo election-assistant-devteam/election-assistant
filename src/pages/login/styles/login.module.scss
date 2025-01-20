@@ -44,10 +44,9 @@
       &__label {
         align-self: flex-start;
         color: $color-purple-500;
-        margin-top: 0.5rem;
       }
       &__button {
-        margin-top: 2rem;
+        margin-top: 1.5rem;
         display: flex;
         flex-direction: column;
         gap: 1rem;
@@ -66,12 +65,14 @@
 
 .errorMsg {
   color: red;
-  font-size: small;
-  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
 }
 
 .noErrorMsg {
   visibility: hidden;
-  font-size: small;
-  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
 }
