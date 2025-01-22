@@ -6,6 +6,8 @@ import RecallPage from "@/pages/recall";
 import RegisterPage from "@/pages/register";
 import MainPage from "@/pages/main";
 import CalendarPage from "@/pages/calendar";
+import CandidatePage from "@/pages/candidate";
+import PoliticianPage from "@/pages/politician";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/register" element={<RegisterPage />}></Route>
         <Route path="/main" element={<MainPage />}></Route>
         <Route path="/calendar" element={<CalendarPage />}></Route>
+        <Route path="/candidate/:id" element={<CandidatePage />}></Route>
+        <Route path="/politician/:id" element={<PoliticianPage />}></Route>
       </Routes>
     </BrowserRouter>
   );
