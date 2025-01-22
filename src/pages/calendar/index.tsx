@@ -58,7 +58,7 @@ function index() {
       issues: [
         {
           id: 16,
-          name: "고양이 산책시키기",
+          name: "제 22대 대통령 선거",
           isCustom: false,
           isElection: true,
         },
@@ -241,7 +241,7 @@ function index() {
               {selectedDateEvent
                 .filter((event, index) => event.isElection === true)
                 .map((event, index) => (
-                  <div className={`${styles.page__contents__modal__body__event} ${styles.election}`} key={index}>
+                  <div className={`${styles.page__contents__modal__body__event} ${styles.election}`} key={index} onClick={() => navigate(`/candidate/${event.id}`)}>
                     {event.name}
                   </div>
                 ))}
