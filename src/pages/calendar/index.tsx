@@ -22,7 +22,7 @@ function index() {
   const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
   const navigate = useNavigate();
 
-  const [mopEvent, setMopEvent] = useState([
+  const [mockEvent, setmockEvent] = useState([
     // 서버로부터 올 이벤트 배열
     {
       date: "2024-02-24",
@@ -182,7 +182,7 @@ function index() {
   const getEvent = () => {
     //모달창을 열었을때 해당하는 날짜의 이벤트를 표시하는 메서드
     const eventArray = [];
-    mopEvent.map((item) => {
+    mockEvent.map((item) => {
       if (item.date === formatSelectedDateDash(selectedDate)) {
         item.issues.map((issue) => {
           eventArray.push(issue);
@@ -284,7 +284,7 @@ function index() {
           <Calendar
             tileContent={({ date, view }) => {
               const eventName = [];
-              mopEvent.map((e) => {
+              mockEvent.map((e) => {
                 if (e.date === formatSelectedDateDash(date)) {
                   e.issues.map((item) => {
                     eventName.push(item.name);
