@@ -280,39 +280,38 @@ function index() {
             }}
           />
         </div>
-        <div>
-          <Calendar
-            tileContent={({ date, view }) => {
-              const eventName = [];
-              mockEvent.map((e) => {
-                if (e.date === formatSelectedDateDash(date)) {
-                  e.issues.map((item) => {
-                    eventName.push(item.name);
-                  });
-                }
-              });
 
-              return (
-                <div className="eventTagBox">
-                  {eventName.map((item, index) => (
-                    <div key={index} className="eventTag">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              );
-            }}
-            value={selectedDate}
-            // onChange={(date) => {
-            //   setSelectedDate(date);
-            // }}
-            onClickDay={(date) => {
-              setSelectedDate(date);
-              setModalAvailable(true);
-            }}
-            formatDay={(locale, date) => date.toLocaleString("en", { day: "numeric" })}
-          ></Calendar>
-        </div>
+        <Calendar
+          tileContent={({ date, view }) => {
+            const eventName = [];
+            mockEvent.map((e) => {
+              if (e.date === formatSelectedDateDash(date)) {
+                e.issues.map((item) => {
+                  eventName.push(item.name);
+                });
+              }
+            });
+
+            return (
+              <div className="eventTagBox">
+                {eventName.map((item, index) => (
+                  <div key={index} className="eventTag">
+                    {item}
+                  </div>
+                ))}
+              </div>
+            );
+          }}
+          value={selectedDate}
+          // onChange={(date) => {
+          //   setSelectedDate(date);
+          // }}
+          onClickDay={(date) => {
+            setSelectedDate(date);
+            setModalAvailable(true);
+          }}
+          formatDay={(locale, date) => date.toLocaleString("en", { day: "numeric" })}
+        ></Calendar>
       </div>
     </div>
   );
