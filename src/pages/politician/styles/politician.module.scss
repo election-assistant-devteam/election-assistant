@@ -2,6 +2,9 @@
   width: 100%;
   height: 100vh;
 
+  display: flex;
+  flex-direction: column;
+
   &__contents {
     width: 100%;
     height: 100%;
@@ -104,6 +107,7 @@
 
       &__categoryBox {
         overflow: hidden;
+        user-select: none;
         &__window {
           // width: 100%;
           width: calc(20% * 6);
@@ -124,6 +128,8 @@
 
             background-color: $color-purple-300;
             border-radius: 10px;
+
+            cursor: pointer;
           }
         }
       }

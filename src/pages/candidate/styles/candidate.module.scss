@@ -25,6 +25,8 @@
         height: 7rem;
         padding: 5px;
 
+        cursor: pointer;
+
         &:hover {
           background-color: $color-purple-400;
         }

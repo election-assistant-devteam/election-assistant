@@ -66,6 +66,7 @@
 
           &.election {
             color: red;
+            cursor: pointer;
           }
           &.custom {
             color: $color-purple-500;
@@ -109,6 +110,10 @@
       padding: 5px;
 
       background-color: $color-purple-300;
+
+      &__prevArrow {
+        cursor: pointer;
+      }
     }
   }
 }
