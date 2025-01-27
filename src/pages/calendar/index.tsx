@@ -8,6 +8,10 @@ import { SlArrowLeft } from "react-icons/sl";
 import { GiCancel } from "react-icons/gi";
 import { IoIosAddCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { eventData } from "@/recoil/selectors/eventSelector";
+import { yearState } from "@/recoil/atoms/year";
+import { monthState } from "@/recoil/atoms/month";
 
 type DatePiece = Date | null;
 
@@ -21,7 +25,11 @@ interface Event {
 function index() {
   const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
   const navigate = useNavigate();
-
+  /*recoil state value*/
+  const scheduledata = useRecoilValueLoadable(eventData);
+  const yearValue = useRecoilValue(yearState);
+  const monthValue = useRecoilValue(monthState);
+  /****/
   const [mockEvent, setmockEvent] = useState([
     // 서버로부터 올 이벤트 배열
     {
@@ -278,6 +286,7 @@ function index() {
             onClick={() => {
               navigate(-1);
             }}
+            className={styles.page__contents__topBar__prevArrow}
           />
         </div>
 
