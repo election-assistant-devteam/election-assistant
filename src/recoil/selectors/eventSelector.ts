@@ -1,20 +1,18 @@
 import { selector } from "recoil";
 import { yearState } from "../atoms/year";
-import { monthState } from "../atoms/month";
 
 export const eventData = selector({
   key: "eventData",
   get: async ({ get }) => {
     const yearValue = get(yearState);
-    const monthValue = get(monthState);
 
     try {
-      const res = await fetch(`/calendar/schedules?year=${yearValue}&month=${monthValue}`, {
+      const res = await fetch(`https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/calendar/schedules?year=${yearValue}`, {
         method: "GET",
       });
       if (res.status === 200) {
-        const data = await res.json();
-        return data;
+        const result = await res.json();
+        return result.data.calendar;
       }
     } catch (e) {
       console.error(e);
