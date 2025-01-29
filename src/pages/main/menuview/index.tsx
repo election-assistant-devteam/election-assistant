@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./styles/leftbar.module.scss";
+import styles from "./styles/menuview.module.scss";
 
-import { IoNotificationsOutline } from "react-icons/io5";
 import { PiQuestionBold } from "react-icons/pi";
 import { BiEnvelope } from "react-icons/bi";
-import { IoSettingsOutline } from "react-icons/io5";
 import { MdKeyboardArrowRight } from "react-icons/md";
+import { FiSettings } from "react-icons/fi";
+import { TbBell } from "react-icons/tb";
 import BotNav from "@/components/common/botnav/BotNav";
 
 interface Props {
@@ -19,8 +19,7 @@ function index({ view, handleView }: Props) {
       <div className={styles.page__contents}>
         <div className={styles.page__contents__topNav}>
           <div className={styles.page__contents__topNav__item}>
-            <IoNotificationsOutline className={styles.page__contents__topNav__item__icon} size="40" />
-
+            <TbBell className={styles.page__contents__topNav__item__icon} size="40" />
             <div className={styles.page__contents__topNav__item__text}>공지사항</div>
           </div>
           <div className={styles.page__contents__topNav__item}>
@@ -32,7 +31,7 @@ function index({ view, handleView }: Props) {
             <div className={styles.page__contents__topNav__item__text}>1:1 문의</div>
           </div>
           <div className={styles.page__contents__topNav__item}>
-            <IoSettingsOutline className={styles.page__contents__topNav__item__icon} size="40" />
+            <FiSettings className={styles.page__contents__topNav__item__icon} size="40" />
             <div className={styles.page__contents__topNav__item__text}>설정</div>
           </div>
         </div>
@@ -74,8 +73,8 @@ function index({ view, handleView }: Props) {
             </div>
           </div>
         </div>
-        <BotNav view={view} handleView={handleView}></BotNav>
       </div>
+      <BotNav view={view} handleView={handleView}></BotNav>
     </div>
   );
 }

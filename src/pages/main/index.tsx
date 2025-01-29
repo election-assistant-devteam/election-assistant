@@ -8,7 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 function index() {
-  const [viewNum, setViewNum] = useState(1);
+  const [viewNum, setViewNum] = useState(2);
 
   const getAnimation = () => {
     switch (viewNum) {

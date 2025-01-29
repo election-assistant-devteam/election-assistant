@@ -23,28 +23,30 @@ function index({ view, handleView }: Props) {
       <div className={styles.page__contents}>
         <div className={styles.page__contents__profileSection}>
           <div className={styles.page__contents__profileSection__name}>길동님</div>
-          <div className={styles.page__contents__profileSection__prefer}>
-            <div className={styles.page__contents__profileSection__prefer__party}>
-              <div className={styles.page__contents__profileSection__prefer__party__label}>선호 정당</div>
-              <div className={styles.page__contents__profileSection__prefer__party__data}>무슨무슨당</div>
+          <div className={styles.page__contents__profileSection__dataBox}>
+            <div className={styles.page__contents__profileSection__dataBox__prefer}>
+              <div className={styles.page__contents__profileSection__dataBox__prefer__party}>
+                <div className={styles.page__contents__profileSection__dataBox__prefer__party__label}>선호 정당</div>
+                <div className={styles.page__contents__profileSection__dataBox__prefer__party__data}>무슨무슨당</div>
+              </div>
+              <div className={styles.page__contents__profileSection__dataBox__prefer__politician}>
+                <div className={styles.page__contents__profileSection__dataBox__prefer__politician__label}>선호 정치인</div>
+                <div className={styles.page__contents__profileSection__dataBox__prefer__politician__data}>봉길창</div>
+              </div>
             </div>
-            <div className={styles.page__contents__profileSection__prefer__politician}>
-              <div className={styles.page__contents__profileSection__prefer__politician__label}>선호 정치인</div>
-              <div className={styles.page__contents__profileSection__prefer__politician__data}>봉길창</div>
-            </div>
-          </div>
-          <div className={styles.page__contents__profileSection__status}>
-            <div className={styles.page__contents__profileSection__status__edit}>
-              <div className={styles.page__contents__profileSection__status__edit__text}>
+            <div className={styles.page__contents__profileSection__dataBox__info}>
+              <div className={styles.page__contents__profileSection__dataBox__info__edit} onClick={() => navigate("/edit")}>
                 <div>내 정보 수정</div>
                 <div>
                   <MdKeyboardArrowRight />
                 </div>
               </div>
-              <div className={styles.page__contents__profileSection__status__edit__logout} onClick={logout}>
+              <div className={styles.page__contents__profileSection__dataBox__info__logout} onClick={logout}>
                 로그아웃
               </div>
             </div>
+          </div>
+          <div className={styles.page__contents__profileSection__status}>
             <div className={styles.page__contents__profileSection__status__post}>
               <div className={styles.page__contents__profileSection__status__post__totalCount}>내가쓴글 8개</div>
               <div className={styles.viewAll}>
