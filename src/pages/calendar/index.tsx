@@ -4,10 +4,20 @@ import classNames from "classnames";
 // import "react-calendar/dist/Calendar.css";
 import styles from "./styles/calendar.module.scss";
 import "./styles/Calendar.scss";
-import { SlArrowLeft } from "react-icons/sl";
+// import { SlArrowLeft } from "react-icons/sl";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 import { GiCancel } from "react-icons/gi";
 import { IoIosAddCircle } from "react-icons/io";
+import { AiFillCaretRight } from "react-icons/ai";
+import { AiFillCaretLeft } from "react-icons/ai";
+import { PiCaretDoubleRightFill } from "react-icons/pi";
+import { PiCaretDoubleLeftFill } from "react-icons/pi";
+
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useRecoilValueLoadable, useSetRecoilState } from "recoil";
+import { eventData } from "@/recoil/selectors/eventSelector";
+import { yearState } from "@/recoil/atoms/year";
+import Loading from "@/components/common/loading/Loading";
 
 type DatePiece = Date | null;
 
@@ -21,73 +31,10 @@ interface Event {
 function index() {
   const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
   const navigate = useNavigate();
-
-  const [mockEvent, setmockEvent] = useState([
-    // 서버로부터 올 이벤트 배열
-    {
-      date: "2024-02-24",
-      issues: [
-        // 당일 일정을 담는 배열
-        {
-          id: 12,
-          name: "제 17대 국회의원 선거일",
-          isCustom: false,
-          isElection: true,
-        },
-      ],
-    },
-    {
-      date: "2024-02-27",
-      issues: [
-        {
-          id: 14,
-          name: "조국 판결",
-          isCustom: false,
-          isElection: true,
-        },
-        {
-          id: 15,
-          name: "판결 보러가기",
-          isCustom: true,
-          isElection: false,
-        },
-      ],
-    },
-    {
-      date: "2025-01-13",
-      issues: [
-        {
-          id: 16,
-          name: "제 22대 대통령 선거",
-          isCustom: false,
-          isElection: true,
-        },
-        {
-          id: 17,
-          name: "집회 참석하고 밥먹고 화장실가고 운동하기",
-          isCustom: true,
-          isElection: false,
-        },
-      ],
-    },
-    {
-      date: "2025-01-18",
-      issues: [
-        {
-          id: 18,
-          name: "강아지 산책",
-          isCustom: false,
-          isElection: true,
-        },
-        {
-          id: 19,
-          name: "시위 참석",
-          isCustom: true,
-          isElection: false,
-        },
-      ],
-    },
-  ]);
+  /*recoil state value*/
+  const scheduledata = useRecoilValueLoadable(eventData);
+  const yearValue = useRecoilValue(yearState);
+  const setYearValue = useSetRecoilState(yearState);
 
   const inputRef = useRef<HTMLInputElement>(null); //사용자 정의 일정 데이터
 
@@ -155,14 +102,8 @@ function index() {
 
   const deleteCustomEvent = async (eventId) => {
     //커스텀 이벤트를 삭제하는 메서드
-    const response = await fetch("https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/calendar/delete/success", {
+    const response = await fetch(`https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/calendar/schedules/delete/${eventId}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: eventId,
-      }),
     });
 
     if (response.status === 200) {
@@ -182,7 +123,7 @@ function index() {
   const getEvent = () => {
     //모달창을 열었을때 해당하는 날짜의 이벤트를 표시하는 메서드
     const eventArray = [];
-    mockEvent.map((item) => {
+    scheduledata.contents.map((item) => {
       if (item.date === formatSelectedDateDash(selectedDate)) {
         item.issues.map((issue) => {
           eventArray.push(issue);
@@ -220,71 +161,75 @@ function index() {
     }
   };
 
-  return (
-    <div className={styles.page}>
-      {modalAvailable && <div className={styles.overlay}></div>}
-      <div className={styles.page__contents}>
-        {modalAvailable && (
-          <div className={styles.page__contents__modal}>
-            <div className={styles.page__contents__modal__header}>
-              <div className={styles.page__contents__modal__header__date}>{formattedDate}</div>
-              <GiCancel
-                color="#21005d"
-                size="30"
-                className={styles.page__contents__modal__header__icon}
-                onClick={() => {
-                  setModalAvailable(false);
-                }}
-              />
-            </div>
-            <div className={styles.page__contents__modal__body} id="modal-body" ref={modalBodyHandling}>
-              {selectedDateEvent
-                .filter((event, index) => event.isElection === true)
-                .map((event, index) => (
-                  <div className={`${styles.page__contents__modal__body__event} ${styles.election}`} key={index} onClick={() => navigate(`/candidate/${event.id}`)}>
-                    {event.name}
+  if (scheduledata.state === "hasValue") {
+    // console.log(scheduledata.contents);
+    return (
+      <div className={styles.page}>
+        {modalAvailable && <div className={styles.overlay}></div>}
+        <div className={styles.page__contents}>
+          {modalAvailable && (
+            <div className={styles.page__contents__modal}>
+              <div className={styles.page__contents__modal__header}>
+                <div className={styles.page__contents__modal__header__date}>{formattedDate}</div>
+                <GiCancel
+                  color="#21005d"
+                  size="30"
+                  className={styles.page__contents__modal__header__icon}
+                  onClick={() => {
+                    setModalAvailable(false);
+                  }}
+                />
+              </div>
+              <div className={styles.page__contents__modal__body} id="modal-body" ref={modalBodyHandling}>
+                {selectedDateEvent
+                  .filter((event, index) => event.isElection === true)
+                  .map((event, index) => (
+                    <div className={`${styles.page__contents__modal__body__event} ${styles.election}`} key={index} onClick={() => navigate(`/candidate/${event.id}`)}>
+                      {event.name}
+                    </div>
+                  ))}
+                {selectedDateEvent
+                  .filter((event, index) => event.isCustom === true)
+                  .map((event, index) => (
+                    <div className={`${styles.page__contents__modal__body__event} ${styles.custom}`} key={event.id}>
+                      {event.name}
+                      <GiCancel
+                        color="#21005d"
+                        size="20"
+                        className={styles.page__contents__modal__body__event__icon}
+                        onClick={() => {
+                          void deleteCustomEvent(event.id);
+                        }}
+                      />
+                    </div>
+                  ))}
+                {writeAvailable && (
+                  <div className={styles.page__contents__modal__body__inputBox}>
+                    <input type="text" ref={inputRef} className={styles.page__contents__modal__body__inputBox__inputTag} />
+                    <button className={styles.page__contents__modal__body__inputBox__writeButton} onClick={setEvent}>
+                      추가
+                    </button>
                   </div>
-                ))}
-              {selectedDateEvent
-                .filter((event, index) => event.isCustom === true)
-                .map((event, index) => (
-                  <div className={`${styles.page__contents__modal__body__event} ${styles.custom}`} key={event.id}>
-                    {event.name}
-                    <GiCancel
-                      color="#21005d"
-                      size="20"
-                      className={styles.page__contents__modal__body__event__icon}
-                      onClick={() => {
-                        void deleteCustomEvent(event.id);
-                      }}
-                    />
-                  </div>
-                ))}
-              {writeAvailable && (
-                <div className={styles.page__contents__modal__body__inputBox}>
-                  <input type="text" ref={inputRef} className={styles.page__contents__modal__body__inputBox__inputTag} />
-                  <button className={styles.page__contents__modal__body__inputBox__writeButton} onClick={setEvent}>
-                    추가
-                  </button>
-                </div>
-              )}
+                )}
+              </div>
+              {modalChildCount <= 4 && <IoIosAddCircle color="#21005d" size="50" className={styles.addEvents} onClick={writeCustomEvent} />}
             </div>
-            {modalChildCount <= 4 && <IoIosAddCircle color="#21005d" size="50" className={styles.addEvents} onClick={writeCustomEvent} />}
+          )}
+          <div className={styles.page__contents__topBar}>
+            <MdKeyboardArrowLeft
+              color="#21005d"
+              size="30"
+              onClick={() => {
+                navigate(-1);
+              }}
+              className={styles.page__contents__topBar__prevArrow}
+            />
           </div>
-        )}
-        <div className={styles.page__contents__topBar}>
-          <SlArrowLeft
-            color="#21005d"
-            onClick={() => {
-              navigate(-1);
-            }}
-          />
-        </div>
-        <div>
+
           <Calendar
             tileContent={({ date, view }) => {
               const eventName = [];
-              mockEvent.map((e) => {
+              scheduledata.contents.map((e) => {
                 if (e.date === formatSelectedDateDash(date)) {
                   e.issues.map((item) => {
                     eventName.push(item.name);
@@ -311,11 +256,28 @@ function index() {
               setModalAvailable(true);
             }}
             formatDay={(locale, date) => date.toLocaleString("en", { day: "numeric" })}
+            onActiveStartDateChange={({ action, view, value, activeStartDate }) => {
+              //달력의 페이지의 연도가 바뀌면 yearValue atom값을 다시 셋팅해줌
+              if (activeStartDate.getFullYear() !== yearValue) {
+                setYearValue(activeStartDate.getFullYear());
+                // console.log(activeStartDate.getFullYear());
+              }
+            }}
+            prevLabel={<AiFillCaretLeft size="20" />}
+            nextLabel={<AiFillCaretRight size="20" />}
+            prev2Label={<PiCaretDoubleLeftFill size="20" />}
+            next2Label={<PiCaretDoubleRightFill size="20" />}
           ></Calendar>
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className={styles.loader}>
+        <Loading></Loading>
+      </div>
+    );
+  }
 }
 
 export default index;

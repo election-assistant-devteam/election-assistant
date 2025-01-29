@@ -1,10 +1,16 @@
 $mobile1: 320px;
-$mobile2: 900px;
+$mobile2: 430px;
 $desktop1: 901px;
 $desktop2: 1400px;
 
 @mixin mobile {
   @media (min-width: $mobile1) and (max-width: $mobile2) {
+    @content;
+  }
+}
+
+@mixin non-mobile {
+  @media (min-width: 431px) {
     @content;
   }
 }

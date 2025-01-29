@@ -12,8 +12,8 @@ function index() {
 
   const [startX, setStartX] = useState(0);
   const [endX, setEndX] = useState(0);
-  const [moveDist, setMoveDist] = useState(0);
   const [curPos, setCurPos] = useState(0);
+  // const [curPos, setCurPos] = useState(0);
 
   /** 스와이프 기능 **/
   const handleTouchStart = (e) => {
@@ -33,27 +33,47 @@ function index() {
 
     // console.log("limieLen:", limitLen);
 
-    // console.log("swipeDist:", swipeDistance);
+    setCurPos((prevPos) => {
+      const newPos = prevPos + swipeDistance;
+      // console.log("width: ", width);
+      // console.log("swipeDist:", swipeDistance);
+      // console.log("newPos: ", newPos);
+      // console.log("###", limitLen * numOfElements + 10 * (numOfElements - 1) - width);
 
-    setMoveDist((prevMoveDist) => {
-      const newMoveDist = prevMoveDist + swipeDistance;
-      // console.log("newMoveDist", newMoveDist);
-
-      if (swipeDistance > 0 && swipeDistance > (numOfElements - 1) * limitLen - prevMoveDist) {
+      if (swipeDistance > 0 && newPos > limitLen * numOfElements + 10 * (numOfElements - 1) - width) {
         //좌측이동이고 새로운 이동거리가 하나의 요소조차 남기지 못하는 경우
         //하나의 요소만 남길수있을만큼만 이동함
-        return (numOfElements - 1) * limitLen + 10 * (numOfElements - 2) + 5;
+        // return (numOfElements - 1) * limitLen + 10 * (numOfElements - 2) + 5;
+        return limitLen * numOfElements + 10 * (numOfElements - 1) - width;
       }
-
       // 스와이프 범위를 제한 (예: 0 이상, 500px 이하)
-      setCurPos(-Math.max(0, Math.min(newMoveDist, 500)));
-      console.log("curPos: ", -Math.max(0, Math.min(newMoveDist, 500)));
-      return Math.max(0, Math.min(newMoveDist, 500));
+      // setCurPos(-Math.max(0, Math.min(newMoveDist, 500)));
+      // console.log("curPos: ", -Math.max(0, Math.min(newMoveDist, 500)));
+      return Math.max(0, Math.min(newPos, 500));
     });
 
     // 초기화
     setStartX(0);
     setEndX(0);
+  };
+
+  const handleMouseDown = (e) => {
+    e.preventDefault();
+    setStartX(e.clientX);
+    setEndX(e.clientX);
+    document.addEventListener("mousemove", handleMouseMove);
+  };
+
+  const handleMouseMove = (e) => {
+    // console.log(e.clientX);
+    setEndX(e.clientX);
+  };
+
+  const handleMouseUp = (e) => {
+    // console.log(startX, ",", endX);
+    handleTouchEnd(e); // 동일한 로직 재사용
+    document.removeEventListener("mousemove", handleMouseMove);
+    document.removeEventListener("mouseup", handleMouseUp);
   };
 
   /**********************/
@@ -78,8 +98,9 @@ function index() {
 
   return (
     <div className={styles.page}>
+      <NavBar text={"후보자 상세보기"}></NavBar>
+
       <div className={styles.page__contents}>
-        <NavBar text={"후보자 상세보기"}></NavBar>
         <div className={styles.page__contents__profileBox}>
           <div className={styles.page__contents__profileBox__profile}>
             <div className={styles.page__contents__profileBox__profile__dataBox}>
@@ -106,8 +127,8 @@ function index() {
           <div className={styles.page__contents__profileBox__image}>이미지</div>
         </div>
         <div className={styles.page__contents__infoBox}>
-          <div className={styles.page__contents__infoBox__categoryBox} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-            <div className={styles.page__contents__infoBox__categoryBox__window} style={{ transform: `translateX(-${moveDist}px)`, transition: "transform 0.3s ease-in-out" }}>
+          <div className={styles.page__contents__infoBox__categoryBox} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp}>
+            <div className={styles.page__contents__infoBox__categoryBox__window} style={{ transform: `translateX(-${curPos}px)`, transition: "transform 0.3s ease-in-out" }}>
               <div
                 className={viewNum === 0 ? `${styles.page__contents__infoBox__categoryBox__window__category} ${styles.active}` : styles.page__contents__infoBox__categoryBox__window__category}
                 onClick={() => {
@@ -158,23 +179,7 @@ function index() {
               </div>
             </div>
           </div>
-          <div className={styles.page__contents__infoBox__view}>
-            {data ? <Specview viewNum={viewNum} data={data}></Specview> : "로딩 중..."}
-            {/* {(() => {
-              switch (viewNum) {
-                case 0:
-                  return data ? data.education : "로딩 중...";
-                case 1:
-                  return <p>내용 B</p>;
-                case 2:
-                  return <p>내용 C</p>;
-                case 3:
-                  return <p>내용 D</p>;
-                default:
-                  return <p>기본 내용</p>;
-              }
-            })()} */}
-          </div>
+          <div className={styles.page__contents__infoBox__view}>{data ? <Specview viewNum={viewNum} data={data}></Specview> : "로딩 중..."}</div>
         </div>
       </div>
     </div>
