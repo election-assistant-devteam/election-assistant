@@ -8,21 +8,26 @@ import MainPage from "@/pages/main";
 import CalendarPage from "@/pages/calendar";
 import CandidatePage from "@/pages/candidate";
 import PoliticianPage from "@/pages/politician";
+import EditPage from "@/pages/editprofile";
+import { RecoilRoot } from "recoil";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index path="/" element={<InitialPage />}></Route>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/recall" element={<RecallPage />}></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
-        <Route path="/main" element={<MainPage />}></Route>
-        <Route path="/calendar" element={<CalendarPage />}></Route>
-        <Route path="/candidate/:id" element={<CandidatePage />}></Route>
-        <Route path="/politician/:id" element={<PoliticianPage />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <RecoilRoot>
+      <BrowserRouter>
+        <Routes>
+          <Route index path="/" element={<InitialPage />}></Route>
+          <Route path="/login" element={<LoginPage />}></Route>
+          <Route path="/recall" element={<RecallPage />}></Route>
+          <Route path="/register" element={<RegisterPage />}></Route>
+          <Route path="/main" element={<MainPage />}></Route>
+          <Route path="/calendar" element={<CalendarPage />}></Route>
+          <Route path="/candidate/:id" element={<CandidatePage />}></Route>
+          <Route path="/politician/:id" element={<PoliticianPage />}></Route>
+          <Route path="/edit" element={<EditPage />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </RecoilRoot>
   );
 }
 

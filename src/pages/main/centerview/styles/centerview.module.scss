@@ -1,0 +1,232 @@
+.page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  &__contents {
+    width: 100%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    flex: 1;
+
+    &__searchSection {
+      width: 100%;
+      height: 40%;
+      background-color: $color-purple-200;
+      padding: 1rem;
+
+      display: flex;
+      flex-direction: column;
+
+      &__searchBar {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        background-color: white;
+        width: 100%;
+        height: 20%;
+        border-radius: 15px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        &__inputText {
+          width: 100%;
+          border: none;
+        }
+      }
+
+      &__interest {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 80%;
+
+        &__textArea {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 50%;
+          padding: 1rem;
+          gap: 5px;
+
+          color: $color-purple-500;
+          &__text {
+            font-size: 1.5rem;
+            margin-top: 5px;
+          }
+
+          &__edit {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.8rem;
+          }
+        }
+        &__imageArea {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          align-items: center;
+
+          padding: 10px;
+          width: 50%;
+          height: 100%;
+
+          &__image {
+            z-index: 1;
+            margin-top: 20px;
+            @include mobile {
+              width: auto;
+              height: 80%;
+            }
+            @include desktop {
+              width: auto;
+              height: 80%;
+            }
+          }
+          &__nameTag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+            margin-top: -20px;
+
+            border-radius: 10px;
+            color: white;
+            background-color: $color-purple-500;
+            @include mobile {
+              width: calc(158.88px * 1.2);
+              height: 3rem;
+              line-height: 3rem;
+            }
+            @include desktop {
+              width: calc(158.88px * 1.2);
+              height: 3rem;
+              line-height: 3rem;
+            }
+          }
+        }
+      }
+    }
+    //
+    &__dataSection {
+      width: 100%;
+      height: 65%;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1rem;
+
+      justify-content: start;
+      align-items: center;
+
+      &__newsContainer {
+        width: 100%;
+        height: 40%;
+        padding: 1rem;
+        background-color: $color-purple-400;
+        border-radius: 15px;
+        box-shadow: 0px 4px 8px $color-gray-100;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &__head {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          color: white;
+
+          &__title {
+          }
+        }
+        &__body {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+        &__foot {
+          display: flex;
+          flex-direction: row;
+          gap: 5px;
+
+          color: white;
+        }
+      }
+
+      &__etcContainer {
+        width: 100%;
+        height: 60%;
+        gap: 1rem;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        &__issueCalendar {
+          width: 40%;
+          height: 100%;
+          padding: 1rem;
+          border-radius: 15px;
+          box-shadow: 0px 4px 8px $color-gray-100;
+          color: $color-purple-500;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          cursor: pointer;
+
+          &__text {
+            font-size: 2rem;
+          }
+        }
+        &__community {
+          width: 60%;
+          height: 100%;
+          padding: 1rem;
+          border-radius: 15px;
+          box-shadow: 0px 4px 8px $color-gray-100;
+          background-color: $color-purple-200;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          &__head {
+            font-size: 1.5rem;
+            color: $color-purple-500;
+          }
+
+          &__hot {
+            display: flex;
+            flex-direction: column;
+
+            &__title {
+              color: $color-purple-400;
+
+              display: flex;
+              flex-direction: row;
+              gap: 5px;
+            }
+          }
+          &__foot {
+            color: $color-purple-400;
+
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+          }
+        }
+      }
+    }
+  }
+}
