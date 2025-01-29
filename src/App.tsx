@@ -8,6 +8,7 @@ import MainPage from "@/pages/main";
 import CalendarPage from "@/pages/calendar";
 import CandidatePage from "@/pages/candidate";
 import PoliticianPage from "@/pages/politician";
+import EditPage from "@/pages/editprofile";
 import { RecoilRoot } from "recoil";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/calendar" element={<CalendarPage />}></Route>
           <Route path="/candidate/:id" element={<CandidatePage />}></Route>
           <Route path="/politician/:id" element={<PoliticianPage />}></Route>
+          <Route path="/edit" element={<EditPage />}></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
