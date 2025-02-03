@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles/centerview.module.scss";
 import { FaSearch } from "react-icons/fa";
 import { FiSettings } from "react-icons/fi";
@@ -17,7 +17,21 @@ interface Props {
 function index({ view, handleView }: Props) {
   const data = "홍길동";
   const politicianName = "봉길창";
+  const [newsData, setNewsData] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("/news_data.json")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        setNewsData(data);
+      })
+      .catch((error) => console.error("Error loading news_data", error));
+  }, []);
+
   return (
     <div className={styles.page}>
       <div className={styles.page__contents}>
@@ -51,14 +65,16 @@ function index({ view, handleView }: Props) {
           <div className={styles.page__contents__dataSection__newsContainer}>
             <div className={styles.page__contents__dataSection__newsContainer__head}>
               <div className={styles.page__contents__dataSection__newsContainer__head__title}>맞춤 뉴스</div>
-              <FiSettings />
+              {/* <FiSettings /> */}
             </div>
             <div className={styles.page__contents__dataSection__newsContainer__body}>
-              <div className={styles.page__contents__dataSection__newsContainer__body__image}>이미지</div>
-              <div className={styles.page__contents__dataSection__newsContainer__body__newsTitle}>뉴스제목</div>
+              <img src={newsData?.[0]?.image?.replace("./", "/")} alt="" className={styles.page__contents__dataSection__newsContainer__body__image} />
+              <div className={styles.page__contents__dataSection__newsContainer__body__newsTitle}>{newsData?.[0]?.title}</div>
             </div>
             <div className={styles.page__contents__dataSection__newsContainer__foot}>
-              <div className={styles.page__contents__dataSection__newsContainer__foot__text}>더 많은 뉴스 보기</div>
+              <div className={styles.page__contents__dataSection__newsContainer__foot__text} onClick={() => navigate("/news", { state: newsData })}>
+                더 많은 뉴스 보기
+              </div>
               <div className={styles.page__contents__dataSection__newsContainer__foot__icon}>
                 <MdArrowForwardIos />
               </div>
