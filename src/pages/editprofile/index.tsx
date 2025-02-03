@@ -22,10 +22,11 @@ function index() {
 
   const [modalAvailable, setModalAvailable] = useState<boolean>(false);
   const [modalType, setModalType] = useState<string>();
+  const [modalData, setModalData] = useState<string>();
 
   const idFormatCheck = (id: string) => {
     const regex = /^[a-zA-Z0-9]{4,12}$/;
-    if (!regex.test(id)) {
+    if (!regex.test(id) || id === undefined) {
       setIdValidation(false);
     } else {
       setIdValidation(true);
@@ -50,14 +51,25 @@ function index() {
     if (isEditPw) {
       pwFormatCheck(pw);
     }
-    const isIdValid = /^[a-zA-Z0-9]{4,12}$/.test(id); // id 유효성 체크
-    const isPwValid = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/.test(pw); // pw 유효성 체크
 
-    if (!isIdValid || !isPwValid) {
-      return;
+    if (isEditId) {
+      const isIdValid = /^[a-zA-Z0-9]{4,12}$/.test(id); // id 유효성 체크
+      if (!isIdValid) {
+        return;
+      }
+    }
+    if (isEditPw) {
+      const isPwValid = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/.test(pw); // pw 유효성 체크
+      if (!isPwValid) {
+        return;
+      }
     }
 
-    const response = await fetch(`https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/edit/${prevId}`, {
+    // if (!isIdValid || !isPwValid) {
+    //   return;
+    // }
+
+    const response = await fetch(`https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/edit/info?id=${prevId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,6 +83,27 @@ function index() {
 
     if (response.status === 200) {
       alert("수정완료 되었습니다!");
+    } else {
+      console.error(response.status);
+    }
+  };
+
+  const updateInterest = async () => {
+    const response = await fetch(`https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/edit/interest?id=${prevId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        party: preferParty,
+        politician: preferPolitician,
+      }),
+    });
+
+    if (response.status === 200) {
+      alert("수정완료 되었습니다!");
+    } else {
+      console.error(response.status);
     }
   };
 
@@ -88,7 +121,7 @@ function index() {
     <div className={styles.page}>
       <NavBar text="내 정보 수정"></NavBar>
       {modalAvailable && <div className={styles.overlay}></div>}
-      {modalAvailable && <Modal type={modalType} available={(val: boolean) => setModalAvailable(val)}></Modal>}
+      {modalAvailable && <Modal type={modalType} available={(val: boolean) => setModalAvailable(val)} data={modalType === "정당" ? setPreferParty : setPreferPolitician}></Modal>}
 
       <div className={styles.page__contents}>
         <div className={styles.page__contents__infoBox}>
@@ -116,17 +149,20 @@ function index() {
           <div className={styles.page__contents__preferBox__title}>나의 관심사 수정</div>
           <div className={styles.page__contents__preferBox__body}>
             <div className={styles.page__contents__preferBox__body__editParty}>
-              <div className={styles.page__contents__preferBox__body__editParty__label}> 관심 정당</div>
-              <InputBox placeHolder="관심 정당" handleData={setPreferParty}></InputBox>
+              <div className={styles.page__contents__preferBox__body__editParty__label}>관심 정당</div>
+              <input className={styles.page__contents__preferBox__body__editParty__text} placeholder={preferParty} readOnly />
+              {/* <InputBox placeHolder={preferParty} handleData={setPreferParty}></InputBox> */}
               <Button text="수정하기" onClick={openPartyModal}></Button>
             </div>
             <div className={styles.page__contents__preferBox__body__editPolitician}>
-              <div className={styles.page__contents__preferBox___body_editPolitician__label}>관심 정치인</div>
-              <InputBox placeHolder="관심 정치인" handleData={setPreferPolitician}></InputBox>
+              <div className={styles.page__contents__preferBox__body__editPolitician__label}>관심 정치인</div>
+              <input className={styles.page__contents__preferBox__body__editPolitician__text} placeholder={preferPolitician} readOnly />
+
+              {/* <InputBox placeHolder={preferPolitician} handleData={setPreferPolitician}></InputBox> */}
               <Button text="수정하기" onClick={openPoliticianModal}></Button>
             </div>
           </div>
-          <Button text="수정완료"></Button>
+          <Button text="수정완료" onClick={updateInterest}></Button>
         </div>
       </div>
     </div>

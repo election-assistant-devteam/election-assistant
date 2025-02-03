@@ -37,37 +37,37 @@ function index({ view, handleView }: Props) {
         </div>
         <div className={styles.page__contents__menuList}>
           <div className={styles.page__contents__menuList__item}>
-            <div className={styles.page__contents__menuList__item__text}>A</div>
+            <div className={styles.page__contents__menuList__item__text}></div>
             <div className={styles.page__contents__menuList__item__icon}>
               <MdKeyboardArrowRight size="40" />
             </div>
           </div>
           <div className={styles.page__contents__menuList__item}>
-            <div className={styles.page__contents__menuList__item__text}>B</div>
+            <div className={styles.page__contents__menuList__item__text}></div>
             <div className={styles.page__contents__menuList__item__icon}>
               <MdKeyboardArrowRight size="40" />
             </div>
           </div>
           <div className={styles.page__contents__menuList__item}>
-            <div className={styles.page__contents__menuList__item__text}>C</div>
+            <div className={styles.page__contents__menuList__item__text}></div>
             <div className={styles.page__contents__menuList__item__icon}>
               <MdKeyboardArrowRight size="40" />
             </div>
           </div>
           <div className={styles.page__contents__menuList__item}>
-            <div className={styles.page__contents__menuList__item__text}>D</div>
+            <div className={styles.page__contents__menuList__item__text}></div>
             <div className={styles.page__contents__menuList__item__icon}>
               <MdKeyboardArrowRight size="40" />
             </div>
           </div>
           <div className={styles.page__contents__menuList__item}>
-            <div className={styles.page__contents__menuList__item__text}>EEEEEEEEEE</div>
+            <div className={styles.page__contents__menuList__item__text}></div>
             <div className={styles.page__contents__menuList__item__icon}>
               <MdKeyboardArrowRight size="40" />
             </div>
           </div>
           <div className={styles.page__contents__menuList__item}>
-            <div className={styles.page__contents__menuList__item__text}>FFFFFFFFF</div>
+            <div className={styles.page__contents__menuList__item__text}></div>
             <div className={styles.page__contents__menuList__item__icon}>
               <MdKeyboardArrowRight size="40" />
             </div>
