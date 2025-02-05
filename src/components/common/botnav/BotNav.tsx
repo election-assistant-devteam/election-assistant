@@ -18,9 +18,25 @@ function BotNav({ view, handleView }: Props) {
     <div className={styles.page}>
       <div className={styles.page__contents}>
         <div className={styles.page__contents__navBox}>
-          <div className={styles.page__contents__navBox__button}>{view === 0 ? <IoDocumentText size="30" color="#21005d" /> : <IoDocumentTextOutline size="30" color="#21005d" onClick={() => handleView(0)} />}</div>
-          <div className={styles.page__contents__navBox__button}>{view === 1 ? <GoHomeFill size="30" color="#21005d" /> : <GoHome size="30" color="#21005d" onClick={() => handleView(1)} />}</div>
-          <div className={styles.page__contents__navBox__button}>{view === 2 ? <MdPerson size="30" color="#21005d" /> : <MdOutlinePerson size="30" color="#21005d" onClick={() => handleView(2)} />}</div>
+          <div className={styles.page__contents__navBox__button}>
+            {view === 0 ? (
+              <IoDocumentText size="30" color="#21005d" />
+            ) : (
+              <IoDocumentTextOutline
+                size="30"
+                color="#21005d"
+                onClick={() => {
+                  handleView(0);
+                }}
+              />
+            )}
+          </div>
+          <div className={styles.page__contents__navBox__button}>
+            {view === 1 ? <GoHomeFill size="30" color="#21005d" /> : <GoHome size="30" color="#21005d" onClick={() => handleView(1)} />}
+          </div>
+          <div className={styles.page__contents__navBox__button}>
+            {view === 2 ? <MdPerson size="30" color="#21005d" /> : <MdOutlinePerson size="30" color="#21005d" onClick={() => handleView(2)} />}
+          </div>
         </div>
       </div>
     </div>

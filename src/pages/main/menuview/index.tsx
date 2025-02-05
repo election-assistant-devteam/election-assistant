@@ -7,6 +7,7 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { FiSettings } from "react-icons/fi";
 import { TbBell } from "react-icons/tb";
 import BotNav from "@/components/common/botnav/BotNav";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   view: number;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 function index({ view, handleView }: Props) {
+  const navigate = useNavigate();
   return (
     <div className={styles.page}>
       <div className={styles.page__contents}>
@@ -22,11 +24,11 @@ function index({ view, handleView }: Props) {
             <TbBell className={styles.page__contents__topNav__item__icon} size="40" />
             <div className={styles.page__contents__topNav__item__text}>공지사항</div>
           </div>
-          <div className={styles.page__contents__topNav__item}>
+          <div className={styles.page__contents__topNav__item} onClick={() => navigate("/faq")}>
             <PiQuestionBold className={styles.page__contents__topNav__item__icon} size="40" />
             <div className={styles.page__contents__topNav__item__text}>FAQ</div>
           </div>
-          <div className={styles.page__contents__topNav__item}>
+          <div className={styles.page__contents__topNav__item} onClick={() => navigate("/inquiry")}>
             <BiEnvelope className={styles.page__contents__topNav__item__icon} size="40" />
             <div className={styles.page__contents__topNav__item__text}>1:1 문의</div>
           </div>
