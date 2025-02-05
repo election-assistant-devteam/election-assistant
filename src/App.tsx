@@ -10,6 +10,8 @@ import CandidatePage from "@/pages/candidate";
 import PoliticianPage from "@/pages/politician";
 import EditPage from "@/pages/editprofile";
 import NewsPage from "@/pages/news";
+import FaqPage from "@/pages/faq";
+import InquiryPage from "@/pages/inquiry";
 import { RecoilRoot } from "recoil";
 
 function App() {
@@ -27,6 +29,8 @@ function App() {
           <Route path="/politician/:id" element={<PoliticianPage />}></Route>
           <Route path="/edit" element={<EditPage />}></Route>
           <Route path="/news" element={<NewsPage />}></Route>
+          <Route path="/faq" element={<FaqPage />}></Route>
+          <Route path="/inquiry" element={<InquiryPage />}></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>

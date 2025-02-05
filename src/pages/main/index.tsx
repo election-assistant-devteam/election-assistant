@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function index() {
   const [viewNum, setViewNum] = useState(1);
+  // const [prevViewNum, setPrevViewNum] = useState<number>();
 
   const getAnimation = () => {
     switch (viewNum) {
@@ -58,7 +59,14 @@ function index() {
   return (
     <div className={styles.container}>
       <AnimatePresence mode="wait">
-        <motion.div key={viewNum} initial={getAnimation().initial} animate={getAnimation().animate} exit={getAnimation().exit} transition={{ duration: 0.5 }} className={styles.viewContainer}>
+        <motion.div
+          key={viewNum}
+          initial={getAnimation().initial}
+          animate={getAnimation().animate}
+          exit={getAnimation().exit}
+          transition={{ duration: 0.5 }}
+          className={styles.viewContainer}
+        >
           {renderView()}
         </motion.div>
       </AnimatePresence>
