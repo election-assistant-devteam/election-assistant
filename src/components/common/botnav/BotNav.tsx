@@ -7,35 +7,65 @@ import { GoHome } from "react-icons/go";
 import { MdOutlinePerson } from "react-icons/md";
 import { MdPerson } from "react-icons/md";
 
-interface Props {
-  view: number;
-  handleView: (viewNum: number) => void;
-}
+import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
+import { curMainNum } from "@/recoil/atoms/curMainNum";
+import { prevMainNum } from "@/recoil/atoms/prevMainNum";
 
-function BotNav({ view, handleView }: Props) {
+// interface Props {
+//   view: number;
+//   handleView: (viewNum: number) => void;
+// }
+
+function BotNav() {
   // console.log(view);
+  const [curView, setCurView] = useRecoilState(curMainNum);
+  const [prevView, setPrevView] = useRecoilState(prevMainNum);
+
   return (
     <div className={styles.page}>
       <div className={styles.page__contents}>
         <div className={styles.page__contents__navBox}>
           <div className={styles.page__contents__navBox__button}>
-            {view === 0 ? (
+            {curView === 0 ? (
               <IoDocumentText size="30" color="#21005d" />
             ) : (
               <IoDocumentTextOutline
                 size="30"
                 color="#21005d"
                 onClick={() => {
-                  handleView(0);
+                  setPrevView(curView);
+                  setCurView(0);
                 }}
               />
             )}
           </div>
           <div className={styles.page__contents__navBox__button}>
-            {view === 1 ? <GoHomeFill size="30" color="#21005d" /> : <GoHome size="30" color="#21005d" onClick={() => handleView(1)} />}
+            {curView === 1 ? (
+              <GoHomeFill size="30" color="#21005d" />
+            ) : (
+              <GoHome
+                size="30"
+                color="#21005d"
+                onClick={() => {
+                  setPrevView(curView);
+                  setCurView(1);
+                }}
+              />
+            )}
           </div>
           <div className={styles.page__contents__navBox__button}>
-            {view === 2 ? <MdPerson size="30" color="#21005d" /> : <MdOutlinePerson size="30" color="#21005d" onClick={() => handleView(2)} />}
+            {curView === 2 ? (
+              <MdPerson size="30" color="#21005d" />
+            ) : (
+              <MdOutlinePerson
+                size="30"
+                color="#21005d"
+                onClick={() => {
+                  setPrevView(curView);
+                  setCurView(2);
+                }}
+              />
+            )}
           </div>
         </div>
       </div>

@@ -9,12 +9,12 @@ import { MdArrowForwardIos } from "react-icons/md";
 import BotNav from "@/components/common/botnav/BotNav";
 import { useNavigate } from "react-router-dom";
 
-interface Props {
-  view: number;
-  handleView: (viewNum: number) => void;
-}
+// interface Props {
+//   view: number;
+//   handleView: (viewNum: number) => void;
+// }
 
-function index({ view, handleView }: Props) {
+function index() {
   const data = "홍길동";
   const politicianName = "봉길창";
   const [newsData, setNewsData] = useState(null);
@@ -56,7 +56,11 @@ function index({ view, handleView }: Props) {
               </div>
             </div>
             <div className={styles.page__contents__searchSection__interest__imageArea}>
-              <img src="/src/assets/images/sample.jpg" alt="선호정치인 사진" className={styles.page__contents__searchSection__interest__imageArea__image}></img>
+              <img
+                src="/src/assets/images/sample.jpg"
+                alt="선호정치인 사진"
+                className={styles.page__contents__searchSection__interest__imageArea__image}
+              ></img>
               <div className={styles.page__contents__searchSection__interest__imageArea__nameTag}>{politicianName}</div>
             </div>
           </div>
@@ -125,8 +129,7 @@ function index({ view, handleView }: Props) {
           </div>
         </div>
       </div>
-
-      <BotNav view={view} handleView={handleView}></BotNav>
+      <BotNav></BotNav>
     </div>
   );
 }

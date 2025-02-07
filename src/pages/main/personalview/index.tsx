@@ -4,12 +4,7 @@ import BotNav from "@/components/common/botnav/BotNav";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-interface Props {
-  view: number;
-  handleView: (viewNum: number) => void;
-}
-
-function index({ view, handleView }: Props) {
+function index() {
   const navigate = useNavigate();
 
   const logout = () => {
@@ -94,7 +89,7 @@ function index({ view, handleView }: Props) {
           </div>
         </div>
       </div>
-      <BotNav view={view} handleView={handleView}></BotNav>
+      <BotNav></BotNav>
     </div>
   );
 }
