@@ -9,12 +9,12 @@ import { TbBell } from "react-icons/tb";
 import BotNav from "@/components/common/botnav/BotNav";
 import { useNavigate } from "react-router-dom";
 
-interface Props {
-  view: number;
-  handleView: (viewNum: number) => void;
-}
+// interface Props {
+//   view: number;
+//   handleView: (viewNum: number) => void;
+// }
 
-function index({ view, handleView }: Props) {
+function index() {
   const navigate = useNavigate();
   return (
     <div className={styles.page}>
@@ -76,7 +76,7 @@ function index({ view, handleView }: Props) {
           </div>
         </div>
       </div>
-      <BotNav view={view} handleView={handleView}></BotNav>
+      <BotNav></BotNav>
     </div>
   );
 }

@@ -104,7 +104,14 @@ function Modal({ type, available, data }: Props) {
             />
           </div>
           <div className={styles.page__contents__head__inputBox}>
-            <input type="text" placeholder={`검색할 ${type}을 입력하세요`} value={inputValue} onChange={changeInputValue} onKeyUp={handleDropDownKey} className={styles.page__contents__head__inputBox__input} />
+            <input
+              type="text"
+              placeholder={`검색할 ${type}을 입력하세요`}
+              value={inputValue}
+              onChange={changeInputValue}
+              onKeyUp={handleDropDownKey}
+              className={styles.page__contents__head__inputBox__input}
+            />
             <FaSearch size="25" color="#21005d" className={styles.page__contents__head__inputBox__icon}></FaSearch>
           </div>
           {isHaveInputValue && (
@@ -113,7 +120,11 @@ function Modal({ type, available, data }: Props) {
               {dropDownList.map((dropDownItem, dropDownIndex) => {
                 return (
                   <div
-                    className={dropDownItemIndex === dropDownIndex ? `${styles.page__contents__head__dropDownBox__dropDownItem} ${styles.active}` : `${styles.page__contents__head__dropDownBox__dropDownItem}`}
+                    className={
+                      dropDownItemIndex === dropDownIndex
+                        ? `${styles.page__contents__head__dropDownBox__dropDownItem} ${styles.active}`
+                        : `${styles.page__contents__head__dropDownBox__dropDownItem}`
+                    }
                     key={dropDownIndex}
                     onClick={() => clickDropDownItem(dropDownItem)}
                     onMouseOver={() => setDropDownItemIndex(dropDownIndex)}
@@ -133,7 +144,7 @@ function Modal({ type, available, data }: Props) {
               available(false);
             }}
           >
-            관심 정당으로 선택하기
+            관심 {type}으로 선택하기
           </button>
         </div>
       </div>

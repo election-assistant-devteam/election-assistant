@@ -4,15 +4,22 @@ import MenuView from "./menuview/index";
 import CenterView from "./centerview/index";
 import PersonalView from "./personalview/index";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
+import { curMainNum } from "@/recoil/atoms/curMainNum";
+import { prevMainNum } from "@/recoil/atoms/prevMainNum";
 
 import { useNavigate } from "react-router-dom";
 
 function index() {
-  const [viewNum, setViewNum] = useState(1);
-  // const [prevViewNum, setPrevViewNum] = useState<number>();
+  const [prevView, setPrevView] = useRecoilState(prevMainNum);
+  const [curView, setCurView] = useRecoilState(curMainNum);
+  // console.log("--------------------");
+  // console.log("prevView:", prevView);
+  // console.log("curView:", curView);
+  // console.log("--------------------");
 
   const getAnimation = () => {
-    switch (viewNum) {
+    switch (curView) {
       case 0:
         return {
           initial: { x: "-100%", opacity: 0 },
@@ -20,14 +27,27 @@ function index() {
           exit: { x: "-100%", opacity: 0 },
         };
       case 1:
-        return {
-          // initial: { scale: 0.5, opacity: 0 },
-          // animate: { scale: 1, opacity: 1 },
-          // exit: { scale: 0.5, opacity: 0 },
-          initial: { y: "-100%", opacity: 0 },
-          animate: { y: 0, opacity: 1 },
-          exit: { y: "-100%", opacity: 0 },
-        };
+        if (prevView < curView) {
+          return {
+            initial: { x: "100%", opacity: 0 },
+            animate: { x: 0, opacity: 1 },
+            exit: { x: "-100%", opacity: 0 },
+          };
+        } else if (prevView > curView) {
+          return {
+            initial: { x: "-100%", opacity: 0 },
+            animate: { x: 0, opacity: 1 },
+            exit: { x: "100%", opacity: 0 },
+          };
+        }
+      // return {
+      //   // initial: { scale: 0.5, opacity: 0 },
+      //   // animate: { scale: 1, opacity: 1 },
+      //   // exit: { scale: 0.5, opacity: 0 },
+      //   initial: { y: "-100%", opacity: 0 },
+      //   animate: { y: 0, opacity: 1 },
+      //   exit: { y: "-100%", opacity: 0 },
+      // };
       case 2:
         return {
           initial: { x: "100%", opacity: 0 },
@@ -44,13 +64,13 @@ function index() {
   };
 
   const renderView = () => {
-    switch (viewNum) {
+    switch (curView) {
       case 0:
-        return <MenuView view={viewNum} handleView={setViewNum} />;
+        return <MenuView />;
       case 1:
-        return <CenterView view={viewNum} handleView={setViewNum} />;
+        return <CenterView />;
       case 2:
-        return <PersonalView view={viewNum} handleView={setViewNum}></PersonalView>;
+        return <PersonalView></PersonalView>;
       default:
         return <p>잘못된 viewNum입니다.</p>;
     }
@@ -60,7 +80,7 @@ function index() {
     <div className={styles.container}>
       <AnimatePresence mode="wait">
         <motion.div
-          key={viewNum}
+          key={curView}
           initial={getAnimation().initial}
           animate={getAnimation().animate}
           exit={getAnimation().exit}
