@@ -24,15 +24,15 @@ function index() {
   const [modalType, setModalType] = useState<string>();
   const [modalData, setModalData] = useState<string>();
 
-  const idFormatCheck = (id: string) => {
-    const regex = /^[a-zA-Z0-9]{4,12}$/;
-    if (!regex.test(id) || id === undefined) {
-      setIdValidation(false);
-    } else {
-      setIdValidation(true);
-    }
-    return;
-  };
+  // const idFormatCheck = (id: string) => {
+  //   const regex = /^[a-zA-Z0-9]{4,12}$/;
+  //   if (!regex.test(id) || id === undefined) {
+  //     setIdValidation(false);
+  //   } else {
+  //     setIdValidation(true);
+  //   }
+  //   return;
+  // };
 
   const pwFormatCheck = (pw: string) => {
     const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/;
@@ -45,29 +45,25 @@ function index() {
   };
 
   const updateInfo = async () => {
-    if (isEditId) {
-      idFormatCheck(id);
-    }
+    // if (isEditId) {
+    //   idFormatCheck(id);
+    // }
     if (isEditPw) {
       pwFormatCheck(pw);
     }
 
-    if (isEditId) {
-      const isIdValid = /^[a-zA-Z0-9]{4,12}$/.test(id); // id 유효성 체크
-      if (!isIdValid) {
-        return;
-      }
-    }
+    // if (isEditId) {
+    //   const isIdValid = /^[a-zA-Z0-9]{4,12}$/.test(id); // id 유효성 체크
+    //   if (!isIdValid) {
+    //     return;
+    //   }
+    // }
     if (isEditPw) {
       const isPwValid = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/.test(pw); // pw 유효성 체크
       if (!isPwValid) {
         return;
       }
     }
-
-    // if (!isIdValid || !isPwValid) {
-    //   return;
-    // }
 
     const response = await fetch(`https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/edit/info?id=${prevId}`, {
       method: "POST",
@@ -121,26 +117,40 @@ function index() {
     <div className={styles.page}>
       <NavBar text="내 정보 수정"></NavBar>
       {modalAvailable && <div className={styles.overlay}></div>}
-      {modalAvailable && <Modal type={modalType} available={(val: boolean) => setModalAvailable(val)} data={modalType === "정당" ? setPreferParty : setPreferPolitician}></Modal>}
+      {modalAvailable && (
+        <Modal
+          type={modalType}
+          available={(val: boolean) => setModalAvailable(val)}
+          data={modalType === "정당" ? setPreferParty : setPreferPolitician}
+        ></Modal>
+      )}
 
       <div className={styles.page__contents}>
         <div className={styles.page__contents__infoBox}>
           <div className={styles.page__contents__infoBox__title}>내 정보 수정</div>
           <div className={styles.page__contents__infoBox__body}>
-            <div className={styles.page__contents__infoBox__body__editId}>
+            {/* <div className={styles.page__contents__infoBox__body__editId}>
               <div className={styles.page__contents__infoBox__body__editId__label}>아이디 수정</div>
 
               {isEditId ? <InputBox placeHolder="id" handleData={setId}></InputBox> : <Button text="수정하기" onClick={() => setIsEditId(true)}></Button>}
               <div className={idValidation ? styles.noErrorMsg : styles.errorMsg}>아이디 형식이 올바르지 않습니다 (4~12자 영문자 또는 숫자)</div>
-            </div>
+            </div> */}
             <div className={styles.page__contents__infoBox__body__editPw}>
               <div className={styles.page__contents__infoBox__body__editPw__label}>비밀번호 수정</div>
-              {isEditPw ? <InputBox placeHolder="pw" handleData={setPw}></InputBox> : <Button text="수정하기" onClick={() => setIsEditPw(true)}></Button>}
+              {isEditPw ? (
+                <InputBox placeHolder="pw" handleData={setPw}></InputBox>
+              ) : (
+                <Button text="수정하기" onClick={() => setIsEditPw(true)}></Button>
+              )}
               <div className={pwValidation ? styles.noErrorMsg : styles.errorMsg}>비밀번호 형식이 올바르지 않습니다 (9~12자 영문자, 숫자 조합)</div>
             </div>
             <div className={styles.page__contents__infoBox__body__editName}>
               <div className={styles.page__contents__infoBox__body__editName__label}>내 이름 수정</div>
-              {isEditName ? <InputBox placeHolder="name" handleData={setName}></InputBox> : <Button text="수정하기" onClick={() => setIsEditName(true)}></Button>}
+              {isEditName ? (
+                <InputBox placeHolder="name" handleData={setName}></InputBox>
+              ) : (
+                <Button text="수정하기" onClick={() => setIsEditName(true)}></Button>
+              )}
             </div>
           </div>
           {(isEditId || isEditPw || isEditName) && <Button text="수정완료" onClick={updateInfo}></Button>}

@@ -71,9 +71,16 @@ function index() {
               <div className={styles.page__contents__dataSection__newsContainer__head__title}>맞춤 뉴스</div>
               {/* <FiSettings /> */}
             </div>
-            <div className={styles.page__contents__dataSection__newsContainer__body}>
+            <div className={styles.page__contents__dataSection__newsContainer__body} onClick={() => window.open(newsData[0].link)}>
               <img src={newsData?.[0]?.image?.replace("./", "/")} alt="" className={styles.page__contents__dataSection__newsContainer__body__image} />
               <div className={styles.page__contents__dataSection__newsContainer__body__newsTitle}>{newsData?.[0]?.title}</div>
+            </div>
+            <div
+              className={`${styles.page__contents__dataSection__newsContainer__body} ${styles.additionalNews}`}
+              onClick={() => window.open(newsData[1].link)}
+            >
+              <img src={newsData?.[1]?.image?.replace("./", "/")} alt="" className={styles.page__contents__dataSection__newsContainer__body__image} />
+              <div className={styles.page__contents__dataSection__newsContainer__body__newsTitle}>{newsData?.[1]?.title}</div>
             </div>
             <div className={styles.page__contents__dataSection__newsContainer__foot}>
               <div className={styles.page__contents__dataSection__newsContainer__foot__text} onClick={() => navigate("/news", { state: newsData })}>
