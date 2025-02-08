@@ -1,5 +1,6 @@
 .page {
   width: 100%;
+  min-width: 351px;
   height: 100vh;
 
   display: flex;
@@ -121,120 +122,132 @@
         }
       }
     }
-
-    &__dataSection {
-      width: 100%;
-      height: 60%;
-      padding: 1rem;
-      gap: 1rem;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-      align-items: center;
-
-      &__newsContainer {
-        width: 100%;
-        height: 40%;
-        padding: 1rem;
-        gap: 10px;
-        background-color: $color-purple-400;
-        border-radius: 15px;
-        box-shadow: 0px 4px 8px $color-gray-100;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        &__head {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          color: white;
-
-          height: 20%;
-
-          &__title {
-          }
-        }
-        &__body {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          justify-content: space-between;
-          gap: 15px;
-
-          width: 100%;
-          height: 60%;
-
-          &__image {
-            width: 100%;
-            height: 100%;
-          }
-          &__newsTitle {
-          }
-        }
-        &__foot {
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          gap: 5px;
-          height: 20%;
-
-          color: white;
-        }
-      }
-
-      &__etcContainer {
+    @include mobile {
+      &__dataSection {
         width: 100%;
         height: 60%;
-
+        padding: 1rem;
         gap: 1rem;
 
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        justify-content: start;
         align-items: center;
-        &__issueCalendar {
-          width: 40%;
-          height: 100%;
+
+        &__newsContainer {
+          width: 100%;
+          height: 40%;
           padding: 1rem;
+          gap: 10px;
+          background-color: $color-purple-400;
           border-radius: 15px;
           box-shadow: 0px 4px 8px $color-gray-100;
-          color: $color-purple-500;
-
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-
-          cursor: pointer;
-
-          &__text {
-            font-size: clamp(16px, 5vw, 32px);
-          }
-        }
-        &__community {
-          width: 60%;
-          height: 100%;
-          padding: 1rem;
-          border-radius: 15px;
-          box-shadow: 0px 4px 8px $color-gray-100;
-          background-color: $color-purple-200;
 
           display: flex;
           flex-direction: column;
           justify-content: space-between;
 
           &__head {
-            font-size: 1.5rem;
-            color: $color-purple-500;
-          }
-
-          &__hot {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+
+            height: 20%;
 
             &__title {
+            }
+          }
+          &__body {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            width: 100%;
+            height: 60%;
+
+            &__image {
+              width: 100%;
+              height: 100%;
+
+              border-style: solid;
+              border-color: black;
+              border-width: 2px;
+            }
+            &__newsTitle {
+            }
+          }
+          &__foot {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 5px;
+            height: 20%;
+
+            color: white;
+          }
+        }
+
+        &__etcContainer {
+          width: 100%;
+          height: 60%;
+
+          gap: 1rem;
+
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          &__issueCalendar {
+            width: 40%;
+            height: 100%;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px $color-gray-100;
+            color: $color-purple-500;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            cursor: pointer;
+
+            &__text {
+              font-size: clamp(16px, 5vw, 32px);
+            }
+          }
+          &__community {
+            width: 60%;
+            height: 100%;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px $color-gray-100;
+            background-color: $color-purple-200;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            &__head {
+              font-size: 1.5rem;
+              color: $color-purple-500;
+            }
+
+            &__hot {
+              display: flex;
+              flex-direction: column;
+
+              &__title {
+                color: $color-purple-400;
+
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+              }
+            }
+            &__foot {
               color: $color-purple-400;
 
               display: flex;
@@ -242,15 +255,172 @@
               gap: 5px;
             }
           }
+        }
+      }
+    }
+
+    @include non-mobile {
+      &__dataSection {
+        width: 100%;
+        height: 60%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 1rem;
+        gap: 1rem;
+
+        &__newsContainer {
+          width: 35%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          padding: 1rem;
+          gap: 5px;
+
+          background-color: $color-purple-400;
+          border-radius: 15px;
+          box-shadow: 0px 4px 8px $color-gray-100;
+
+          &__head {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: start;
+
+            color: white;
+          }
+          &__body {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            gap: 5px;
+
+            cursor: pointer;
+            &__image {
+              width: 40%;
+
+              border-style: solid;
+              border-color: black;
+              border-width: 2px;
+            }
+            &__newsTitle {
+            }
+          }
           &__foot {
-            color: $color-purple-400;
+            height: 10%;
 
             display: flex;
             flex-direction: row;
+            justify-content: start;
+            align-items: center;
+
+            font-size: 0.8rem;
+            color: white;
+
+            cursor: pointer;
+            &__text {
+              display: flex;
+              align-items: center;
+            }
+            &__icon {
+              display: flex;
+              align-items: center;
+            }
+          }
+        }
+
+        &__etcContainer {
+          width: 65%;
+          height: 100%;
+
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          gap: 1rem;
+
+          &__issueCalendar {
+            width: 50%;
+            height: 100%;
+
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px $color-gray-100;
+            color: $color-purple-500;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            cursor: pointer;
+
+            &__icon {
+            }
+            &__text {
+              font-size: clamp(16px, 5vw, 32px);
+            }
+          }
+
+          &__community {
+            width: 50%;
+            height: 100%;
+
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px $color-gray-100;
+            background-color: $color-purple-200;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             gap: 5px;
+
+            &__head {
+            }
+            &__hot {
+              display: flex;
+              flex-direction: column;
+
+              &__title {
+                color: $color-purple-400;
+
+                display: flex;
+                flex-direction: row;
+                gap: 5px;
+              }
+            }
+            &__foot {
+              display: flex;
+              flex-direction: row;
+              justify-content: start;
+              align-items: center;
+
+              font-size: 0.8rem;
+
+              cursor: pointer;
+              &__text {
+                display: flex;
+                align-items: center;
+              }
+              &__icon {
+                display: flex;
+                align-items: center;
+              }
+            }
           }
         }
       }
     }
+  }
+}
+
+.additionalNews {
+  @include mobile {
+    display: none;
   }
 }
