@@ -25,47 +25,32 @@ function BotNav() {
     <div className={styles.page}>
       <div className={styles.page__contents}>
         <div className={styles.page__contents__navBox}>
-          <div className={styles.page__contents__navBox__button}>
-            {curView === 0 ? (
-              <IoDocumentText size="30" color="#21005d" />
-            ) : (
-              <IoDocumentTextOutline
-                size="30"
-                color="#21005d"
-                onClick={() => {
-                  setPrevView(curView);
-                  setCurView(0);
-                }}
-              />
-            )}
+          <div
+            className={styles.page__contents__navBox__button}
+            onClick={() => {
+              setPrevView(curView);
+              setCurView(0);
+            }}
+          >
+            {curView === 0 ? <IoDocumentText size="30" color="#21005d" /> : <IoDocumentTextOutline size="30" color="#21005d" />}
           </div>
-          <div className={styles.page__contents__navBox__button}>
-            {curView === 1 ? (
-              <GoHomeFill size="30" color="#21005d" />
-            ) : (
-              <GoHome
-                size="30"
-                color="#21005d"
-                onClick={() => {
-                  setPrevView(curView);
-                  setCurView(1);
-                }}
-              />
-            )}
+          <div
+            className={styles.page__contents__navBox__button}
+            onClick={() => {
+              setPrevView(curView);
+              setCurView(1);
+            }}
+          >
+            {curView === 1 ? <GoHomeFill size="30" color="#21005d" /> : <GoHome size="30" color="#21005d" />}
           </div>
-          <div className={styles.page__contents__navBox__button}>
-            {curView === 2 ? (
-              <MdPerson size="30" color="#21005d" />
-            ) : (
-              <MdOutlinePerson
-                size="30"
-                color="#21005d"
-                onClick={() => {
-                  setPrevView(curView);
-                  setCurView(2);
-                }}
-              />
-            )}
+          <div
+            className={styles.page__contents__navBox__button}
+            onClick={() => {
+              setPrevView(curView);
+              setCurView(2);
+            }}
+          >
+            {curView === 2 ? <MdPerson size="30" color="#21005d" /> : <MdOutlinePerson size="30" color="#21005d" />}
           </div>
         </div>
       </div>

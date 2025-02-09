@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./NavBar.module.scss";
 import { SlArrowLeft } from "react-icons/sl";
 import { useNavigate } from "react-router-dom";
+import { MdKeyboardArrowLeft } from "react-icons/md";
 
 interface Props {
   text: string;
@@ -15,9 +16,8 @@ function NavBar({ text }: Props) {
 
   return (
     <div className={styles.navBar}>
-      <div className={styles.navBar__goBackButton} onClick={goBack}>
-        <SlArrowLeft />
-      </div>
+      {/* <SlArrowLeft /> */}
+      <MdKeyboardArrowLeft size="25" className={styles.navBar__goBackButton} onClick={goBack} />
       <div className={styles.navBar__innerText}>{text}</div>
     </div>
   );

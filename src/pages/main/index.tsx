@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styles from "./styles/main.module.scss";
 import MenuView from "./menuview/index";
 import CenterView from "./centerview/index";
@@ -13,55 +13,19 @@ import { useNavigate } from "react-router-dom";
 function index() {
   const [prevView, setPrevView] = useRecoilState(prevMainNum);
   const [curView, setCurView] = useRecoilState(curMainNum);
+
   // console.log("--------------------");
   // console.log("prevView:", prevView);
   // console.log("curView:", curView);
   // console.log("--------------------");
 
-  const getAnimation = () => {
-    switch (curView) {
-      case 0:
-        return {
-          initial: { x: "-100%", opacity: 0 },
-          animate: { x: 0, opacity: 1 },
-          exit: { x: "-100%", opacity: 0 },
-        };
-      case 1:
-        if (prevView < curView) {
-          return {
-            initial: { x: "100%", opacity: 0 },
-            animate: { x: 0, opacity: 1 },
-            exit: { x: "-100%", opacity: 0 },
-          };
-        } else if (prevView > curView) {
-          return {
-            initial: { x: "-100%", opacity: 0 },
-            animate: { x: 0, opacity: 1 },
-            exit: { x: "100%", opacity: 0 },
-          };
-        }
-      // return {
-      //   // initial: { scale: 0.5, opacity: 0 },
-      //   // animate: { scale: 1, opacity: 1 },
-      //   // exit: { scale: 0.5, opacity: 0 },
-      //   initial: { y: "-100%", opacity: 0 },
-      //   animate: { y: 0, opacity: 1 },
-      //   exit: { y: "-100%", opacity: 0 },
-      // };
-      case 2:
-        return {
-          initial: { x: "100%", opacity: 0 },
-          animate: { x: 0, opacity: 1 },
-          exit: { x: "100%", opacity: 0 },
-        };
-      default:
-        return {
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-          exit: { opacity: 0 },
-        };
-    }
-  };
+  // const getAnimation = () => {
+  //   return {
+  //     initial: prevView > curView ? { x: "-100%", opacity: 0 } : { x: "100%", opacity: 0 },
+  //     animate: { x: 0, opacity: 1 },
+  //     exit: prevView > curView ? { x: "100%", opacity: 0 } : { x: "-100%", opacity: 0 },
+  //   };
+  // };
 
   const renderView = () => {
     switch (curView) {
@@ -78,7 +42,7 @@ function index() {
 
   return (
     <div className={styles.container}>
-      <AnimatePresence mode="wait">
+      {/* <AnimatePresence mode="wait">
         <motion.div
           key={curView}
           initial={getAnimation().initial}
@@ -89,7 +53,8 @@ function index() {
         >
           {renderView()}
         </motion.div>
-      </AnimatePresence>
+      </AnimatePresence> */}
+      {renderView()}
     </div>
   );
 }
