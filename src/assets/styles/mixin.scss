@@ -9,13 +9,19 @@ $desktop2: 1400px;
   }
 }
 
-@mixin non-mobile {
-  @media (min-width: 431px) {
+@mixin mid-mobile {
+  @media (min-width: 431px) and (max-width: 900px) {
     @content;
   }
 }
 @mixin desktop {
   @media (min-width: $desktop1) {
+    @content;
+  }
+}
+
+@mixin non-mobile {
+  @media (min-width: 431px) {
     @content;
   }
 }
