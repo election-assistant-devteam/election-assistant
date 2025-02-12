@@ -1,0 +1,37 @@
+{
+  "success": true,
+  "code": 20000,
+  "message": "요청에 성공했습니다",
+  "data": {
+    "name": "한동훈",
+    "age": 32,
+    "birth": "서울특별시",
+    "Residence": "서울특별시 강남구 도곡동 타워팰리스",
+    "family": "아버지, 어머니, 누나, 배우자, 장녀, 장남",
+    "approvalRating": {
+      "ratePerAge": {
+        "age10s": 7.9,
+        "age20s": 8.7,
+        "age70s": 16.6
+      },
+      "ratePerSex": {
+        "maleRate": 34.8,
+        "femaleRate": 56.2
+      }
+    },
+    "education": ["청주운호국민학교(전학)", "서울신동국민학교(졸업)"],
+    "career": ["제37회 울타리 넘기대회(우승/5회)", "제27기 블라인드 줄넘기대회(우승/3회)"],
+    "criminalRecord": ["편의점 츕파츕스2개 강탈", "아파트 소음공해"],
+    "details": ["안경은 뿔테안경", "머리는 숱이 많은편"],
+    "ability": {
+      "faithfulness": {
+        "attendance": {
+          "totalConfDay": 40,
+          "attendanceRate": 13,
+          "reqForVac": 3,
+          "busindessTrip": 24
+        }
+      }
+    }
+  }
+}

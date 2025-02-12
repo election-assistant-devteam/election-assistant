@@ -15,9 +15,19 @@ function index() {
           <div className={styles.page__contents__newsContainer__head}>최신 정치뉴스</div>
           <div className={styles.page__contents__newsContainer__body}>
             {state.map((event, index) => (
-              <div key={index} className={styles.page__contents__newsContainer__body__item} onClick={() => window.open(state[index].link)}>
-                <img src={state?.[index]?.image} alt="" className={styles.page__contents__newsContainer__body__item__image} />
-                <div className={styles.page__contents__newsContainer__body__item__title}>{state[index].title}</div>
+              <div
+                key={index}
+                className={styles.page__contents__newsContainer__body__item}
+                onClick={() => window.open(state[index].link)}
+              >
+                <img
+                  src={state?.[index]?.image}
+                  alt=""
+                  className={styles.page__contents__newsContainer__body__item__image}
+                />
+                <div className={styles.page__contents__newsContainer__body__item__title}>
+                  {state[index].title}
+                </div>
               </div>
             ))}
           </div>
