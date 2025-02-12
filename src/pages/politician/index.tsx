@@ -56,6 +56,7 @@ function index() {
       // 스와이프 범위를 제한 (예: 0 이상, 500px 이하)
       // setCurPos(-Math.max(0, Math.min(newMoveDist, 500)));
       // console.log("curPos: ", -Math.max(0, Math.min(newMoveDist, 500)));
+      // console.log(Math.max(0, Math.min(newPos, 500)));
       return Math.max(0, Math.min(newPos, 500));
     });
 
