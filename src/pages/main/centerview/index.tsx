@@ -188,7 +188,10 @@ function index() {
                 </div>
               </div>
 
-              <div className={styles.page__contents__dataSection__etcContainer__community__foot}>
+              <div
+                className={styles.page__contents__dataSection__etcContainer__community__foot}
+                onClick={() => navigate("/community")}
+              >
                 <div
                   className={
                     styles.page__contents__dataSection__etcContainer__community__foot__text
