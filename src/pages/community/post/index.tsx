@@ -204,7 +204,21 @@ function index() {
       commentId += 1;
       setComments([
         ...comments,
-        { id: commentId, name: "규", content: input, likes: 0, replies: [], time: Date.now() },
+        {
+          id: commentId,
+          name: "규",
+          content: input,
+          likes: 0,
+          replies: [],
+          time: new Date()
+            .toLocaleDateString("ko-KR", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+            })
+            .replace(/\. /g, "/")
+            .replace(/\.$/, ""),
+        },
       ]);
       setInput("");
     }
@@ -238,7 +252,14 @@ function index() {
                   name: "추가",
                   content: input,
                   likes: 7,
-                  time: new Date().toISOString(), // 현재 시간을 ISO 포맷으로 저장
+                  time: new Date()
+                    .toLocaleDateString("ko-KR", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })
+                    .replace(/\. /g, "/")
+                    .replace(/\.$/, ""),
                 },
               ],
             }
@@ -247,6 +268,8 @@ function index() {
     );
 
     setInput("");
+    setReply(false);
+    setSelectedComment(null);
   };
 
   useEffect(() => {
@@ -304,7 +327,14 @@ function index() {
         </div>
         <div className={styles.page__contents__commentSection}>
           {comments.map((item, index) => (
-            <div className={styles.page__contents__commentSection__comment} key={index}>
+            <div
+              className={
+                selectedComment === item.id
+                  ? `${styles.page__contents__commentSection__comment} ${styles.selectedComment}`
+                  : `${styles.page__contents__commentSection__comment}`
+              }
+              key={item.id}
+            >
               <div className={styles.page__contents__commentSection__comment__head}>
                 <div className={styles.page__contents__commentSection__comment__head__writer}>
                   {item.name}
@@ -316,14 +346,21 @@ function index() {
                     }
                   >
                     {likedComments[item.id] ? (
-                      <FaHeart onClick={() => toggleCommentLike(item.id)} />
+                      <FaHeart
+                        onClick={() => toggleCommentLike(item.id)}
+                        style={{ cursor: "pointer" }}
+                      />
                     ) : (
-                      <FaRegHeart onClick={() => toggleCommentLike(item.id)} />
+                      <FaRegHeart
+                        onClick={() => toggleCommentLike(item.id)}
+                        style={{ cursor: "pointer" }}
+                      />
                     )}
 
                     {item.likes}
                   </div>
                   <FaRegComment
+                    style={{ cursor: "pointer" }}
                     onClick={() => {
                       setSelectedComment(item.id);
                       setReply(true);
@@ -363,9 +400,15 @@ function index() {
                         }
                       >
                         {likedReplies[item.id]?.[reply.id] ? (
-                          <FaHeart onClick={() => toggleReplyLike(item.id, reply.id)} />
+                          <FaHeart
+                            onClick={() => toggleReplyLike(item.id, reply.id)}
+                            style={{ cursor: "pointer" }}
+                          />
                         ) : (
-                          <FaRegHeart onClick={() => toggleReplyLike(item.id, reply.id)} />
+                          <FaRegHeart
+                            onClick={() => toggleReplyLike(item.id, reply.id)}
+                            style={{ cursor: "pointer" }}
+                          />
                         )}
                         {reply.likes}
                       </div>
