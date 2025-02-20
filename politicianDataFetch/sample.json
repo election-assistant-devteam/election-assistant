@@ -27,10 +27,13 @@
       "faithfulness": {
         "attendance": {
           "totalConfDay": 40,
-          "attendanceRate": 13,
+          "attendanceCount": 13,
           "reqForVac": 3,
           "busindessTrip": 24
         }
+      },
+      "legislativeActivity": {
+        "proposalCount": 14
       }
     }
   }

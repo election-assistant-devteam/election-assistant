@@ -12,6 +12,9 @@ import EditPage from "@/pages/editprofile";
 import NewsPage from "@/pages/news";
 import FaqPage from "@/pages/faq";
 import InquiryPage from "@/pages/inquiry";
+import CommunityPage from "@/pages/community";
+import CommunityUploadPage from "@/pages/community/upload";
+import CommunityPostPage from "@/pages/community/post";
 import { RecoilRoot } from "recoil";
 
 function App() {
@@ -31,6 +34,9 @@ function App() {
           <Route path="/news" element={<NewsPage />}></Route>
           <Route path="/faq" element={<FaqPage />}></Route>
           <Route path="/inquiry" element={<InquiryPage />}></Route>
+          <Route path="/community" element={<CommunityPage />}></Route>
+          <Route path="/community/upload" element={<CommunityUploadPage />}></Route>
+          <Route path="/community/post/:id" element={<CommunityPostPage />}></Route>
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
