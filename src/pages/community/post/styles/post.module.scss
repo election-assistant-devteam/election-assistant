@@ -1,0 +1,252 @@
+.page {
+  width: 100%;
+  height: 100%;
+  padding-bottom: 56px;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: "LINESeedKR", sans-serif; /* font-family를 명확히 지정 */
+
+  &__contents {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+
+    &__postSection {
+      width: 100%;
+      min-height: 10rem;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+
+      padding: 1rem;
+
+      gap: 10px;
+
+      @include desktop {
+        width: 60%;
+      }
+
+      &__info {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        color: $color-gray-100;
+
+        &__time {
+          font-weight: 400;
+          font-size: smaller;
+        }
+        &__writer {
+          font-weight: 400;
+          font-size: smaller;
+        }
+      }
+      &__contents {
+        width: 100%;
+      }
+    }
+    &__reactSection {
+      width: 100%;
+      height: 3rem;
+
+      background-color: $color-purple-500;
+      color: white;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      @include desktop {
+        width: 60%;
+      }
+
+      &__likes {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 10px;
+      }
+      &__replies {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        gap: 10px;
+      }
+    }
+    &__commentSection {
+      width: 100%;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: center;
+
+      @include desktop {
+        width: 60%;
+      }
+
+      &__comment {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+
+        gap: 3px;
+
+        padding: 1rem;
+
+        border-bottom-style: solid;
+        border-bottom-width: 1px;
+
+        &__head {
+          width: 100%;
+
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          &__reaction {
+            display: flex;
+            flex-direction: row;
+
+            gap: 10px;
+
+            font-weight: 400;
+            font-size: smaller;
+
+            &__likes {
+              display: flex;
+              flex-direction: row;
+
+              gap: 3px;
+            }
+          }
+        }
+
+        &__body {
+          width: 100%;
+          font-weight: 400;
+          font-size: smaller;
+        }
+
+        &__tail {
+          width: 100%;
+          font-weight: 400;
+          font-size: smaller;
+        }
+
+        &__replySection {
+          width: 100%;
+
+          display: flex;
+          flex-direction: column;
+          justify-content: start;
+
+          gap: 5px;
+          &__reply {
+            width: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 3px;
+
+            padding: 5px;
+
+            background-color: #ddd9d9;
+
+            border-radius: 7px;
+
+            &__head {
+              width: 100%;
+
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              &__reaction {
+                display: flex;
+                flex-direction: row;
+
+                gap: 7px;
+
+                font-weight: 400;
+                font-size: smaller;
+              }
+            }
+
+            &__body {
+              font-weight: 400;
+              font-size: smaller;
+            }
+            &__tail {
+              font-weight: 400;
+              font-size: smaller;
+            }
+          }
+        }
+      }
+    }
+    &__commentWriteSection {
+      width: 100%;
+      max-width: calc(100% - 10px);
+      height: 3rem;
+
+      position: fixed;
+
+      bottom: 0;
+
+      border-radius: 15px;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      padding-left: 10px;
+      padding-right: 10px;
+      margin-bottom: 5px;
+      margin-left: 5px;
+      margin-right: 5px;
+
+      background-color: $color-gray-100;
+
+      @include desktop {
+        width: 60%;
+      }
+
+      &__inputTag {
+        border: none;
+        width: 100%;
+        height: 100%;
+
+        background-color: $color-gray-100;
+      }
+      &__sendButton {
+        color: $color-purple-500;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.navBar {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.selectedComment {
+  background-color: $color-purple-200;
+}
