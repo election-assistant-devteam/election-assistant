@@ -236,6 +236,7 @@
       }
       &__sendButton {
         color: $color-purple-500;
+        cursor: pointer;
       }
     }
   }
@@ -244,4 +245,8 @@
 .navBar {
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+
+.selectedComment {
+  background-color: $color-purple-200;
 }
