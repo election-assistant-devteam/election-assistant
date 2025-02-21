@@ -8,6 +8,7 @@ import { FaHotjar } from "react-icons/fa";
 import { MdArrowForwardIos } from "react-icons/md";
 import BotNav from "@/components/common/botnav/BotNav";
 import { useNavigate } from "react-router-dom";
+import AutoCarousel from "@/components/common/AutoCarousel/AutoCarousel";
 
 // interface Props {
 //   view: number;
@@ -66,14 +67,15 @@ function index() {
               </div>
             </div>
             <div className={styles.page__contents__searchSection__interest__imageArea}>
-              <img
+              {/* <img
                 src="/src/assets/images/sample.jpg"
                 alt="선호정치인 사진"
                 className={styles.page__contents__searchSection__interest__imageArea__image}
               ></img>
               <div className={styles.page__contents__searchSection__interest__imageArea__nameTag}>
                 {politicianName}
-              </div>
+              </div> */}
+              <AutoCarousel></AutoCarousel>
             </div>
           </div>
         </div>

@@ -140,13 +140,16 @@
         }
         &__write {
           height: 2rem;
+          line-height: 1rem;
 
           background-color: $color-purple-500;
           color: white;
 
           border-radius: 10px;
 
-          padding: 3px;
+          padding: 4px;
+
+          cursor: pointer;
         }
       }
 
