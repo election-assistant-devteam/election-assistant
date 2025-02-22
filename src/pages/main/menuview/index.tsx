@@ -20,7 +20,10 @@ function index() {
     <div className={styles.page}>
       <div className={styles.page__contents}>
         <div className={styles.page__contents__topNav}>
-          <div className={styles.page__contents__topNav__item}>
+          <div
+            className={styles.page__contents__topNav__item}
+            onClick={() => navigate("/notification")}
+          >
             <TbBell className={styles.page__contents__topNav__item__icon} size="40" />
             <div className={styles.page__contents__topNav__item__text}>공지사항</div>
           </div>

@@ -16,7 +16,7 @@
     align-items: center;
     gap: 10px;
 
-    background-color: $color-gray-100;
+    background-color: $color-gray-200;
 
     &__profileBox {
       width: 100%;
@@ -185,7 +185,7 @@
         justify-content: center;
         align-items: center;
 
-        background-color: $color-gray-100;
+        background-color: $color-gray-200;
         border-radius: 10px;
       }
     }
@@ -198,7 +198,7 @@
 }
 
 .nonObserve {
-  color: $color-gray-100;
+  color: $color-gray-200;
 }
 
 .observe {
