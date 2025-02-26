@@ -56,9 +56,13 @@ function index() {
       : ""; // date가 null일 경우 빈 문자열 반환
   };
 
-  const formattedDate = Array.isArray(selectedDate) ? `${formatDateKorean(selectedDate[0])} ~ ${formatDateKorean(selectedDate[1])}` : formatDateKorean(selectedDate);
+  const formattedDate = Array.isArray(selectedDate)
+    ? `${formatDateKorean(selectedDate[0])} ~ ${formatDateKorean(selectedDate[1])}`
+    : formatDateKorean(selectedDate);
 
-  const formatSelectedDateDash = (selectedDate: DatePiece | [DatePiece, DatePiece]): string | null => {
+  const formatSelectedDateDash = (
+    selectedDate: DatePiece | [DatePiece, DatePiece]
+  ): string | null => {
     if (selectedDate instanceof Date) {
       const year = selectedDate.getFullYear();
       const month = String(selectedDate.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작
@@ -102,12 +106,19 @@ function index() {
 
   const deleteCustomEvent = async (eventId) => {
     //커스텀 이벤트를 삭제하는 메서드
-    const response = await fetch(`https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/calendar/schedules/delete/${eventId}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/calendar/schedules/delete/${eventId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${sessionStorage.getItem("access")}`,
+        },
+      }
+    );
 
-    if (response.status === 200) {
-      const result = await response.json();
+    const result = await response.json();
+
+    if (result.code === 20000) {
       const eventArray = [];
       result.data.calendar.map((item) => {
         if (item.date === formatSelectedDateDash(selectedDate)) {
@@ -135,19 +146,22 @@ function index() {
 
   const setEvent = async () => {
     //서버에 커스텀이벤트 등록 후 모달창에 보여주는 메서드
-    const response = await fetch("https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/calendar/getschedules/success", {
+    //"https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/calendar/getschedules/success"
+    const response = await fetch("http://localhost:9001/calendar/schedules", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("access")}`,
       },
       body: JSON.stringify({
         date: formattedDate,
-        event: inputRef.current.value,
+        schedule: inputRef.current.value,
       }),
     });
 
-    if (response.status === 200) {
-      const result = await response.json();
+    const result = await response.json();
+
+    if (result.code === 20000) {
       const eventArray = [];
       result.data.calendar.map((item) => {
         if (item.date === formatSelectedDateDash(selectedDate)) {
@@ -180,18 +194,29 @@ function index() {
                   }}
                 />
               </div>
-              <div className={styles.page__contents__modal__body} id="modal-body" ref={modalBodyHandling}>
+              <div
+                className={styles.page__contents__modal__body}
+                id="modal-body"
+                ref={modalBodyHandling}
+              >
                 {selectedDateEvent
                   .filter((event, index) => event.isElection === true)
                   .map((event, index) => (
-                    <div className={`${styles.page__contents__modal__body__event} ${styles.election}`} key={index} onClick={() => navigate(`/candidate/${event.id}`)}>
+                    <div
+                      className={`${styles.page__contents__modal__body__event} ${styles.election}`}
+                      key={index}
+                      onClick={() => navigate(`/candidate/${event.id}`)}
+                    >
                       {event.name}
                     </div>
                   ))}
                 {selectedDateEvent
                   .filter((event, index) => event.isCustom === true)
                   .map((event, index) => (
-                    <div className={`${styles.page__contents__modal__body__event} ${styles.custom}`} key={event.id}>
+                    <div
+                      className={`${styles.page__contents__modal__body__event} ${styles.custom}`}
+                      key={event.id}
+                    >
                       {event.name}
                       <GiCancel
                         color="#21005d"
@@ -205,14 +230,28 @@ function index() {
                   ))}
                 {writeAvailable && (
                   <div className={styles.page__contents__modal__body__inputBox}>
-                    <input type="text" ref={inputRef} className={styles.page__contents__modal__body__inputBox__inputTag} />
-                    <button className={styles.page__contents__modal__body__inputBox__writeButton} onClick={setEvent}>
+                    <input
+                      type="text"
+                      ref={inputRef}
+                      className={styles.page__contents__modal__body__inputBox__inputTag}
+                    />
+                    <button
+                      className={styles.page__contents__modal__body__inputBox__writeButton}
+                      onClick={setEvent}
+                    >
                       추가
                     </button>
                   </div>
                 )}
               </div>
-              {modalChildCount <= 4 && <IoIosAddCircle color="#21005d" size="50" className={styles.addEvents} onClick={writeCustomEvent} />}
+              {modalChildCount <= 4 && (
+                <IoIosAddCircle
+                  color="#21005d"
+                  size="50"
+                  className={styles.addEvents}
+                  onClick={writeCustomEvent}
+                />
+              )}
             </div>
           )}
           <div className={styles.page__contents__topBar}>

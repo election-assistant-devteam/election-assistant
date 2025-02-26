@@ -27,7 +27,7 @@
       justify-content: space-between;
 
       border-bottom-style: solid;
-      border-bottom-color: $color-gray-100;
+      border-bottom-color: $color-gray-200;
       border-bottom-width: 1px;
 
       &__item {
@@ -62,19 +62,50 @@
 
       display: flex;
       flex-direction: column;
+
       &__item {
+        position: relative;
         width: 100%;
-        height: 20%;
+        height: 15%;
 
         display: flex;
         flex-direction: row;
         justify-content: space-between;
 
         padding: 10px;
+
         &__text {
           display: flex;
           justify-content: center;
           align-items: center;
+          font-size: larger;
+        }
+        &__icon {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+
+      &__item::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5); /* 검은색 반투명 오버레이 */
+        z-index: 1; /* 기존 요소보다 위에 배치 */
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        &__text {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: larger;
         }
         &__icon {
           display: flex;

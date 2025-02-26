@@ -58,7 +58,13 @@ function index() {
   };
 
   const handleRegister = async () => {
-    if (id === undefined || pw === undefined || email === undefined || nickname === undefined || pwRepeat === undefined) {
+    if (
+      id === undefined ||
+      pw === undefined ||
+      email === undefined ||
+      nickname === undefined ||
+      pwRepeat === undefined
+    ) {
       alert("모든 항목에 대해 입력하세요!");
       return;
     }
@@ -78,12 +84,12 @@ function index() {
     const payload = {
       nickname: nickname,
       email: email,
-      id: id,
-      pw: pw,
+      username: id,
+      password: pw,
     };
 
     try {
-      const response = await fetch("https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/register/success", {
+      const response = await fetch("http://localhost:9001/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -93,7 +99,7 @@ function index() {
 
       const result = await response.json();
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         if (result.success === true) {
           setSuccess(true);
         } else if (result.success === false) {
@@ -118,7 +124,9 @@ function index() {
             <div className={styles.page__contents__inputBox__emailBox}>
               <div className={styles.label}>이메일</div>
               <InputBox placeHolder={"이메일을 입력하세요"} handleData={setEmail} />
-              <div className={emailValidation ? styles.noErrorMsg : styles.errorMsg}>이메일 형식이 올바르지 않습니다</div>
+              <div className={emailValidation ? styles.noErrorMsg : styles.errorMsg}>
+                이메일 형식이 올바르지 않습니다
+              </div>
             </div>
             <div className={styles.page__contents__inputBox__nicknameBox}>
               <div className={styles.label}>닉네임</div>
@@ -128,17 +136,23 @@ function index() {
             <div className={styles.page__contents__inputBox__idBox}>
               <div className={styles.label}>아이디</div>
               <InputBox placeHolder={"아이디를 입력하세요"} handleData={setId} />
-              <div className={idValidation ? styles.noErrorMsg : styles.errorMsg}>아이디 형식이 올바르지 않습니다 (4~12자 영문자 또는 숫자)</div>
+              <div className={idValidation ? styles.noErrorMsg : styles.errorMsg}>
+                아이디 형식이 올바르지 않습니다 (4~12자 영문자 또는 숫자)
+              </div>
             </div>
             <div className={styles.page__contents__inputBox__pwBox}>
               <div className={styles.label}>비밀번호</div>
               <InputBox placeHolder={"비빈번호를 입력하세요"} handleData={setPw} />
-              <div className={pwValidation ? styles.noErrorMsg : styles.errorMsg}>비밀번호 형식이 올바르지 않습니다 (9~12자 영문자, 숫자, 특수문자 조합)</div>
+              <div className={pwValidation ? styles.noErrorMsg : styles.errorMsg}>
+                비밀번호 형식이 올바르지 않습니다 (9~12자 영문자, 숫자, 특수문자 조합)
+              </div>
             </div>
             <div className={styles.page__contents__inputBox__pwCheckBox}>
               <div className={styles.label}>비밀번호 확인</div>
               <InputBox placeHolder={"비밀번호를 다시 한번 입력하세요"} handleData={setPwRepeat} />
-              <div className={pwRepeatValidation ? styles.noErrorMsg : styles.errorMsg}>비밀번호와 같지 않습니다</div>
+              <div className={pwRepeatValidation ? styles.noErrorMsg : styles.errorMsg}>
+                비밀번호와 같지 않습니다
+              </div>
             </div>
           </div>
           <div className={styles.page__contents__buttonBox}>
