@@ -59,10 +59,10 @@ function index() {
   return (
     <div className={styles.page}>
       <div className={styles.page__NavBar}>
-        <div className={styles.page__contents__NavBar__prev} onClick={() => navigate(-1)}>
+        <div className={styles.page__NavBar__prev} onClick={() => navigate(-1)}>
           <MdKeyboardArrowLeft size="30" />
         </div>
-        <div className={styles.page__contents__NavBar__finish} onClick={handleSubmit}>
+        <div className={styles.page__NavBar__finish} onClick={handleSubmit}>
           완료
         </div>
       </div>
@@ -99,7 +99,7 @@ function index() {
             />
 
             <div onClick={handleIconClick}>
-              <BiImageAlt size="30" />
+              <BiImageAlt size="30" style={{ cursor: "pointer" }} />
             </div>
           </div>
 
