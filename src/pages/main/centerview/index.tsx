@@ -8,6 +8,7 @@ import { FaHotjar } from "react-icons/fa";
 import { MdArrowForwardIos } from "react-icons/md";
 import BotNav from "@/components/common/botnav/BotNav";
 import { useNavigate } from "react-router-dom";
+import AutoCarousel from "@/components/common/AutoCarousel/AutoCarousel";
 
 // interface Props {
 //   view: number;
@@ -39,7 +40,7 @@ function index() {
           <div className={styles.page__contents__searchSection__searchBar}>
             <input
               type="text"
-              placeholder="검색어를 입력하세요."
+              placeholder="찾고싶은 정치인을 입력하세요."
               className={styles.page__contents__searchSection__searchBar__inputText}
             />
             <FaSearch />
@@ -52,7 +53,10 @@ function index() {
                 <br />
                 정치인이에요
               </div>
-              <div className={styles.page__contents__searchSection__interest__textArea__edit}>
+              <div
+                className={styles.page__contents__searchSection__interest__textArea__edit}
+                onClick={() => navigate("/edit")}
+              >
                 <div
                   className={styles.page__contents__searchSection__interest__textArea__edit__text}
                 >
@@ -66,14 +70,15 @@ function index() {
               </div>
             </div>
             <div className={styles.page__contents__searchSection__interest__imageArea}>
-              <img
+              {/* <img
                 src="/src/assets/images/sample.jpg"
                 alt="선호정치인 사진"
                 className={styles.page__contents__searchSection__interest__imageArea__image}
               ></img>
               <div className={styles.page__contents__searchSection__interest__imageArea__nameTag}>
                 {politicianName}
-              </div>
+              </div> */}
+              <AutoCarousel></AutoCarousel>
             </div>
           </div>
         </div>
