@@ -147,7 +147,7 @@ function index() {
   const setEvent = async () => {
     //서버에 커스텀이벤트 등록 후 모달창에 보여주는 메서드
     //"https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/calendar/getschedules/success"
-    const response = await fetch("http://localhost:9001/calendar/schedules", {
+    const response = await fetch("http://13.124.154.53/calendar/schedules", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
