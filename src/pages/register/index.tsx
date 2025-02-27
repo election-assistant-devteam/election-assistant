@@ -89,7 +89,7 @@ function index() {
     };
 
     try {
-      const response = await fetch("http://localhost:9001/users", {
+      const response = await fetch("http://13.124.154.53/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -144,7 +144,7 @@ function index() {
               <div className={styles.label}>비밀번호</div>
               <InputBox placeHolder={"비빈번호를 입력하세요"} handleData={setPw} />
               <div className={pwValidation ? styles.noErrorMsg : styles.errorMsg}>
-                비밀번호 형식이 올바르지 않습니다 (9~12자 영문자, 숫자, 특수문자 조합)
+                비밀번호 형식이 올바르지 않습니다 (9~12자 영문자, 숫자 조합)
               </div>
             </div>
             <div className={styles.page__contents__inputBox__pwCheckBox}>

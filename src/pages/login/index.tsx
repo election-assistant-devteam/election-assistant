@@ -53,7 +53,7 @@ function index() {
     }
     //
 
-    const response = await fetch("http://localhost:9001/auth/login", {
+    const response = await fetch("http://13.124.154.53/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
