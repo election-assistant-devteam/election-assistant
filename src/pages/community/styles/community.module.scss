@@ -30,7 +30,7 @@
       width: 100%;
 
       border-radius: 15px;
-      box-shadow: 0px 4px 8px $color-gray-100;
+      box-shadow: 0px 4px 8px $color-gray-200;
 
       padding: 10px;
       &__head {
@@ -124,7 +124,7 @@
       width: 100%;
 
       border-radius: 15px;
-      box-shadow: 0px 4px 8px $color-gray-100;
+      box-shadow: 0px 4px 8px $color-gray-200;
 
       padding: 10px;
 
@@ -140,13 +140,16 @@
         }
         &__write {
           height: 2rem;
+          line-height: 1rem;
 
           background-color: $color-purple-500;
           color: white;
 
           border-radius: 10px;
 
-          padding: 3px;
+          padding: 4px;
+
+          cursor: pointer;
         }
       }
 

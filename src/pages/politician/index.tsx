@@ -187,12 +187,6 @@ function index() {
               </div>
             </div>
             <div className={styles.page__contents__profileBox__profile__dataBox}>
-              <div className={styles.page__contents__profileBox__profile__dataBox__label}>출생</div>
-              <div className={styles.page__contents__profileBox__profile__dataBox__data}>
-                {data ? data.birth : "로딩 중..."}
-              </div>
-            </div>
-            <div className={styles.page__contents__profileBox__profile__dataBox}>
               <div className={styles.page__contents__profileBox__profile__dataBox__label}>
                 거주지
               </div>
@@ -201,9 +195,17 @@ function index() {
               </div>
             </div>
             <div className={styles.page__contents__profileBox__profile__dataBox}>
-              <div className={styles.page__contents__profileBox__profile__dataBox__label}>가족</div>
+              <div className={styles.page__contents__profileBox__profile__dataBox__label}>
+                소속정당
+              </div>
               <div className={styles.page__contents__profileBox__profile__dataBox__data}>
-                {data ? data.family : "로딩 중..."}
+                {data ? data.party : "로딩 중..."}
+              </div>
+            </div>
+            <div className={styles.page__contents__profileBox__profile__dataBox}>
+              <div className={styles.page__contents__profileBox__profile__dataBox__label}>직업</div>
+              <div className={styles.page__contents__profileBox__profile__dataBox__data}>
+                {data ? data.job : "로딩 중..."}
               </div>
             </div>
           </div>
@@ -290,7 +292,7 @@ function index() {
               >
                 공약
               </div>
-              <div
+              {/* <div
                 className={
                   viewNum === 4
                     ? `${styles.page__contents__infoBox__categoryBox__window__category} ${styles.active}`
@@ -313,7 +315,7 @@ function index() {
                 }}
               >
                 지지율
-              </div>
+              </div> */}
             </div>
           </div>
           <div className={styles.page__contents__infoBox__view}>
