@@ -1,0 +1,41 @@
+.toastBox {
+  bottom: -50px;
+
+  font-size: clamp(3px, 3.5vw, 15px);
+
+  position: fixed;
+
+  height: 3rem;
+}
+
+.show {
+  transform: translateY((-70px));
+  transition: all 0.4s ease-in-out;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(209, 20, 20);
+
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 3px;
+}
+
+.hide {
+  transform: translateY((70px));
+  transition: all 0.4s ease-in-out;
+
+  background-color: rgba(0, 0, 0, 0.3);
+  color: rgb(209, 20, 20);
+
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 3px;
+}
