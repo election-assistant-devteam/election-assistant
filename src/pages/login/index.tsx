@@ -4,6 +4,7 @@ import Title from "@/components/common/title/Title";
 import Button from "@/components/common/button/Button";
 import InputBox from "@/components/common/input/InputBox";
 import { Link, useNavigate } from "react-router-dom";
+import Popup from "@/components/common/Popup/Popup";
 
 function index() {
   const [id, setId] = useState<string>();
@@ -11,6 +12,7 @@ function index() {
   const navigate = useNavigate();
   const [idValidation, setIdValidation] = useState<boolean>(true);
   const [pwValidation, setPwValidation] = useState<boolean>(true);
+  const [alertMsg, setAlertMsg] = useState<string>();
 
   const idFormatCheck = (id: string) => {
     const regex = /^[a-zA-Z0-9]{4,12}$/;
@@ -53,7 +55,7 @@ function index() {
     }
     //
 
-    const response = await fetch("http://13.124.154.53/auth/login", {
+    const response = await fetch("http://localhost:9001/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -64,13 +66,18 @@ function index() {
       }),
     });
 
-    if (response.status === 200) {
-      const result = await response.json();
+    const result = await response.json();
+
+    if (result.code === 20000) {
       sessionStorage.setItem("access-token", result.data.access);
       sessionStorage.setItem("refresh-token", result.data.refresh);
       sessionStorage.setItem("id", id);
       console.log(result);
       navigate("/main");
+    } else if (result.code === 40400) {
+      // alert(`${result.message}`);
+      setAlertMsg(result.message);
+      console.log(result);
     }
   };
 
@@ -106,6 +113,7 @@ function index() {
             </div>
           </Link>
         </div>
+        <Popup text={alertMsg} className={styles.popup}></Popup>
       </div>
     </div>
   );

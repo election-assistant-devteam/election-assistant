@@ -76,3 +76,12 @@
   margin-top: 0.3rem;
   margin-bottom: 0.3rem;
 }
+
+.popup {
+  @include mobile {
+    width: 70%;
+  }
+  @include non-mobile {
+    width: 50%;
+  }
+}
