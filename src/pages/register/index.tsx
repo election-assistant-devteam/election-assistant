@@ -4,7 +4,7 @@ import NavBar from "@/components/common/navigation/NavBar";
 import InputBox from "@/components/common/input/InputBox";
 import Button from "@/components/common/button/Button";
 import RegisterSuccess from "./registersuccess";
-import { useNavigate } from "react-router-dom";
+import Popup from "@/components/common/popup/Popup";
 
 function index() {
   const [email, setEmail] = useState<string>();
@@ -17,7 +17,7 @@ function index() {
   const [pwValidation, setPwValidation] = useState<boolean>(true);
   const [emailValidation, setEmailValidation] = useState<boolean>(true);
   const [pwRepeatValidation, setPwRepeatValidation] = useState<boolean>(true);
-  const navigate = useNavigate();
+  const [alertMsg, setAlertMsg] = useState<string>();
 
   const idFormatCheck = (id: string) => {
     const regex = /^[a-zA-Z0-9]{4,12}$/;
@@ -80,7 +80,7 @@ function index() {
     if (!isEmailValid || !isIdValid || !isPwValid || !isPwRepeatValid) {
       return;
     }
-    console.log("flag");
+    // console.log("flag");
     const payload = {
       nickname: nickname,
       email: email,
@@ -89,7 +89,7 @@ function index() {
     };
 
     try {
-      const response = await fetch("http://13.124.154.53/users", {
+      const response = await fetch("http://localhost:9001/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,14 +99,16 @@ function index() {
 
       const result = await response.json();
 
-      if (response.status === 200) {
+      if (result.code === 20000) {
         if (result.success === true) {
           setSuccess(true);
         } else if (result.success === false) {
           alert(result.message);
         }
-      } else {
-        alert(`에러코드 : ${response.status}`);
+      } else if (result.code === 40000) {
+        // alert(`에러코드 : ${response.status}`);
+        console.log(result);
+        setAlertMsg(result.message);
       }
     } catch (error) {
       console.error("오류 발생: ", error);
@@ -158,6 +160,7 @@ function index() {
           <div className={styles.page__contents__buttonBox}>
             <Button text={"회원가입"} data={null} onClick={handleRegister} />
           </div>
+          <Popup text={alertMsg} className={styles.popup}></Popup>
         </div>
       )}
     </div>
