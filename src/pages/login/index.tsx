@@ -4,7 +4,7 @@ import Title from "@/components/common/title/Title";
 import Button from "@/components/common/button/Button";
 import InputBox from "@/components/common/input/InputBox";
 import { Link, useNavigate } from "react-router-dom";
-import Popup from "@/components/common/Popup/Popup";
+import Popup from "@/components/common/popup/Popup";
 
 function index() {
   const [id, setId] = useState<string>();

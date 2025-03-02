@@ -4,7 +4,7 @@ import NavBar from "@/components/common/navigation/NavBar";
 import InputBox from "@/components/common/input/InputBox";
 import Button from "@/components/common/button/Button";
 import RegisterSuccess from "./registersuccess";
-import Popup from "@/components/common/Popup/Popup";
+import Popup from "@/components/common/popup/Popup";
 
 function index() {
   const [email, setEmail] = useState<string>();

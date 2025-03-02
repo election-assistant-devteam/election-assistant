@@ -49,7 +49,9 @@ function index() {
 
       if (result.code === 20000) {
         console.log(result);
-        setData(result.data.notificationList);
+        setData(result.data.notifications);
+      } else {
+        alert(result.code);
       }
     };
     getNotification();
@@ -69,9 +71,9 @@ function index() {
                 {item.title}
               </div>
               <div className={styles.page__contents__notifyList__notifyItem__foot}>
-                <div className={styles.page__contents__notifyList__notifyItem__foot__writer}>
+                {/* <div className={styles.page__contents__notifyList__notifyItem__foot__writer}>
                   {item.writer}
-                </div>
+                </div> */}
                 <div className={styles.page__contents__notifyList__notifyItem__foot__time}>
                   {item.updatedAt}
                 </div>
