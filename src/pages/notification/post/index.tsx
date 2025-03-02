@@ -10,19 +10,16 @@ function index() {
 
   useEffect(() => {
     const getNotificationData = async () => {
-      const response = await fetch(
-        `https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/notification/post/${params.id}`,
-        {
-          method: "GET",
-        }
-      );
+      const response = await fetch(`http://localhost:9001/notification/post?id=${params.id}`, {
+        method: "GET",
+      });
 
-      if (response.status === 200) {
-        const result = await response.json();
+      const result = await response.json();
 
+      if (result.code === 20000) {
         // console.log(result);
         // data = result.data;
-        setData(result);
+        setData(result.data);
       }
     };
     getNotificationData();
@@ -35,7 +32,9 @@ function index() {
           <div className={styles.page__contents__head__title}>
             {data ? data.title : "로딩 중..."}
           </div>
-          <div className={styles.page__contents__head__time}>{data ? data.time : "로딩 중..."}</div>
+          <div className={styles.page__contents__head__time}>
+            {data ? data.updatedAt : "로딩 중..."}
+          </div>
         </div>
         <div className={styles.page__contents__body}>{data ? data.content : "로딩 중..."}</div>
       </div>
