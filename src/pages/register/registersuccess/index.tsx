@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import styles from "./styles/registersuccess.module.scss";
 import Button from "@/components/common/button/Button";
 import { Link } from "react-router-dom";

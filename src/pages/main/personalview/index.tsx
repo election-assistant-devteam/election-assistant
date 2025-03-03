@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import styles from "./styles/personalview.module.scss";
 import BotNav from "@/components/common/botnav/BotNav";
 import { MdKeyboardArrowRight } from "react-icons/md";

@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import styles from "./styles/news.module.scss";
 import NavBar from "@/components/common/navigation/NavBar";
 import { useLocation } from "react-router-dom";
