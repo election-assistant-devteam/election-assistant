@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import styles from "./styles/initial.module.scss";
 import Button from "@/components/common/button/Button";
 import Title from "@/components/common/title/Title";

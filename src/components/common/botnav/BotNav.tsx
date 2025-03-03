@@ -1,4 +1,4 @@
-import React from "react";
+//import React from "react";
 import styles from "./BotNav.module.scss";
 import { IoDocumentTextOutline } from "react-icons/io5";
 import { IoDocumentText } from "react-icons/io5";
@@ -32,7 +32,11 @@ function BotNav() {
               setCurView(0);
             }}
           >
-            {curView === 0 ? <IoDocumentText size="30" color="#21005d" /> : <IoDocumentTextOutline size="30" color="#21005d" />}
+            {curView === 0 ? (
+              <IoDocumentText size="30" color="#21005d" />
+            ) : (
+              <IoDocumentTextOutline size="30" color="#21005d" />
+            )}
           </div>
           <div
             className={styles.page__contents__navBox__button}
@@ -41,7 +45,11 @@ function BotNav() {
               setCurView(1);
             }}
           >
-            {curView === 1 ? <GoHomeFill size="30" color="#21005d" /> : <GoHome size="30" color="#21005d" />}
+            {curView === 1 ? (
+              <GoHomeFill size="30" color="#21005d" />
+            ) : (
+              <GoHome size="30" color="#21005d" />
+            )}
           </div>
           <div
             className={styles.page__contents__navBox__button}
@@ -50,7 +58,11 @@ function BotNav() {
               setCurView(2);
             }}
           >
-            {curView === 2 ? <MdPerson size="30" color="#21005d" /> : <MdOutlinePerson size="30" color="#21005d" />}
+            {curView === 2 ? (
+              <MdPerson size="30" color="#21005d" />
+            ) : (
+              <MdOutlinePerson size="30" color="#21005d" />
+            )}
           </div>
         </div>
       </div>
