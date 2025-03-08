@@ -5,8 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow-y: visible;
-  overflow-x: hidden;
+  overflow: hidden;
 
   &__imageWrapper {
     position: absolute;
@@ -18,8 +17,8 @@
 
     &__image {
       width: 7rem;
-      height: 9rem;
-      object-fit: cover;
+      height: 8rem;
+      object-fit: contain;
       border-radius: 10px;
       //   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
 
