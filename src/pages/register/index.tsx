@@ -89,7 +89,7 @@ function index() {
     };
 
     try {
-      const response = await fetch("http://localhost:9001/users", {
+      const response = await fetch("http://13.124.154.53:80/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

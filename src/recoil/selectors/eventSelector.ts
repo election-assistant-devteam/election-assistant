@@ -12,7 +12,7 @@ export const eventData = selector({
 
     try {
       const res = await fetch(
-        `http://13.124.154.53/calendar/schedules?userId=1&year=${yearValue}`,
+        `http://13.124.154.53/api/calendar/schedules?userId=1&year=${yearValue}`,
         {
           method: "GET",
         }
