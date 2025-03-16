@@ -34,5 +34,5 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "build/*"
+          source: "dist/*"
           target: "/home/ec2-user"  # 프론트엔드 배포 경로
