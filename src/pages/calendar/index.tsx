@@ -151,7 +151,7 @@ function index() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("access")}`,
+        Authorization: `Bearer ${sessionStorage.getItem("access-token")}`,
       },
       body: JSON.stringify({
         date: formattedDate,
