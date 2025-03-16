@@ -1,0 +1,38 @@
+name: Deploy React App to EC2
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'develop'
+  pull_request:
+    branches:
+      - 'main'
+      - 'develop'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # 프로젝트 Node.js 버전에 맞게 변경
+
+      - name: Install Dependencies & Build
+        run: |
+          npm install
+          npm run build  # 리액트 프로젝트 빌드
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "build/*"
+          target: "/home/ec2-user"  # 프론트엔드 배포 경로
