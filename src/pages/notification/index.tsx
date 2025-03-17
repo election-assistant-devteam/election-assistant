@@ -38,7 +38,7 @@ function index() {
 
   useEffect(() => {
     const getNotification = async () => {
-      const response = await fetch("http://localhost:9001/notification", {
+      const response = await fetch("http://13.124.154.53:80/api/notification", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

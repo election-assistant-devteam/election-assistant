@@ -55,7 +55,7 @@ function index() {
     }
     //
 
-    const response = await fetch("http://localhost:9001/auth/login", {
+    const response = await fetch("http://13.124.154.53:80/api/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,12 +72,11 @@ function index() {
       sessionStorage.setItem("access-token", result.data.access);
       sessionStorage.setItem("refresh-token", result.data.refresh);
       sessionStorage.setItem("id", id);
-      console.log(result);
+      // console.log(result);
       navigate("/main");
     } else if (result.code === 40400) {
-      // alert(`${result.message}`);
       setAlertMsg(result.message);
-      console.log(result);
+      // console.log(result);
     }
   };
 
