@@ -86,7 +86,7 @@ function index() {
           <div className={styles.page__contents__dataSection__newsContainer}>
             <div className={styles.page__contents__dataSection__newsContainer__head}>
               <div className={styles.page__contents__dataSection__newsContainer__head__title}>
-                맞춤 뉴스
+                실시간 뉴스
               </div>
               {/* <FiSettings /> */}
             </div>
