@@ -10,14 +10,16 @@ function index() {
   const logout = () => {
     sessionStorage.removeItem("access-token");
     sessionStorage.removeItem("refresh-token");
-    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("nickname");
     navigate("/");
   };
   return (
     <div className={styles.page}>
       <div className={styles.page__contents}>
         <div className={styles.page__contents__profileSection}>
-          <div className={styles.page__contents__profileSection__name}>길동님</div>
+          <div className={styles.page__contents__profileSection__name}>
+            {sessionStorage.getItem("nickname")}님
+          </div>
           <div className={styles.page__contents__profileSection__dataBox}>
             <div className={styles.page__contents__profileSection__dataBox__prefer}>
               <div className={styles.page__contents__profileSection__dataBox__prefer__party}>
