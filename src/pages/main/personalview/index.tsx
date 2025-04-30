@@ -1,18 +1,29 @@
 //import React from "react";
 import styles from "./styles/personalview.module.scss";
 import BotNav from "@/components/common/botnav/BotNav";
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 function index() {
   const navigate = useNavigate();
+  const [intPol, setIntPol] = useState<string>("");
+  const [intPar, setIntPar] = useState<string>("");
 
   const logout = () => {
     sessionStorage.removeItem("access-token");
     sessionStorage.removeItem("refresh-token");
     sessionStorage.removeItem("nickname");
+    sessionStorage.removeItem("politicianOfInterest");
+    sessionStorage.removeItem("partyOfInterest");
     navigate("/");
   };
+
+  useEffect(() => {
+    setIntPol(sessionStorage.getItem("politicianOfInterest"));
+    setIntPar(sessionStorage.getItem("partyOfInterest"));
+  }, []);
+
   return (
     <div className={styles.page}>
       <div className={styles.page__contents}>
@@ -31,7 +42,7 @@ function index() {
                 <div
                   className={styles.page__contents__profileSection__dataBox__prefer__party__data}
                 >
-                  무슨무슨당
+                  {intPar === "" ? "미등록" : intPar}
                 </div>
               </div>
               <div className={styles.page__contents__profileSection__dataBox__prefer__politician}>
@@ -47,7 +58,7 @@ function index() {
                     styles.page__contents__profileSection__dataBox__prefer__politician__data
                   }
                 >
-                  봉길창
+                  {intPol === "" ? "미등록" : intPol}
                 </div>
               </div>
             </div>
