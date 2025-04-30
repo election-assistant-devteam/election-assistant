@@ -6,10 +6,11 @@ import InputBox from "@/components/common/input/InputBox";
 import { Link, useNavigate } from "react-router-dom";
 import Popup from "@/components/common/popup/Popup";
 import { formatChecker } from "@/utils/formatChecker";
-import { login } from "@/services/authServices";
+import { apiCall } from "@/services/authServices";
 
 const ID_REGEX = /^[a-zA-Z0-9]{4,12}$/;
 const PW_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/;
+const ENDPOINT = "https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/auth/login/success";
 
 function index() {
   const [id, setId] = useState<string>();
@@ -40,12 +41,15 @@ function index() {
       setPwValidation(true);
     }
 
-    const result = await login(id, pw);
+    const data = { id: id, pw: pw };
+    const result = await apiCall(data, ENDPOINT, "POST");
 
     if (result.code === 20000) {
       sessionStorage.setItem("access-token", result.data.access);
       sessionStorage.setItem("refresh-token", result.data.refresh);
       sessionStorage.setItem("nickname", result.data.nickname);
+      sessionStorage.setItem("politicianOfInterest", result.data.politicianOfInterest);
+      sessionStorage.setItem("partyOfInterest", result.data.partyOfInterest);
       navigate("/main");
     } else if (result.code === 40400) {
       setAlertMsg(result.message);

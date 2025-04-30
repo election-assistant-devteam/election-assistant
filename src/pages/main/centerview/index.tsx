@@ -10,14 +10,8 @@ import BotNav from "@/components/common/botnav/BotNav";
 import { useNavigate } from "react-router-dom";
 import AutoCarousel from "@/components/common/AutoCarousel/AutoCarousel";
 
-// interface Props {
-//   view: number;
-//   handleView: (viewNum: number) => void;
-// }
-
 function index() {
-  const data = "홍길동";
-  const politicianName = "봉길창";
+  const [userName, setUserName] = useState<string | null>(null);
   const [newsData, setNewsData] = useState(null);
   const navigate = useNavigate();
 
@@ -31,6 +25,8 @@ function index() {
         setNewsData(data);
       })
       .catch((error) => console.error("Error loading news_data", error));
+
+    setUserName(sessionStorage.getItem("nickname"));
   }, []);
 
   return (
@@ -48,7 +44,7 @@ function index() {
           <div className={styles.page__contents__searchSection__interest}>
             <div className={styles.page__contents__searchSection__interest__textArea}>
               <div className={styles.page__contents__searchSection__interest__textArea__text}>
-                {data}님이 <br />
+                {userName}님이 <br />
                 관심있을만한
                 <br />
                 정치인이에요
@@ -70,14 +66,6 @@ function index() {
               </div>
             </div>
             <div className={styles.page__contents__searchSection__interest__imageArea}>
-              {/* <img
-                src="/src/assets/images/sample.jpg"
-                alt="선호정치인 사진"
-                className={styles.page__contents__searchSection__interest__imageArea__image}
-              ></img>
-              <div className={styles.page__contents__searchSection__interest__imageArea__nameTag}>
-                {politicianName}
-              </div> */}
               <AutoCarousel></AutoCarousel>
             </div>
           </div>
