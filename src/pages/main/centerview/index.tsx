@@ -9,23 +9,16 @@ import { MdArrowForwardIos } from "react-icons/md";
 import BotNav from "@/components/common/botnav/BotNav";
 import { useNavigate } from "react-router-dom";
 import AutoCarousel from "@/components/common/AutoCarousel/AutoCarousel";
+import CalendarButton from "./CalendarButton";
+import CommunitySection from "./CommunitySection";
+import LiveNewsSection from "./LiveNewsSection";
 
-function index() {
+const CenterView = () => {
   const [userName, setUserName] = useState<string | null>(null);
-  const [newsData, setNewsData] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/news_data.json")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        setNewsData(data);
-      })
-      .catch((error) => console.error("Error loading news_data", error));
-
     setUserName(sessionStorage.getItem("nickname"));
   }, []);
 
@@ -71,142 +64,16 @@ function index() {
           </div>
         </div>
         <div className={styles.page__contents__dataSection}>
-          <div className={styles.page__contents__dataSection__newsContainer}>
-            <div className={styles.page__contents__dataSection__newsContainer__head}>
-              <div className={styles.page__contents__dataSection__newsContainer__head__title}>
-                실시간 뉴스
-              </div>
-              {/* <FiSettings /> */}
-            </div>
-            <div
-              className={styles.page__contents__dataSection__newsContainer__body}
-              onClick={() => window.open(newsData[0].link)}
-            >
-              <img
-                src={newsData?.[0]?.image?.replace("./", "/")}
-                alt=""
-                className={styles.page__contents__dataSection__newsContainer__body__image}
-              />
-              <div className={styles.page__contents__dataSection__newsContainer__body__newsTitle}>
-                {newsData?.[0]?.title}
-              </div>
-            </div>
-            <div
-              className={`${styles.page__contents__dataSection__newsContainer__body} ${styles.additionalNews}`}
-              onClick={() => window.open(newsData[1].link)}
-            >
-              <img
-                src={newsData?.[1]?.image?.replace("./", "/")}
-                alt=""
-                className={styles.page__contents__dataSection__newsContainer__body__image}
-              />
-              <div className={styles.page__contents__dataSection__newsContainer__body__newsTitle}>
-                {newsData?.[1]?.title}
-              </div>
-            </div>
-            <div className={styles.page__contents__dataSection__newsContainer__foot}>
-              <div
-                className={styles.page__contents__dataSection__newsContainer__foot__text}
-                onClick={() => navigate("/news", { state: newsData })}
-              >
-                더 많은 뉴스 보기
-              </div>
-              <div className={styles.page__contents__dataSection__newsContainer__foot__icon}>
-                <MdArrowForwardIos />
-              </div>
-            </div>
-          </div>
+          <LiveNewsSection />
           <div className={styles.page__contents__dataSection__etcContainer}>
-            <div
-              className={styles.page__contents__dataSection__etcContainer__issueCalendar}
-              onClick={() => {
-                navigate("/calendar");
-              }}
-            >
-              <div
-                className={styles.page__contents__dataSection__etcContainer__issueCalendar__icon}
-              >
-                <LuCalendar size="50" />
-              </div>
-              <div
-                className={styles.page__contents__dataSection__etcContainer__issueCalendar__text}
-              >
-                이슈
-                <br />
-                캘린더
-                <br />
-                확인하기
-                <br />
-              </div>
-            </div>
-            <div className={styles.page__contents__dataSection__etcContainer__community}>
-              <div className={styles.page__contents__dataSection__etcContainer__community__head}>
-                <div
-                  className={
-                    styles.page__contents__dataSection__etcContainer__community__head__title
-                  }
-                >
-                  커뮤니티
-                </div>
-              </div>
-              <div className={styles.page__contents__dataSection__etcContainer__community__hot}>
-                <div
-                  className={
-                    styles.page__contents__dataSection__etcContainer__community__hot__title
-                  }
-                >
-                  <div
-                    className={
-                      styles.page__contents__dataSection__etcContainer__community__hot__icon
-                    }
-                  >
-                    <FaHotjar color="red" />
-                  </div>
-                  <div
-                    className={
-                      styles.page__contents__dataSection__etcContainer__community__hot__text
-                    }
-                  >
-                    인기글
-                  </div>
-                </div>
-                <div className={styles.page__contents__dataSection__etcContainer__community__post}>
-                  인기글 1
-                </div>
-                <div className={styles.page__contents__dataSection__etcContainer__community__post}>
-                  인기글 2
-                </div>
-                <div className={styles.page__contents__dataSection__etcContainer__community__post}>
-                  인기글 3
-                </div>
-              </div>
-
-              <div
-                className={styles.page__contents__dataSection__etcContainer__community__foot}
-                onClick={() => navigate("/community")}
-              >
-                <div
-                  className={
-                    styles.page__contents__dataSection__etcContainer__community__foot__text
-                  }
-                >
-                  커뮤니티 바로가기
-                </div>
-                <div
-                  className={
-                    styles.page__contents__dataSection__etcContainer__community__foot__icon
-                  }
-                >
-                  <MdArrowForwardIos />
-                </div>
-              </div>
-            </div>
+            <CalendarButton />
+            <CommunitySection />
           </div>
         </div>
       </div>
       <BotNav></BotNav>
     </div>
   );
-}
+};
 
-export default index;
+export default CenterView;
