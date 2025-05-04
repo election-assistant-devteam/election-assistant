@@ -1,14 +1,18 @@
 //import React from "react";
+import TopNav from "@/components/common/TopNav/TopNav";
 import styles from "./styles/personalview.module.scss";
 import BotNav from "@/components/common/botnav/BotNav";
 import { useEffect, useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { curMainNum } from "@/recoil/atoms/curMainNum";
 
-function index() {
+function PersonalView() {
   const navigate = useNavigate();
   const [intPol, setIntPol] = useState<string>("");
   const [intPar, setIntPar] = useState<string>("");
+  const [curView, setCurView] = useRecoilState(curMainNum);
 
   const logout = () => {
     sessionStorage.removeItem("access-token");
@@ -16,6 +20,7 @@ function index() {
     sessionStorage.removeItem("nickname");
     sessionStorage.removeItem("politicianOfInterest");
     sessionStorage.removeItem("partyOfInterest");
+    setCurView(1);
     navigate("/");
   };
 
@@ -26,6 +31,7 @@ function index() {
 
   return (
     <div className={styles.page}>
+      <TopNav></TopNav>
       <div className={styles.page__contents}>
         <div className={styles.page__contents__profileSection}>
           <div className={styles.page__contents__profileSection__name}>
@@ -151,4 +157,4 @@ function index() {
   );
 }
 
-export default index;
+export default PersonalView;
