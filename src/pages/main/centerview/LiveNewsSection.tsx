@@ -30,23 +30,14 @@ const LiveNewsSection = () => {
       <div className={styles.newsContainer__head}>
         <div className={styles.newsContainer__head__title}>실시간 뉴스</div>
       </div>
-      {newsData && newsData.length > 0 && <LiveNewsItem newsData={newsData[0]} />}
-      <div
-        className={`${styles.newsContainer__body} ${styles.additionalNews}`}
-        onClick={() => window.open(newsData[1].link)}
-      >
-        <img
-          src={newsData?.[1]?.image?.replace("./", "/")}
-          alt=""
-          className={styles.newsContainer__body__image}
-        />
-        <div className={styles.newsContainer__body__newsTitle}>{newsData?.[1]?.title}</div>
+      <div className={styles.newsContainer__body}>
+        {newsData && newsData.length > 0 && <LiveNewsItem newsData={newsData[0]} />}
+        {newsData && newsData.length > 0 && <LiveNewsItem additional={true} newsData={newsData[1]} />}
+        {newsData && newsData.length > 0 && <LiveNewsItem additional={true} newsData={newsData[2]} />}
       </div>
+
       <div className={styles.newsContainer__foot}>
-        <div
-          className={styles.newsContainer__foot__text}
-          onClick={() => navigate("/news", { state: newsData })}
-        >
+        <div className={styles.newsContainer__foot__text} onClick={() => navigate("/news", { state: newsData })}>
           더 많은 뉴스 보기
         </div>
         <div className={styles.newsContainer__foot__icon}>

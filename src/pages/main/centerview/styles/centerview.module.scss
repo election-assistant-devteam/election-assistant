@@ -1,347 +1,63 @@
 .page {
   width: 100%;
   min-width: 351px;
+  // min-height: 100vh;
   height: 100vh;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  // align-items: center;
+  // justify-content: space-between;
+
+  // overflow-y: auto;
 
   &__contents {
     width: 100%;
-    // height: auto;
     min-height: 0;
+    height: 100vh;
+    overflow-y: auto;
 
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
     flex: 1;
+    @include desktop {
+      padding-top: 3rem;
+    }
 
-    &__searchSection {
+    &__dataSection {
       width: 100%;
-      height: 40%;
-      background-color: $color-purple-200;
+      height: 60%;
       padding: 1rem;
+      gap: 1rem;
 
       display: flex;
       flex-direction: column;
+      justify-content: start;
+      align-items: center;
 
-      &__searchBar {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-
-        background-color: white;
-        width: 100%;
-        height: 20%;
-        border-radius: 15px;
-        padding-left: 1rem;
-        padding-right: 1rem;
-        &__inputText {
-          width: 100%;
-          height: 70%;
-          border: none;
-        }
-      }
-
-      &__interest {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        height: 80%;
-
-        &__textArea {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          width: 50%;
-          padding: 1rem;
-          gap: 5px;
-
-          color: $color-purple-500;
-          &__text {
-            font-size: 1.5rem;
-            margin-top: 5px;
-
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-          }
-
-          &__edit {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 5px;
-            font-size: 0.8rem;
-
-            cursor: pointer;
-          }
-        }
-        &__imageArea {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-
-          width: 50%;
-          height: 100%;
-        }
-      }
-    }
-    @include mobile {
-      &__dataSection {
+      &__etcContainer {
         width: 100%;
         height: 60%;
-        padding: 1rem;
+
         gap: 1rem;
 
         display: flex;
-        flex-direction: column;
-        justify-content: start;
+        flex-direction: row;
         align-items: center;
-
-        &__etcContainer {
-          width: 100%;
-          height: 60%;
-
-          gap: 1rem;
-
-          display: flex;
-          flex-direction: row;
-          align-items: center;
-          &__issueCalendar {
-            width: 40%;
-            height: 100%;
-            padding: 1rem;
-            border-radius: 15px;
-            box-shadow: 0px 4px 8px $color-gray-200;
-            color: $color-purple-500;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-
-            // user-select: none;
-            cursor: pointer;
-
-            &__text {
-              font-size: clamp(16px, 5vw, 32px);
-            }
-          }
-          // &__community {
-          //   width: 60%;
-          //   height: 100%;
-          //   padding: 1rem;
-          //   border-radius: 15px;
-          //   box-shadow: 0px 4px 8px $color-gray-200;
-          //   background-color: $color-purple-200;
-
-          //   display: flex;
-          //   flex-direction: column;
-          //   justify-content: space-between;
-
-          //   &__head {
-          //     font-size: 1.5rem;
-          //     color: $color-purple-500;
-          //   }
-
-          //   &__hot {
-          //     display: flex;
-          //     flex-direction: column;
-
-          //     &__title {
-          //       color: $color-purple-400;
-
-          //       display: flex;
-          //       flex-direction: row;
-          //       gap: 5px;
-          //     }
-          //   }
-          //   &__foot {
-          //     color: $color-purple-400;
-
-          //     display: flex;
-          //     flex-direction: row;
-          //     gap: 5px;
-          //   }
-          // }
-        }
       }
     }
 
-    @include mid-mobile {
-      &__dataSection {
-        width: 100%;
-        height: 60%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-
-        padding: 1rem;
-        gap: 1rem;
-
-        &__newsContainer {
-          width: 35%;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-
-          padding: 1rem;
-          gap: 5px;
-
-          background-color: $color-purple-400;
-          border-radius: 15px;
-          box-shadow: 0px 4px 8px $color-gray-200;
-
-          &__head {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: start;
-
-            color: white;
-          }
-          &__body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            gap: 5px;
-
-            cursor: pointer;
-            &__image {
-              width: 100%;
-              max-height: 130px;
-              border-style: solid;
-              border-color: black;
-              border-width: 2px;
-            }
-            &__newsTitle {
-              font-size: clamp(0px, 2vw, 15px);
-              display: -webkit-box;
-              -webkit-line-clamp: 3; /* 최대 2줄까지 표시 */
-              -webkit-box-orient: vertical;
-              overflow: hidden;
-              text-overflow: ellipsis;
-            }
-          }
-          &__foot {
-            display: flex;
-            flex-direction: row;
-            justify-content: start;
-            align-items: center;
-
-            font-size: 0.8rem;
-            color: white;
-
-            cursor: pointer;
-            &__text {
-              display: flex;
-              align-items: center;
-            }
-            &__icon {
-              display: flex;
-              align-items: center;
-            }
-          }
-        }
-
-        &__etcContainer {
-          width: 65%;
-          height: 100%;
-
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          gap: 1rem;
-
-          // &__issueCalendar {
-          //   width: 50%;
-          //   height: 100%;
-
-          //   padding: 1rem;
-          //   border-radius: 15px;
-          //   box-shadow: 0px 4px 8px $color-gray-200;
-          //   color: $color-purple-500;
-
-          //   display: flex;
-          //   flex-direction: column;
-          //   justify-content: center;
-
-          //   cursor: pointer;
-
-          //   &__icon {
-          //   }
-          //   &__text {
-          //     font-size: clamp(16px, 5vw, 32px);
-          //   }
-          // }
-
-          &__community {
-            width: 50%;
-            height: 100%;
-
-            padding: 1rem;
-            border-radius: 15px;
-            box-shadow: 0px 4px 8px $color-gray-200;
-            background-color: $color-purple-200;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 5px;
-
-            &__head {
-            }
-            &__hot {
-              display: flex;
-              flex-direction: column;
-
-              &__title {
-                color: $color-purple-400;
-
-                display: flex;
-                flex-direction: row;
-                gap: 5px;
-              }
-            }
-            &__foot {
-              display: flex;
-              flex-direction: row;
-              justify-content: start;
-              align-items: center;
-
-              font-size: 0.8rem;
-
-              cursor: pointer;
-              &__text {
-                display: flex;
-                align-items: center;
-              }
-              &__icon {
-                display: flex;
-                align-items: center;
-              }
-            }
-          }
-        }
-      }
+    &__creditSection {
+      display: none;
     }
 
     @include desktop {
       &__dataSection {
         width: 80%;
-        height: 60%;
+        // height: 60%;
+        height: 30rem;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -359,53 +75,30 @@
           justify-content: space-between;
           align-items: center;
           gap: 1rem;
+        }
+      }
 
-          &__community {
-            width: 50%;
-            height: 100%;
+      &__creditSection {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
 
-            padding: 1rem;
-            border-radius: 15px;
-            box-shadow: 0px 4px 8px $color-gray-200;
-            background-color: $color-purple-200;
+        width: 100%;
+        height: 15rem;
+        // min-height: 20rem;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: 5px;
+        background-color: $color-gray-200;
 
-            &__head {
-            }
-            &__hot {
-              display: flex;
-              flex-direction: column;
+        &__contents {
+          width: 80%;
+          display: flex;
+          flex-direction: row;
+          gap: 3rem;
 
-              &__title {
-                color: $color-purple-400;
-
-                display: flex;
-                flex-direction: row;
-                gap: 5px;
-              }
-            }
-            &__foot {
-              display: flex;
-              flex-direction: row;
-              justify-content: start;
-              align-items: center;
-
-              font-size: 0.8rem;
-
-              cursor: pointer;
-              &__text {
-                display: flex;
-                align-items: center;
-              }
-              &__icon {
-                display: flex;
-                align-items: center;
-              }
-            }
+          &__item {
+            font-weight: lighter;
+            font-size: smaller;
           }
         }
       }
@@ -413,8 +106,8 @@
   }
 }
 
-.additionalNews {
-  @include mobile {
-    display: none;
+@include desktop {
+  .page__contents > * {
+    flex-shrink: 0; // ← 이 한 줄이면 세 섹션이 더 이상 눌리지 않음
   }
 }

@@ -27,19 +27,29 @@ function index() {
       return;
     }
 
-    //아이디 정합성 체크
-    if (!formatChecker(id, ID_REGEX)) {
-      setIdValidation(false);
-    } else {
-      setIdValidation(true);
-    }
+    //유효성 검사 (동기적인 동작을 위해 로컬 변수에 검증 결과를 저장)
+    const isIdValid = formatChecker(id, ID_REGEX);
+    const isPwValid = formatChecker(pw, PW_REGEX);
 
-    //비밀번호 정합성 체크
-    if (!formatChecker(pw, PW_REGEX)) {
-      setPwValidation(false);
-    } else {
-      setPwValidation(true);
-    }
+    //화면에 에러 메시지 표시
+    setIdValidation(isIdValid);
+    setPwValidation(isPwValid);
+
+    // //아이디 정합성 체크
+    // if (!formatChecker(id, ID_REGEX)) {
+    //   setIdValidation(false);
+    // } else {
+    //   setIdValidation(true);
+    // }
+
+    // //비밀번호 정합성 체크
+    // if (!formatChecker(pw, PW_REGEX)) {
+    //   setPwValidation(false);
+    // } else {
+    //   setPwValidation(true);
+    // }
+
+    if (!isIdValid || !isPwValid) return;
 
     const data = { id: id, pw: pw };
     const result = await apiCall(data, ENDPOINT, "POST");
@@ -50,7 +60,7 @@ function index() {
       sessionStorage.setItem("nickname", result.data.nickname);
       sessionStorage.setItem("politicianOfInterest", result.data.politicianOfInterest);
       sessionStorage.setItem("partyOfInterest", result.data.partyOfInterest);
-      navigate("/main");
+      navigate("/");
     } else if (result.code === 40400) {
       setAlertMsg(result.message);
     }

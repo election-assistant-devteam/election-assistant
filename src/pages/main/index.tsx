@@ -9,6 +9,7 @@ import { curMainNum } from "@/recoil/atoms/curMainNum";
 import { prevMainNum } from "@/recoil/atoms/prevMainNum";
 
 import { useNavigate } from "react-router-dom";
+import Popup from "@/components/common/popup/Popup";
 
 const variants = {
   initial: (direction: number) => ({
@@ -25,14 +26,14 @@ const variants = {
 function index() {
   const [prevView, setPrevView] = useRecoilState(prevMainNum);
   const [curView, setCurView] = useRecoilState(curMainNum);
-
+  const navigate = useNavigate();
   const direction = useMemo(() => (curView > prevView ? 1 : -1), [curView, prevView]);
 
-  console.log("--------------------");
-  console.log("prevView:", prevView);
-  console.log("curView:", curView);
-  console.log("direction : ", direction);
-  console.log("--------------------");
+  // console.log("--------------------");
+  // console.log("prevView:", prevView);
+  // console.log("curView:", curView);
+  // console.log("direction : ", direction);
+  // console.log("--------------------");
 
   // const getAnimation = () => {
   //   return {
@@ -43,12 +44,22 @@ function index() {
   // };
 
   const renderView = () => {
+    console.log(curView);
     switch (curView) {
       case 0:
         return <MenuView />;
       case 1:
         return <CenterView />;
       case 2:
+        console.log(sessionStorage.getItem("access-token"));
+        if (sessionStorage.getItem("access-token") === null) {
+          alert("로그인이 필요합니다!");
+          setCurView(1);
+          navigate("/login");
+          // setCurView(prevView);
+          // return renderView();
+          return;
+        }
         return <PersonalView />;
       default:
         return <p>잘못된 viewNum입니다.</p>;

@@ -1,6 +1,7 @@
 .newsContainer {
   width: 100%;
   height: 40%;
+
   padding: 1rem;
   gap: 5px;
   background-color: $color-purple-400;
@@ -10,7 +11,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  @include desktop {
+    height: 100%;
+  }
   &__head {
     display: flex;
     flex-direction: row;
@@ -18,118 +21,99 @@
     align-items: center;
     color: white;
 
-    height: 20%;
+    height: 1rem;
 
     &__title {
     }
   }
   &__body {
+    flex: 1;
+    min-height: 0;
+
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
+    justify-content: start;
 
-    width: 100%;
-    height: 60%;
-
-    &__image {
-      width: 100%;
-      height: 100%;
-
-      border-style: solid;
-      border-color: black;
-      border-width: 2px;
-
-      object-fit: cover;
-    }
+    gap: 5px;
   }
   &__foot {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 5px;
-    height: 20%;
+    height: 1rem;
 
     color: white;
   }
 }
 
-@include mobile {
-}
-
 @include desktop {
-  .newsContainer {
-    width: 35%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  // .newsContainer {
+  //   width: 35%;
+  //   height: 100%;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: space-between;
 
-    padding: 1rem;
-    gap: 5px;
+  //   padding: 1rem;
+  //   gap: 5px;
 
-    background-color: $color-purple-400;
-    border-radius: 15px;
-    box-shadow: 0px 4px 8px $color-gray-200;
+  //   background-color: $color-purple-400;
+  //   border-radius: 15px;
+  //   box-shadow: 0px 4px 8px $color-gray-200;
 
-    &__head {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: start;
+  //   &__head {
+  //     display: flex;
+  //     flex-direction: row;
+  //     align-items: center;
+  //     justify-content: start;
 
-      color: white;
-    }
-    &__body {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+  //     color: white;
+  //   }
+  //   &__body {
+  //     display: flex;
+  //     flex-direction: row;
+  //     align-items: center;
 
-      gap: 5px;
+  //     gap: 5px;
 
-      cursor: pointer;
-      &__image {
-        width: 40%;
-        min-width: 6rem;
+  //     cursor: pointer;
+  //     &__image {
+  //       width: 40%;
+  //       min-width: 6rem;
 
-        border-style: solid;
-        border-color: black;
-        border-width: 2px;
-      }
-      &__newsTitle {
-        font-size: clamp(0px, 2vw, 15px);
-        display: -webkit-box;
-        -webkit-line-clamp: 3; /* 최대 2줄까지 표시 */
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-    }
-    &__foot {
-      display: flex;
-      flex-direction: row;
-      justify-content: start;
-      align-items: center;
+  //       border-style: solid;
+  //       border-color: black;
+  //       border-width: 2px;
+  //     }
+  //     &__newsTitle {
+  //       font-size: clamp(0px, 2vw, 15px);
+  //       display: -webkit-box;
+  //       -webkit-line-clamp: 3; /* 최대 2줄까지 표시 */
+  //       -webkit-box-orient: vertical;
+  //       overflow: hidden;
+  //       text-overflow: ellipsis;
+  //     }
+  //   }
+  //   &__foot {
+  //     display: flex;
+  //     flex-direction: row;
+  //     justify-content: start;
+  //     align-items: center;
 
-      font-size: 0.8rem;
-      color: white;
+  //     font-size: 0.8rem;
+  //     color: white;
 
-      cursor: pointer;
-      &__text {
-        display: flex;
-        align-items: center;
-      }
-      &__icon {
-        display: flex;
-        align-items: center;
-      }
-    }
-  }
-}
-
-.additionalNews {
-  @include mobile {
-    display: none;
-  }
+  //     cursor: pointer;
+  //     &__text {
+  //       display: flex;
+  //       align-items: center;
+  //     }
+  //     &__icon {
+  //       display: flex;
+  //       align-items: center;
+  //     }
+  //   }
+  // }
 }

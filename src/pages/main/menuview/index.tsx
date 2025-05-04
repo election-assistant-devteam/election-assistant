@@ -8,6 +8,7 @@ import { FiSettings } from "react-icons/fi";
 import { TbBell } from "react-icons/tb";
 import BotNav from "@/components/common/botnav/BotNav";
 import { useNavigate } from "react-router-dom";
+import SideNav from "@/components/common/TopNav/TopNav";
 
 // interface Props {
 //   view: number;
@@ -19,11 +20,9 @@ function index() {
   return (
     <div className={styles.page}>
       <div className={styles.page__contents}>
+        <SideNav></SideNav>
         <div className={styles.page__contents__topNav}>
-          <div
-            className={styles.page__contents__topNav__item}
-            onClick={() => navigate("/notification")}
-          >
+          <div className={styles.page__contents__topNav__item} onClick={() => navigate("/notification")}>
             <TbBell className={styles.page__contents__topNav__item__icon} size="40" />
             <div className={styles.page__contents__topNav__item__text}>공지사항</div>
           </div>

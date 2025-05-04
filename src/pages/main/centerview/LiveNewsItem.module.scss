@@ -1,4 +1,4 @@
-.body {
+.content {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -6,10 +6,13 @@
   gap: 15px;
 
   width: 100%;
-  height: 60%;
+  height: 100%;
+  @include desktop {
+    height: 7rem;
+  }
 
   &__image {
-    width: 100%;
+    width: 12rem;
     height: 100%;
 
     border-style: solid;
@@ -17,5 +20,20 @@
     border-width: 2px;
 
     object-fit: cover;
+  }
+
+  &__newsTitle {
+    font-weight: lighter;
+    color: white;
+  }
+}
+
+.additionalNews {
+  display: none;
+}
+
+@include desktop {
+  .additionalNews {
+    display: flex;
   }
 }
