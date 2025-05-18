@@ -24,11 +24,11 @@ function App() {
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
-          <Route index path="/" element={<InitialPage />}></Route>
+          <Route index path="/" element={<MainPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/recall" element={<RecallPage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
-          <Route path="/main" element={<MainPage />}></Route>
+          {/* <Route path="/main" element={<MainPage />}></Route> */}
           <Route path="/calendar" element={<CalendarPage />}></Route>
           <Route path="/candidate/:id" element={<CandidatePage />}></Route>
           <Route path="/politician/:id" element={<PoliticianPage />}></Route>

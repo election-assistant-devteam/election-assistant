@@ -1,0 +1,80 @@
+.searchSection {
+  width: 100%;
+  height: 40%;
+  background-color: $color-purple-200;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__header {
+    display: none;
+  }
+
+  @include desktop {
+    height: 20rem;
+
+    &__header {
+      display: block;
+      position: relative;
+      width: 100%;
+
+      &__logo {
+        width: 3rem;
+        position: absolute;
+        top: 0.2rem;
+        left: 3rem;
+      }
+    }
+  }
+
+  &__interest {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+
+    &__textArea {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 50%;
+      padding: 1rem;
+      gap: 5px;
+
+      color: $color-purple-500;
+      &__text {
+        font-size: 1.5rem;
+        margin-top: 5px;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+      }
+
+      &__edit {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.8rem;
+
+        cursor: pointer;
+      }
+    }
+    &__imageArea {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 50%;
+      height: 100%;
+    }
+  }
+}

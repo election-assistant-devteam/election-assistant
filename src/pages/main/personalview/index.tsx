@@ -1,23 +1,42 @@
 //import React from "react";
+import TopNav from "@/components/common/TopNav/TopNav";
 import styles from "./styles/personalview.module.scss";
 import BotNav from "@/components/common/botnav/BotNav";
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { curMainNum } from "@/recoil/atoms/curMainNum";
 
-function index() {
+function PersonalView() {
   const navigate = useNavigate();
+  const [intPol, setIntPol] = useState<string>("");
+  const [intPar, setIntPar] = useState<string>("");
+  const [curView, setCurView] = useRecoilState(curMainNum);
 
   const logout = () => {
     sessionStorage.removeItem("access-token");
     sessionStorage.removeItem("refresh-token");
-    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("nickname");
+    sessionStorage.removeItem("politicianOfInterest");
+    sessionStorage.removeItem("partyOfInterest");
+    setCurView(1);
     navigate("/");
   };
+
+  useEffect(() => {
+    setIntPol(sessionStorage.getItem("politicianOfInterest"));
+    setIntPar(sessionStorage.getItem("partyOfInterest"));
+  }, []);
+
   return (
     <div className={styles.page}>
+      <TopNav></TopNav>
       <div className={styles.page__contents}>
         <div className={styles.page__contents__profileSection}>
-          <div className={styles.page__contents__profileSection__name}>길동님</div>
+          <div className={styles.page__contents__profileSection__name}>
+            {sessionStorage.getItem("nickname")}님
+          </div>
           <div className={styles.page__contents__profileSection__dataBox}>
             <div className={styles.page__contents__profileSection__dataBox__prefer}>
               <div className={styles.page__contents__profileSection__dataBox__prefer__party}>
@@ -29,7 +48,7 @@ function index() {
                 <div
                   className={styles.page__contents__profileSection__dataBox__prefer__party__data}
                 >
-                  무슨무슨당
+                  {intPar === "" ? "미등록" : intPar}
                 </div>
               </div>
               <div className={styles.page__contents__profileSection__dataBox__prefer__politician}>
@@ -45,7 +64,7 @@ function index() {
                     styles.page__contents__profileSection__dataBox__prefer__politician__data
                   }
                 >
-                  봉길창
+                  {intPol === "" ? "미등록" : intPol}
                 </div>
               </div>
             </div>
@@ -138,4 +157,4 @@ function index() {
   );
 }
 
-export default index;
+export default PersonalView;

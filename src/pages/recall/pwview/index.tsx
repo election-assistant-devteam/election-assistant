@@ -2,32 +2,24 @@ import React, { useState } from "react";
 import styles from "./styles/PwView.module.scss";
 import InputBox from "@/components/common/input/InputBox";
 import Button from "@/components/common/button/Button";
+import { apiCall } from "@/services/authServices";
+
+const RANDOM_PW_ENDPOINT = "https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/recall/pw";
 
 function index() {
   const [id, setId] = useState<string>();
   const [email, setEmail] = useState<string>();
-  const [randomPw, setRandomPw] = useState<string>();
 
   const getRandomPw = async () => {
-    const response = await fetch(
-      `https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/recall/pw`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: id,
-          email: email,
-        }),
-      }
-    );
+    const data = {
+      id: id,
+      email: email,
+    };
 
-    if (response.status === 200) {
-      const result = await response.json();
-      console.log(result);
-      setRandomPw(result.data);
-      alert(`비밀번호가 재발급 되었습니다 : ${result.data}`);
+    const result = await apiCall(data, RANDOM_PW_ENDPOINT, "POST");
+
+    if (result.code === 20000) {
+      alert(`비밀번호가 재발급 되었습니다. 이메일을 확인하세요!`);
     } else {
       alert("서버 에러... 나중에 다시 시도하세요");
     }

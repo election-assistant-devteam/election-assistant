@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import styles from "./styles/IdView.module.scss";
 import Button from "@/components/common/button/Button";
 import InputBox from "@/components/common/input/InputBox";
+import { apiCall } from "@/services/authServices";
+
+const AUTH_NUM_REQ_ENDPOINT =
+  "https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/authnumreq";
+const AUTH_NUM_CONFIRM_ENDPOINT =
+  "https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/authnumval";
 
 function index() {
   const [email, setEmail] = useState<string>();
@@ -9,21 +15,10 @@ function index() {
   const [id, setId] = useState<string>();
 
   const authNumReq = async () => {
-    const response = await fetch(
-      `https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/authnumreq`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: email,
-        }),
-      }
-    );
+    const data = { email: email };
+    const result = await apiCall(data, AUTH_NUM_REQ_ENDPOINT, "POST");
 
-    if (response.status === 200) {
-      // const result = await response.json();
+    if (result.code === 20000) {
       alert("이메일로 인증번호가 전송되었습니다");
     } else {
       alert("서버 에러... 나중에 다시 시도하세요");
@@ -31,21 +26,10 @@ function index() {
   };
 
   const authNumVal = async () => {
-    const response = await fetch(
-      `https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/authnumval`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          verifycode: verifycode,
-        }),
-      }
-    );
+    const data = { verifycode: verifycode };
+    const result = await apiCall(data, AUTH_NUM_CONFIRM_ENDPOINT, "POST");
 
-    if (response.status === 200) {
-      const result = await response.json();
+    if (result.code === 20000) {
       setId(result.data.id);
       alert("인증번호가 확인되었습니다");
     } else {
