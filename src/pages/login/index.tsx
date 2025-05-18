@@ -5,6 +5,12 @@ import Button from "@/components/common/button/Button";
 import InputBox from "@/components/common/input/InputBox";
 import { Link, useNavigate } from "react-router-dom";
 import Popup from "@/components/common/popup/Popup";
+import { formatChecker } from "@/utils/formatChecker";
+import { apiCall } from "@/services/authServices";
+
+const ID_REGEX = /^[a-zA-Z0-9]{4,12}$/;
+const PW_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/;
+const ENDPOINT = "https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/auth/login/success";
 
 function index() {
   const [id, setId] = useState<string>();
@@ -14,69 +20,49 @@ function index() {
   const [pwValidation, setPwValidation] = useState<boolean>(true);
   const [alertMsg, setAlertMsg] = useState<string>();
 
-  const idFormatCheck = (id: string) => {
-    const regex = /^[a-zA-Z0-9]{4,12}$/;
-    if (!regex.test(id)) {
-      setIdValidation(false);
-    } else {
-      setIdValidation(true);
-    }
-    return;
-  };
-
-  const pwFormatCheck = (pw: string) => {
-    const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/;
-    if (!regex.test(pw)) {
-      setPwValidation(false);
-    } else {
-      setPwValidation(true);
-    }
-    return;
-  };
-
-  // useEffect(() => {
-
-  // }, [idValidation, pwValidation]);
-
   const handleLogin = async () => {
-    //아이디 and 비밀번호 정합성 체크
+    //아이디 & 비번 입력 여부 체크
     if (id === undefined || pw === undefined) {
       alert("아이디나 패스워드를 입력하세요!");
       return;
     }
 
-    idFormatCheck(id);
-    pwFormatCheck(pw);
-    const isIdValid = /^[a-zA-Z0-9]{4,12}$/.test(id); // id 유효성 체크
-    const isPwValid = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/.test(pw); // pw 유효성 체크
+    //유효성 검사 (동기적인 동작을 위해 로컬 변수에 검증 결과를 저장)
+    const isIdValid = formatChecker(id, ID_REGEX);
+    const isPwValid = formatChecker(pw, PW_REGEX);
 
-    if (!isIdValid || !isPwValid) {
-      return;
-    }
-    //
+    //화면에 에러 메시지 표시
+    setIdValidation(isIdValid);
+    setPwValidation(isPwValid);
 
-    const response = await fetch("http://13.124.154.53:80/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: id,
-        password: pw,
-      }),
-    });
+    // //아이디 정합성 체크
+    // if (!formatChecker(id, ID_REGEX)) {
+    //   setIdValidation(false);
+    // } else {
+    //   setIdValidation(true);
+    // }
 
-    const result = await response.json();
+    // //비밀번호 정합성 체크
+    // if (!formatChecker(pw, PW_REGEX)) {
+    //   setPwValidation(false);
+    // } else {
+    //   setPwValidation(true);
+    // }
+
+    if (!isIdValid || !isPwValid) return;
+
+    const data = { id: id, pw: pw };
+    const result = await apiCall(data, ENDPOINT, "POST");
 
     if (result.code === 20000) {
       sessionStorage.setItem("access-token", result.data.access);
       sessionStorage.setItem("refresh-token", result.data.refresh);
-      sessionStorage.setItem("id", id);
-      // console.log(result);
-      navigate("/main");
+      sessionStorage.setItem("nickname", result.data.nickname);
+      sessionStorage.setItem("politicianOfInterest", result.data.politicianOfInterest);
+      sessionStorage.setItem("partyOfInterest", result.data.partyOfInterest);
+      navigate("/");
     } else if (result.code === 40400) {
       setAlertMsg(result.message);
-      // console.log(result);
     }
   };
 
