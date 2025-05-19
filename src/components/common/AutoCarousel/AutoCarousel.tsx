@@ -36,7 +36,7 @@ function AutoCarousel() {
             className={styles.contents__imageWrapper}
             key={i}
             animate={{
-              scale: offset === 1 ? 1.2 : 0.9,
+              scale: offset === 1 ? 1.1 : 0.9,
               opacity: offset === 1 ? 1 : 0.6,
               x: (offset - 1) * 134.4,
               zIndex: offset === 1 ? 10 : 5,
