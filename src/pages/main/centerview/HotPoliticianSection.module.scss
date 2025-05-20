@@ -2,7 +2,7 @@
   width: 100%;
   height: 40%;
   background-color: $color-purple-200;
-  padding: 1rem;
+  padding: 0.5rem;
 
   display: flex;
   flex-direction: column;
@@ -13,7 +13,7 @@
   }
 
   @include desktop {
-    height: 20rem;
+    height: 12rem;
 
     &__header {
       display: block;
@@ -54,6 +54,9 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        @include desktop {
+          font-size: 0.8rem;
+        }
       }
 
       &__edit {
