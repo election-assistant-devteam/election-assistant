@@ -44,6 +44,7 @@
     }
   }
   &__foot {
+    width: fit-content;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -51,5 +52,13 @@
     height: 1rem;
 
     color: white;
+
+    cursor: pointer;
+
+    &__icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
