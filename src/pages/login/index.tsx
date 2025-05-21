@@ -10,7 +10,7 @@ import { apiCall } from "@/services/authServices";
 
 const ID_REGEX = /^[a-zA-Z0-9]{4,12}$/;
 const PW_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/;
-const ENDPOINT = "http://54.180.165.220/auth/login";
+const ENDPOINT = "http://54.180.165.220/api/auth/login";
 
 function index() {
   const [id, setId] = useState<string>();
