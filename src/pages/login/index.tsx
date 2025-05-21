@@ -10,7 +10,7 @@ import { apiCall } from "@/services/authServices";
 
 const ID_REGEX = /^[a-zA-Z0-9]{4,12}$/;
 const PW_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/;
-const ENDPOINT = "https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/auth/login/success";
+const ENDPOINT = "https://54.180.165.220/auth/login";
 
 function index() {
   const [id, setId] = useState<string>();
