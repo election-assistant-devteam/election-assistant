@@ -26,7 +26,7 @@ const HotPoliticianSection = ({ userName }: Props) => {
     <div className={styles.searchSection}>
       <div className={styles.searchSection__header}>
         <img
-          src="/icons/RunningMateLogo.svg"
+          src="/icons/agora_title2.png"
           alt="러닝메이트 로고"
           className={styles.searchSection__header__logo}
         />

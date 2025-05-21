@@ -44,10 +44,12 @@ const CommunitySection = () => {
       </div>
 
       <div className={styles.community__foot} onClick={() => navigate("/community")}>
-        <div className={styles.community__foot__text}>커뮤니티 바로가기</div>
-        <div className={styles.community__foot__icon}>
+        {/* <div className={styles.community__foot__button}> */}
+        <div className={styles.community__foot__button__text}>커뮤니티 바로가기</div>
+        <div className={styles.community__foot__button__icon}>
           <MdArrowForwardIos />
         </div>
+        {/* </div> */}
       </div>
     </div>
   );

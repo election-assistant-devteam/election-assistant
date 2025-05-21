@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./styles/main.module.scss";
-import MenuView from "./menuview/index";
+import MenuView from "./menuview/MenuView";
 import CenterView from "./centerview/CenterView";
-import PersonalView from "./personalview/index";
+import PersonalView from "./personalview/PersonalView";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import { curMainNum } from "@/recoil/atoms/curMainNum";
