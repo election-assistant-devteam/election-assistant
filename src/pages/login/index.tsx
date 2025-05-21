@@ -58,6 +58,7 @@ function index() {
       sessionStorage.setItem("access-token", result.data.access);
       sessionStorage.setItem("refresh-token", result.data.refresh);
       sessionStorage.setItem("nickname", result.data.nickname);
+      sessionStorage.setItem("id", result.data.id);
       sessionStorage.setItem("politicianOfInterest", result.data.politicianOfInterest);
       sessionStorage.setItem("partyOfInterest", result.data.partyOfInterest);
       navigate("/");
