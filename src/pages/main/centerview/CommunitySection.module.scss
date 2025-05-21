@@ -40,8 +40,11 @@
   &__foot {
     color: $color-purple-400;
 
+    width: fit-content;
     display: flex;
     flex-direction: row;
     gap: 5px;
+
+    cursor: pointer;
   }
 }
