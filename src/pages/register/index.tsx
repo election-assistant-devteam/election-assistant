@@ -5,6 +5,13 @@ import InputBox from "@/components/common/input/InputBox";
 import Button from "@/components/common/button/Button";
 import RegisterSuccess from "./registersuccess";
 import Popup from "@/components/common/popup/Popup";
+import { formatChecker } from "@/utils/formatChecker";
+import { apiCall } from "@/services/authServices";
+
+const ID_REGEX = /^[a-zA-Z0-9]{4,12}$/;
+const PW_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const ENDPOINT = "http://54.180.165.220/api/users";
 
 function index() {
   const [email, setEmail] = useState<string>();
@@ -19,45 +26,8 @@ function index() {
   const [pwRepeatValidation, setPwRepeatValidation] = useState<boolean>(true);
   const [alertMsg, setAlertMsg] = useState<string>();
 
-  const idFormatCheck = (id: string) => {
-    const regex = /^[a-zA-Z0-9]{4,12}$/;
-    if (!regex.test(id)) {
-      setIdValidation(false);
-    } else {
-      setIdValidation(true);
-    }
-    return;
-  };
-
-  const pwFormatCheck = (pw: string) => {
-    const regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/;
-    if (!regex.test(pw)) {
-      setPwValidation(false);
-    } else {
-      setPwValidation(true);
-    }
-    return;
-  };
-
-  const emailFormatCheck = (email: string) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!regex.test(email)) {
-      setEmailValidation(false);
-    } else {
-      setEmailValidation(true);
-    }
-    return;
-  };
-
-  const pwRepeatCheck = (pw: string, pwRepeat: string) => {
-    if (pw !== pwRepeat) {
-      setPwRepeatValidation(false);
-    } else {
-      setPwRepeatValidation(true);
-    }
-  };
-
   const handleRegister = async () => {
+    // 모든 필드에 입력되었는지 여부 체크
     if (
       id === undefined ||
       pw === undefined ||
@@ -68,19 +38,16 @@ function index() {
       alert("모든 항목에 대해 입력하세요!");
       return;
     }
-    emailFormatCheck(email);
-    idFormatCheck(id);
-    pwFormatCheck(pw);
-    pwRepeatCheck(pw, pwRepeat);
 
-    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const isIdValid = /^[a-zA-Z0-9]{4,12}$/.test(id);
-    const isPwValid = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/.test(pw);
+    const isIdValid = formatChecker(id, ID_REGEX);
+    const isPwValid = formatChecker(pw, PW_REGEX);
+    const isEmailValid = formatChecker(email, EMAIL_REGEX);
     const isPwRepeatValid = pw === pwRepeat ? true : false;
+
     if (!isEmailValid || !isIdValid || !isPwValid || !isPwRepeatValid) {
       return;
     }
-    // console.log("flag");
+
     const payload = {
       nickname: nickname,
       email: email,
@@ -89,15 +56,7 @@ function index() {
     };
 
     try {
-      const response = await fetch("http://13.124.154.53:80/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
+      const result = await apiCall(payload, ENDPOINT, "POST");
 
       if (result.code === 20000) {
         if (result.success === true) {
@@ -106,8 +65,6 @@ function index() {
           alert(result.message);
         }
       } else if (result.code === 40000) {
-        // alert(`에러코드 : ${response.status}`);
-        console.log(result);
         setAlertMsg(result.message);
       }
     } catch (error) {
