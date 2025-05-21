@@ -15,6 +15,10 @@
     align-items: center;
     flex: 1;
 
+    @include desktop {
+      padding-top: 3rem;
+    }
+
     &__profileSection {
       background-color: $color-purple-500;
 

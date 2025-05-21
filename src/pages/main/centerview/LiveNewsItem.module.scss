@@ -9,6 +9,8 @@
   flex: 1;
   min-height: 0;
 
+  cursor: pointer;
+
   @include desktop {
     flex: 1;
     min-height: 0;
