@@ -25,13 +25,20 @@ const HotPoliticianSection = ({ userName }: Props) => {
   return (
     <div className={styles.searchSection}>
       <div className={styles.searchSection__header}>
-        <img
-          src="/icons/agora_title2.png"
-          alt="러닝메이트 로고"
-          className={styles.searchSection__header__logo}
-        />
+        <div className={styles.searchSection__header__left}>
+          <img
+            src="/icons/agora_title2.png"
+            alt="러닝메이트 로고"
+            className={styles.searchSection__header__left__logo}
+          />
+        </div>
+
+        <div className={styles.searchSection__header__searchBar}>
+          <SearchBar placeholder="찾고싶은 정치인을 입력하세요" />
+        </div>
+        <div className={styles.searchSection__header__rightArea}></div>
       </div>
-      <SearchBar placeholder="찾고싶은 정치인을 입력하세요" />
+
       <div className={styles.searchSection__interest}>
         {isLogin ? (
           <div className={styles.searchSection__interest__textArea}>
