@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles/centerview.module.scss";
 import BotNav from "@/components/common/botnav/BotNav";
-import { useNavigate } from "react-router-dom";
-import AutoCarousel from "@/components/common/AutoCarousel/AutoCarousel";
 import CalendarButton from "./CalendarButton";
 import CommunitySection from "./CommunitySection";
 import LiveNewsSection from "./LiveNewsSection";
