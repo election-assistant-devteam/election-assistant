@@ -25,7 +25,7 @@ function index() {
               RunningMate는 누가 만들었나요?
             </div>
             <div className={styles.page__contents__faqContainer__faqItem__body}>
-              건국대학교 22학번 재학생으로 구성된 팀이 만든 서비스입니다.
+              건국대학교 재학생으로 구성된 팀이 만든 서비스입니다.
             </div>
           </div>
         </div>
