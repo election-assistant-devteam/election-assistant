@@ -35,23 +35,10 @@ function index() {
     setIdValidation(isIdValid);
     setPwValidation(isPwValid);
 
-    // //아이디 정합성 체크
-    // if (!formatChecker(id, ID_REGEX)) {
-    //   setIdValidation(false);
-    // } else {
-    //   setIdValidation(true);
-    // }
-
-    // //비밀번호 정합성 체크
-    // if (!formatChecker(pw, PW_REGEX)) {
-    //   setPwValidation(false);
-    // } else {
-    //   setPwValidation(true);
-    // }
-
     if (!isIdValid || !isPwValid) return;
 
-    const data = { id: id, pw: pw };
+    console.log(id, pw);
+    const data = { username: id, password: pw };
     const result = await apiCall(data, ENDPOINT, "POST");
 
     if (result.code === 20000) {
