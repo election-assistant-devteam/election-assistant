@@ -9,22 +9,33 @@
   align-items: center;
 
   &__header {
-    display: none;
+    width: 100%;
+    &__left {
+      display: none;
+    }
   }
 
   @include desktop {
-    height: 12rem;
-
+    height: 14rem;
     &__header {
-      display: block;
-      position: relative;
-      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      &__logo {
+      &__left__logo {
         width: 5rem;
-        position: absolute;
-        top: 0.5rem;
-        left: 1rem;
+      }
+
+      &__left,
+      &__rightArea {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      &__searchBar {
+        padding: 1rem;
+        flex: 0 0 80%;
       }
     }
   }
