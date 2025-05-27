@@ -12,6 +12,7 @@ const ID_REGEX = /^[a-zA-Z0-9]{4,12}$/;
 const PW_REGEX = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{9,12}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ENDPOINT = "http://54.180.165.220/api/users";
+//hello
 
 function index() {
   const [email, setEmail] = useState<string>();
