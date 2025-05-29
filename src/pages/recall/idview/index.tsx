@@ -16,7 +16,7 @@ function index() {
 
   const authNumReq = async () => {
     const data = { email: email };
-    const result = await apiCall(data, AUTH_NUM_REQ_ENDPOINT, "POST");
+    const result = await apiCall(AUTH_NUM_REQ_ENDPOINT, "POST", data);
 
     if (result.code === 20000) {
       alert("이메일로 인증번호가 전송되었습니다");
@@ -27,7 +27,7 @@ function index() {
 
   const authNumVal = async () => {
     const data = { verifycode: verifycode };
-    const result = await apiCall(data, AUTH_NUM_CONFIRM_ENDPOINT, "POST");
+    const result = await apiCall(AUTH_NUM_CONFIRM_ENDPOINT, "POST", data);
 
     if (result.code === 20000) {
       setId(result.data.id);
