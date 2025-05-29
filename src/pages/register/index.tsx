@@ -57,7 +57,7 @@ function index() {
     };
 
     try {
-      const result = await apiCall(payload, ENDPOINT, "POST");
+      const result = await apiCall(ENDPOINT, "POST", payload);
 
       if (result.code === 20000) {
         if (result.success === true) {

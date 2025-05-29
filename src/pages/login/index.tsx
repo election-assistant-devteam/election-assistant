@@ -40,7 +40,7 @@ function index() {
 
     console.log(id, pw);
     const data = { username: id, password: pw };
-    const result = await apiCall(data, ENDPOINT, "POST");
+    const result = await apiCall(ENDPOINT, "POST", data);
 
     if (result.code === 20000) {
       sessionStorage.setItem("access-token", result.data.access);
