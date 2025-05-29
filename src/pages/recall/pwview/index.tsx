@@ -16,7 +16,7 @@ function index() {
       email: email,
     };
 
-    const result = await apiCall(data, RANDOM_PW_ENDPOINT, "POST");
+    const result = await apiCall(RANDOM_PW_ENDPOINT, "POST", data);
 
     if (result.code === 20000) {
       alert(`비밀번호가 재발급 되었습니다. 이메일을 확인하세요!`);
