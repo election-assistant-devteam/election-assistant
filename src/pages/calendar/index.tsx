@@ -205,7 +205,7 @@ function index() {
                     <div
                       className={`${styles.page__contents__modal__body__event} ${styles.election}`}
                       key={index}
-                      onClick={() => navigate(`/candidate/${event.id}`)}
+                      onClick={() => navigate(`/candidate/${event.electionId}`)}
                     >
                       {event.name}
                     </div>

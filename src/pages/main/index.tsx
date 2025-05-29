@@ -44,7 +44,7 @@ function index() {
   // };
 
   const renderView = () => {
-    console.log(curView);
+    // console.log(curView);
     switch (curView) {
       case 0:
         return <MenuView />;
