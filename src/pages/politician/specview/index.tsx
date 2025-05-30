@@ -9,9 +9,11 @@ type Info = {
   family: string;
   approvalRating: object;
   education: string[];
-  career: string[];
-  criminalRecord: string[];
+  career: string;
+  pastCrime: string;
   details: string[];
+  levelOfEducation: string;
+  pledge: string;
 };
 
 interface Props {
@@ -28,29 +30,32 @@ function index({ viewNum, data }: Props) {
     case 0:
       return (
         <div className={styles.contents}>
-          {data.education.map((item, index) => (
+          {/* {data.education.map((item, index) => (
             <div key={index}>{item}</div>
-          ))}
+          ))} */}
+          {data.levelOfEducation}
         </div>
       );
     case 1:
       return (
         <div className={styles.contents}>
-          {data.career.map((item, index) => (
+          {/* {data.career.map((item, index) => (
             <div key={index}>{item}</div>
-          ))}
+          ))} */}
+          {data.career}
         </div>
       );
     case 2:
       return (
         <div className={styles.contents}>
-          {data.criminalRecord.map((item, index) => (
+          {/* {data.criminalRecord.map((item, index) => (
             <div key={index}>{item}</div>
-          ))}
+          ))} */}
+          {data.pastCrime}
         </div>
       );
     case 3:
-      return <p>내용 D</p>;
+      return <div className={styles.contents}>{data.pledge}</div>;
     default:
       return <p>기본 내용</p>;
   }

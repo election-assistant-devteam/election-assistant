@@ -4,8 +4,10 @@ import { useParams } from "react-router-dom";
 import Specview from "./specview/index";
 import NavBar from "@/components/common/navigation/NavBar";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
+import { apiCall } from "@/services/authServices";
+import DataCard from "./DataCard";
 
-function index() {
+function PoliticianInfo() {
   const params = useParams();
   const [data, setData] = useState(null);
   const [viewNum, setViewNum] = useState(0);
@@ -14,6 +16,9 @@ function index() {
   const [endX, setEndX] = useState(0);
   const [curPos, setCurPos] = useState(0);
   // const [curPos, setCurPos] = useState(0);
+
+  // const ENDPOINT = `https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/politician/${params.id}`;
+  const ENDPOINT = `http://localhost:9001/politicians/${params.id}/detail`;
 
   /*지켜보기 기능*/
   const [observe, setObserve] = useState<boolean>(false);
@@ -149,19 +154,14 @@ function index() {
   useEffect(() => {
     // console.log(params);
     const getPoliticanData = async () => {
-      const response = await fetch(
-        `https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/politician/${params.id}`,
-        {
-          method: "GET",
-        }
-      );
+      const result = await apiCall(ENDPOINT, "GET");
 
-      if (response.status === 200) {
-        const result = await response.json();
-
-        // console.log(result);
-        // data = result.data;
+      if (result.code === 20000) {
+        console.log(result.message);
+        console.log(result.data);
         setData(result.data);
+      } else if (result.code === 40400) {
+        console.log(result.message);
       }
     };
     getPoliticanData();
@@ -174,10 +174,13 @@ function index() {
       <div className={styles.page__contents}>
         <div className={styles.page__contents__profileBox}>
           <div className={styles.page__contents__profileBox__profile}>
+            {/* {data.map((item, index) => {
+              <DataCard />
+            })} */}
             <div className={styles.page__contents__profileBox__profile__dataBox}>
               <div className={styles.page__contents__profileBox__profile__dataBox__label}>이름</div>
               <div className={styles.page__contents__profileBox__profile__dataBox__data}>
-                {data ? data.name : "로딩 중..."}
+                {data ? data.politicianName : "로딩 중..."}
               </div>
             </div>
             <div className={styles.page__contents__profileBox__profile__dataBox}>
@@ -191,7 +194,7 @@ function index() {
                 거주지
               </div>
               <div className={styles.page__contents__profileBox__profile__dataBox__data}>
-                {data ? data.Residence : "로딩 중..."}
+                {data ? data.habitation : "로딩 중..."}
               </div>
             </div>
             <div className={styles.page__contents__profileBox__profile__dataBox}>
@@ -327,4 +330,4 @@ function index() {
   );
 }
 
-export default index;
+export default PoliticianInfo;
