@@ -9,5 +9,5 @@ export async function apiCall(endpoint: string, method: string, data?) {
     ...(data && { body: JSON.stringify(data) }),
   });
 
-  return await response.json();
+  return response.json();
 }

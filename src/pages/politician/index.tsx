@@ -295,7 +295,7 @@ function PoliticianInfo() {
               >
                 공약
               </div>
-              {/* <div
+              <div
                 className={
                   viewNum === 4
                     ? `${styles.page__contents__infoBox__categoryBox__window__category} ${styles.active}`
@@ -318,7 +318,7 @@ function PoliticianInfo() {
                 }}
               >
                 지지율
-              </div> */}
+              </div>
             </div>
           </div>
           <div className={styles.page__contents__infoBox__view}>
