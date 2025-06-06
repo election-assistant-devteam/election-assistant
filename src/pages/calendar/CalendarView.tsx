@@ -25,6 +25,7 @@ import {
   formatToUTCDate,
 } from "@/utils/formatter";
 import Modal from "./Modal";
+import EventTagBox from "./EventTagBox";
 
 type SelectedDate = DatePiece | [DatePiece, DatePiece];
 
@@ -208,15 +209,7 @@ function CalendarView() {
                 }
               });
 
-              return (
-                <div className="eventTagBox">
-                  {eventName.map((item, index) => (
-                    <div key={index} className="eventTag">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              );
+              return <EventTagBox eventName={eventName} />;
             }}
             value={selectedDate}
             activeStartDate={activeStartDate}
@@ -227,8 +220,6 @@ function CalendarView() {
             formatDay={(locale, date) => date.toLocaleString("en", { day: "numeric" })}
             onActiveStartDateChange={({ action, view, value, activeStartDate }) => {
               //달력의 페이지의 연도가 바뀌면 yearValue atom값을 다시 셋팅해줌
-              console.log("activeStartDate", activeStartDate.getFullYear());
-              console.log("yearValue", yearValue);
               setActiveStartDate(activeStartDate);
               if (activeStartDate.getFullYear() !== yearValue) {
                 setYearValue(activeStartDate.getFullYear());
