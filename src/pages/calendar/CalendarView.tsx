@@ -13,7 +13,6 @@ import { AiFillCaretLeft } from "react-icons/ai";
 import { PiCaretDoubleRightFill } from "react-icons/pi";
 import { PiCaretDoubleLeftFill } from "react-icons/pi";
 
-import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { eventData } from "@/recoil/selectors/eventSelector";
 import { yearState } from "@/recoil/atoms/year";
@@ -26,6 +25,7 @@ import {
 } from "@/utils/formatter";
 import Modal from "./Modal";
 import EventTagBox from "./EventTagBox";
+import TopBar from "./TopBar";
 
 type SelectedDate = DatePiece | [DatePiece, DatePiece];
 
@@ -35,11 +35,13 @@ interface Event {
 }
 
 function CalendarView() {
-  const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date()); // Calendar에서 선택된 날짜
-  const navigate = useNavigate();
+  // Calendar에서 선택된 날짜
+  const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
+
   /*recoil state value*/
   const scheduledata = useRecoilValueLoadable(eventData); // api통신으로 얻은 이벤트 데이터
-  const yearValue = useRecoilValue(yearState); // 현재의 연도
+  /* 현재의 연도 */
+  const yearValue = useRecoilValue(yearState);
   const setYearValue = useSetRecoilState(yearState);
 
   // Calendar 컴포넌트를 제어하기위한 상태 변수 (리렌더링 되었을때 표시 날짜)
@@ -53,6 +55,8 @@ function CalendarView() {
   const [selectedDateEvent, setSelectedDateEvent] = useState([]);
   const [writeAvailable, setWriteAvailable] = useState<boolean>(false); //사용자 정의 일정 입력 태그 활성화여부
   const [modalAvailable, setModalAvailable] = useState<boolean>(false); //모달창 활성화여부
+
+  // etc
 
   const formattedDate = Array.isArray(selectedDate)
     ? `${formatDateToKorean(selectedDate[0])} ~ ${formatDateToKorean(selectedDate[1])}`
@@ -180,16 +184,8 @@ function CalendarView() {
               writeCustomEvent={writeCustomEvent}
             />
           )}
-          <div className={styles.page__contents__topBar}>
-            <MdKeyboardArrowLeft
-              color="#21005d"
-              size="30"
-              onClick={() => {
-                navigate(-1);
-              }}
-              className={styles.page__contents__topBar__prevArrow}
-            />
-          </div>
+
+          <TopBar />
 
           <Calendar
             tileContent={({ date, view }) => {
