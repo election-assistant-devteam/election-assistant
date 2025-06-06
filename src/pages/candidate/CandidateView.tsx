@@ -1,13 +1,17 @@
 import NavBar from "@/components/common/navigation/NavBar";
 import styles from "./styles/candidate.module.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { apiCall } from "@/services/authServices";
 
-function index() {
+function CandidateView() {
+  // 이전 화면으로부터 이벤트 이름 가져오기
+  const location = useLocation();
+  const eventName = location.state;
+
   const params = useParams();
   const navigate = useNavigate();
-  const [eventName, setEventName] = useState(""); // 상태로 eventName 관리
+  // const [eventName, setEventName] = useState(""); // 상태로 eventName 관리
   const [candidateList, setCandidateList] = useState([]); // 상태로 candidateList 관리
   const lastId = useRef(0); // 무한 스크롤을 위한 배치 데이터 인덱스
   // const ENDPOINT = `http://54.180.165.220/api/elections/${params.id}/candidates?lastId=${lastId.current}`;
@@ -19,7 +23,6 @@ function index() {
       console.log(response.data);
 
       if (response.code === 20000) {
-        setEventName(response.name); // 상태 업데이트
         setCandidateList(response.data.candidates); // 상태 업데이트
         if (response.hasMore) {
           lastId.current = response.lastId;
@@ -50,7 +53,13 @@ function index() {
                   {event.name}
                 </div>
               </div>
-              <div className={styles.page__contents__cardList__card__image}>{event.imageUrl}</div>
+              <div className={styles.page__contents__cardList__card__imageSection}>
+                <img
+                  src={event.imageUrl}
+                  alt={`${event.name} 사진`}
+                  className={styles.page__contents__cardList__card__imageSection__img}
+                />
+              </div>
             </div>
           ))}
         </div>
@@ -59,4 +68,4 @@ function index() {
   );
 }
 
-export default index;
+export default CandidateView;
