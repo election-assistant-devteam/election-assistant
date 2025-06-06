@@ -5,7 +5,7 @@ import LoginPage from "@/pages/login";
 import RecallPage from "@/pages/recall";
 import RegisterPage from "@/pages/register";
 import MainPage from "@/pages/main";
-import CalendarPage from "@/pages/calendar";
+import CalendarPage from "@/pages/calendar/CalendarView";
 import CandidatePage from "@/pages/candidate";
 import PoliticianPage from "@/pages/politician";
 import EditPage from "@/pages/editprofile";

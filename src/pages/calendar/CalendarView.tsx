@@ -33,13 +33,16 @@ interface Event {
   title: string;
 }
 
-function index() {
+function CalendarView() {
   const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date()); // Calendar에서 선택된 날짜
   const navigate = useNavigate();
   /*recoil state value*/
   const scheduledata = useRecoilValueLoadable(eventData); // api통신으로 얻은 이벤트 데이터
   const yearValue = useRecoilValue(yearState); // 현재의 연도
   const setYearValue = useSetRecoilState(yearState);
+
+  // Calendar 컴포넌트를 제어하기위한 상태 변수 (리렌더링 되었을때 표시 날짜)
+  const [activeStartDate, setActiveStartDate] = useState(new Date());
 
   const inputRef = useRef<HTMLInputElement>(null); //사용자 정의 일정 데이터
 
@@ -216,6 +219,7 @@ function index() {
               );
             }}
             value={selectedDate}
+            activeStartDate={activeStartDate}
             onClickDay={(date) => {
               setSelectedDate(date);
               setModalAvailable(true);
@@ -223,6 +227,9 @@ function index() {
             formatDay={(locale, date) => date.toLocaleString("en", { day: "numeric" })}
             onActiveStartDateChange={({ action, view, value, activeStartDate }) => {
               //달력의 페이지의 연도가 바뀌면 yearValue atom값을 다시 셋팅해줌
+              console.log("activeStartDate", activeStartDate.getFullYear());
+              console.log("yearValue", yearValue);
+              setActiveStartDate(activeStartDate);
               if (activeStartDate.getFullYear() !== yearValue) {
                 setYearValue(activeStartDate.getFullYear());
                 // console.log(activeStartDate.getFullYear());
@@ -245,4 +252,4 @@ function index() {
   }
 }
 
-export default index;
+export default CalendarView;
