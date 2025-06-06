@@ -7,7 +7,7 @@ import RegisterPage from "@/pages/register";
 import MainPage from "@/pages/main";
 import CalendarPage from "@/pages/calendar/CalendarView";
 import CandidatePage from "@/pages/candidate/CandidateView";
-import PoliticianPage from "@/pages/politician";
+import PoliticianPage from "@/pages/politician/PoliticianInfo";
 import EditPage from "@/pages/editprofile";
 import NewsPage from "@/pages/news";
 import FaqPage from "@/pages/faq";
