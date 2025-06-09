@@ -1,13 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import Calendar from "react-calendar";
-import classNames from "classnames";
-// import "react-calendar/dist/Calendar.css";
+
 import styles from "./styles/calendar.module.scss";
 import "./styles/Calendar.scss";
-// import { SlArrowLeft } from "react-icons/sl";
-import { MdKeyboardArrowLeft } from "react-icons/md";
-import { GiCancel } from "react-icons/gi";
-import { IoIosAddCircle } from "react-icons/io";
+
 import { AiFillCaretRight } from "react-icons/ai";
 import { AiFillCaretLeft } from "react-icons/ai";
 import { PiCaretDoubleRightFill } from "react-icons/pi";
