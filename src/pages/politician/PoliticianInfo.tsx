@@ -213,24 +213,6 @@ function PoliticianInfo() {
               </div>
             </div>
           </div>
-          {/* <div className={styles.page__contents__profileBox__imageSection}>
-            <img
-              src={data.imageUrl}
-              alt={`${data.politicianName} 이미지`}
-              className={styles.page__contents__profileBox__imageSection__image}
-            />
-            <MdOutlineRemoveRedEye
-              size="30"
-              className={
-                observe
-                  ? `${styles.page__contents__profileBox__imageSection__icon} ${styles.observe}`
-                  : `${styles.page__contents__profileBox__imageSection__icon} ${styles.nonObserve}`
-              }
-              onClick={() => {
-                sendObserve();
-              }}
-            />
-          </div> */}
           {!data?.imageUrl ? (
             <Loading />
           ) : (
