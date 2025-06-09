@@ -9,8 +9,8 @@ export const eventData = selector({
   key: "eventData",
   get: async ({ get }) => {
     const yearValue = get(yearState);
-    const ENDPOINT = `http://localhost:9001/calendar/schedules?userId=${userId}&year=${yearValue}`;
-    // const ENDPOINT = `http://54.180.165.220/api/calendar/schedules?userId=${userId}&year=${yearValue}`;
+    // const ENDPOINT = `http://localhost:9001/calendar/schedules?userId=${userId}&year=${yearValue}`;
+    const ENDPOINT = `http://54.180.165.220/api/calendar/schedules?userId=${userId}&year=${yearValue}`;
     const access_token = sessionStorage.getItem("access-token");
 
     const headers = {
