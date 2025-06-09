@@ -13,7 +13,6 @@ import { AiFillCaretLeft } from "react-icons/ai";
 import { PiCaretDoubleRightFill } from "react-icons/pi";
 import { PiCaretDoubleLeftFill } from "react-icons/pi";
 
-import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { eventData } from "@/recoil/selectors/eventSelector";
 import { yearState } from "@/recoil/atoms/year";
@@ -25,6 +24,8 @@ import {
   formatToUTCDate,
 } from "@/utils/formatter";
 import Modal from "./Modal";
+import EventTagBox from "./EventTagBox";
+import TopBar from "./TopBar";
 
 type SelectedDate = DatePiece | [DatePiece, DatePiece];
 
@@ -33,13 +34,18 @@ interface Event {
   title: string;
 }
 
-function index() {
-  const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date()); // Calendar에서 선택된 날짜
-  const navigate = useNavigate();
+function CalendarView() {
+  // Calendar에서 선택된 날짜
+  const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
+
   /*recoil state value*/
   const scheduledata = useRecoilValueLoadable(eventData); // api통신으로 얻은 이벤트 데이터
-  const yearValue = useRecoilValue(yearState); // 현재의 연도
+  /* 현재의 연도 */
+  const yearValue = useRecoilValue(yearState);
   const setYearValue = useSetRecoilState(yearState);
+
+  // Calendar 컴포넌트를 제어하기위한 상태 변수 (리렌더링 되었을때 표시 날짜)
+  const [activeStartDate, setActiveStartDate] = useState(new Date());
 
   const inputRef = useRef<HTMLInputElement>(null); //사용자 정의 일정 데이터
 
@@ -175,88 +181,9 @@ function index() {
               modalChildCount={modalChildCount}
               writeCustomEvent={writeCustomEvent}
             />
-            // <div className={styles.page__contents__modal}>
-            //   <div className={styles.page__contents__modal__header}>
-            //     <div className={styles.page__contents__modal__header__date}>{formattedDate}</div>
-            //     <GiCancel
-            //       color="#21005d"
-            //       size="30"
-            //       className={styles.page__contents__modal__header__icon}
-            //       onClick={() => {
-            //         setModalAvailable(false);
-            //       }}
-            //     />
-            //   </div>
-            //   <div
-            //     className={styles.page__contents__modal__body}
-            //     id="modal-body"
-            //     ref={modalBodyHandling}
-            //   >
-            //     {selectedDateEvent
-            //       .filter((event, index) => event.isElection === true)
-            //       .map((event, index) => (
-            //         <div
-            //           className={`${styles.page__contents__modal__body__event} ${styles.election}`}
-            //           key={index}
-            //           onClick={() => navigate(`/candidate/${event.electionId}`)}
-            //         >
-            //           {event.name}
-            //         </div>
-            //       ))}
-            //     {selectedDateEvent
-            //       .filter((event, index) => event.isCustom === true)
-            //       .map((event, index) => (
-            //         <div
-            //           className={`${styles.page__contents__modal__body__event} ${styles.custom}`}
-            //           key={event.id}
-            //         >
-            //           {event.name}
-            //           <GiCancel
-            //             color="#21005d"
-            //             size="20"
-            //             className={styles.page__contents__modal__body__event__icon}
-            //             onClick={() => {
-            //               void deleteCustomEvent(event.id);
-            //             }}
-            //           />
-            //         </div>
-            //       ))}
-            //     {writeAvailable && (
-            //       <div className={styles.page__contents__modal__body__inputBox}>
-            //         <input
-            //           type="text"
-            //           ref={inputRef}
-            //           className={styles.page__contents__modal__body__inputBox__inputTag}
-            //         />
-            //         <button
-            //           className={styles.page__contents__modal__body__inputBox__writeButton}
-            //           onClick={setEvent}
-            //         >
-            //           추가
-            //         </button>
-            //       </div>
-            //     )}
-            //   </div>
-            //   {modalChildCount <= 4 && (
-            //     <IoIosAddCircle
-            //       color="#21005d"
-            //       size="50"
-            //       className={styles.addEvents}
-            //       onClick={writeCustomEvent}
-            //     />
-            //   )}
-            // </div>
           )}
-          <div className={styles.page__contents__topBar}>
-            <MdKeyboardArrowLeft
-              color="#21005d"
-              size="30"
-              onClick={() => {
-                navigate(-1);
-              }}
-              className={styles.page__contents__topBar__prevArrow}
-            />
-          </div>
+
+          <TopBar />
 
           <Calendar
             tileContent={({ date, view }) => {
@@ -276,17 +203,10 @@ function index() {
                 }
               });
 
-              return (
-                <div className="eventTagBox">
-                  {eventName.map((item, index) => (
-                    <div key={index} className="eventTag">
-                      {item}
-                    </div>
-                  ))}
-                </div>
-              );
+              return <EventTagBox eventName={eventName} />;
             }}
             value={selectedDate}
+            activeStartDate={activeStartDate}
             onClickDay={(date) => {
               setSelectedDate(date);
               setModalAvailable(true);
@@ -294,6 +214,7 @@ function index() {
             formatDay={(locale, date) => date.toLocaleString("en", { day: "numeric" })}
             onActiveStartDateChange={({ action, view, value, activeStartDate }) => {
               //달력의 페이지의 연도가 바뀌면 yearValue atom값을 다시 셋팅해줌
+              setActiveStartDate(activeStartDate);
               if (activeStartDate.getFullYear() !== yearValue) {
                 setYearValue(activeStartDate.getFullYear());
                 // console.log(activeStartDate.getFullYear());
@@ -316,4 +237,4 @@ function index() {
   }
 }
 
-export default index;
+export default CalendarView;

@@ -6,6 +6,7 @@ import NavBar from "@/components/common/navigation/NavBar";
 import { MdOutlineRemoveRedEye } from "react-icons/md";
 import { apiCall } from "@/services/authServices";
 import DataCard from "./DataCard";
+import Loading from "@/components/common/loading/Loading";
 
 function PoliticianInfo() {
   const params = useParams();
@@ -212,24 +213,26 @@ function PoliticianInfo() {
               </div>
             </div>
           </div>
-          <div className={styles.page__contents__profileBox__imageSection}>
-            <img
-              src="/src/assets/images/sample-politician.png"
-              alt=""
-              className={styles.page__contents__profileBox__imageSection__image}
-            />
-            <MdOutlineRemoveRedEye
-              size="30"
-              className={
-                observe
-                  ? `${styles.page__contents__profileBox__imageSection__icon} ${styles.observe}`
-                  : `${styles.page__contents__profileBox__imageSection__icon} ${styles.nonObserve}`
-              }
-              onClick={() => {
-                sendObserve();
-              }}
-            />
-          </div>
+          {!data?.imageUrl ? (
+            <Loading />
+          ) : (
+            <div className={styles.page__contents__profileBox__imageSection}>
+              <img
+                src={data.imageUrl}
+                alt={`${data.politicianName} 이미지`}
+                className={styles.page__contents__profileBox__imageSection__image}
+              />
+              <MdOutlineRemoveRedEye
+                size="30"
+                className={
+                  observe
+                    ? `${styles.page__contents__profileBox__imageSection__icon} ${styles.observe}`
+                    : `${styles.page__contents__profileBox__imageSection__icon} ${styles.nonObserve}`
+                }
+                onClick={sendObserve}
+              />
+            </div>
+          )}
         </div>
         <div className={styles.page__contents__infoBox}>
           <div
