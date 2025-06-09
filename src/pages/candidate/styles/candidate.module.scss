@@ -4,6 +4,9 @@
 
   &__contents {
     width: 100%;
+    height: 100%;
+    background-color: blue;
+    overflow-y: auto;
 
     &__cardList {
       display: flex;
@@ -11,8 +14,6 @@
       justify-content: start;
 
       width: 100%;
-      height: 100px;
-      overflow-y: auto;
       gap: 5px;
       padding: 5px;
 

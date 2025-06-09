@@ -19,7 +19,8 @@ function PoliticianInfo() {
   // const [curPos, setCurPos] = useState(0);
 
   // const ENDPOINT = `https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/politician/${params.id}`;
-  const ENDPOINT = `http://localhost:9001/politicians/${params.id}/detail`;
+  // const ENDPOINT = `http://localhost:9001/politicians/${params.id}/detail`;
+  const ENDPOINT = `http://54.180.165.220/api/politicians/${params.id}/detail`;
 
   /*지켜보기 기능*/
   const [observe, setObserve] = useState<boolean>(false);
