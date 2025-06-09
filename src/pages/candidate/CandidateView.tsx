@@ -20,22 +20,23 @@ function CandidateView() {
   // 무한 스크롤 트리거 관찰용 div 태그에 대한 참조 변수
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
   // 무한 스크롤 트리거를 위한 리스트 참조 변수
-  const listRef = useRef<HTMLDivElement>(null);
+  const contentsRef = useRef<HTMLDivElement>(null);
 
   const [candidateList, setCandidateList] = useState([]); // 상태로 candidateList 관리
 
   // api endpoint
-  // const ENDPOINT = `http://54.180.165.220/api/elections/${params.id}/candidates?lastId=${lastId.current}`;
-  const ENDPOINT = `http://localhost:9001/elections/${id}/candidates?lastId=${lastId.current}`;
+  const ENDPOINT = `http://54.180.165.220/api/elections/${id}/candidates?lastId=${lastId.current}`;
+  // const ENDPOINT = `http://localhost:9001/elections/${id}/candidates?lastId=${lastId.current}`;
 
   // 데이터 페칭 함수
-  const fetchCandidates = useCallback(async () => {
+  const fetchCandidates = async () => {
     console.log({ loading, hasMore }, "before guard");
     if (loading || !hasMore) return;
     console.log("fetching candidate");
     setLoading(true);
     try {
-      const url = `http://localhost:9001/elections/${id}/candidates?lastId=${lastId.current}`;
+      // const url = `http://localhost:9001/elections/${id}/candidates?lastId=${lastId.current}`;
+      const url = `http://54.180.165.220/api/elections/${id}/candidates?lastId=${lastId.current}`;
       const response = await apiCall(url, "GET");
 
       if (response.code === 20000) {
@@ -51,63 +52,38 @@ function CandidateView() {
     } finally {
       setLoading(false);
     }
-  }, [id, loading, hasMore]);
-
-  // useEffect(() => {
-  //   const getCandidateList = async () => {
-  //     const response = await apiCall(ENDPOINT, "GET");
-  //     console.log(response.data);
-
-  //     if (response.code === 20000) {
-  //       setCandidateList(response.data.candidates); // 상태 업데이트
-  //       if (response.hasMore) {
-  //         lastId.current = response.lastId;
-  //       }
-  //     } else {
-  //       console.error(response.code, response.message);
-  //     }
-  //   };
-  //   getCandidateList();
-  // }, []);
+  };
 
   // 첫 번째 페이지 로드
   useEffect(() => {
     fetchCandidates();
-  }, [fetchCandidates]);
+  }, []);
 
-  // Intersection Observer 설정 (loadMoreRef태그를 탐지하면서, 뷰포트 200px 바깥부분에 해당 태그가 걸리면 함수호출)
+  // Intersection Observer 설정 (loadMoreRef태그를 탐지하면서, 뷰포트에 해당 태그가 걸리면 함수호출)
   useEffect(() => {
     if (!loadMoreRef.current) return;
 
     const observer = new IntersectionObserver(
-      // (entries) => {
-      //   console.log("IO:", entries[0].isIntersecting, entries[0].boundingClientRect);
-      //   if (entries[0].isIntersecting) {
-      //     fetchCandidates();
-      //   }
-      // },
       async ([entry]) => {
+        console.log("intersecting:", entry.isIntersecting);
         if (!entry.isIntersecting) return;
         await fetchCandidates();
       },
-      { root: listRef.current, rootMargin: "0px", threshold: 0 } // 미리 불러오고 싶으면 margin 조절
+      { root: contentsRef.current, rootMargin: "0px 0px 0px 0px", threshold: 0 }
     );
 
     observer.observe(loadMoreRef.current);
-    return () => {
-      observer.disconnect();
-    };
   }, [fetchCandidates]);
 
   return (
     <div className={styles.page}>
-      <div className={styles.page__contents}>
+      <div className={styles.page__contents} ref={contentsRef}>
         <NavBar text={`${eventName} 후보자 목록`}></NavBar>
-        <div className={styles.page__contents__cardList} ref={listRef}>
+        <div className={styles.page__contents__cardList}>
           {candidateList.map((event, index) => (
             <div
-              className={styles.page__contents__cardList__card}
               key={index}
+              className={styles.page__contents__cardList__card}
               onClick={() => navigate(`/politician/${event.id}`)}
             >
               <div className={styles.page__contents__cardList__card__info}>
@@ -127,11 +103,10 @@ function CandidateView() {
               </div>
             </div>
           ))}
-          {/* 무한 스크롤 트리거용 div 태그 */}
-          <div ref={loadMoreRef} style={{ height: "10px" }}></div>
         </div>
-
         {loading && <Loading />}
+        {/* 무한 스크롤 트리거용 div 태그 */}
+        <div ref={loadMoreRef} style={{ height: "10px", color: "red" }}></div>
       </div>
     </div>
   );
