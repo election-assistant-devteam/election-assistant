@@ -54,7 +54,7 @@ const Modal = ({
             <div
               className={`${styles.modal__body__event} ${styles.election}`}
               key={index}
-              onClick={() => navigate(`/candidate/${event.electionId}`)}
+              onClick={() => navigate(`/candidate/${event.electionId}`, { state: event.name })}
             >
               {event.name}
             </div>
