@@ -30,9 +30,7 @@ function CandidateView() {
 
   // 데이터 페칭 함수
   const fetchCandidates = async () => {
-    console.log({ loading, hasMore }, "before guard");
     if (loading || !hasMore) return;
-    console.log("fetching candidate");
     setLoading(true);
     try {
       // const url = `http://localhost:9001/elections/${id}/candidates?lastId=${lastId.current}`;
@@ -40,7 +38,7 @@ function CandidateView() {
       const response = await apiCall(url, "GET");
 
       if (response.code === 20000) {
-        console.log(response);
+        // console.log(response);
         setCandidateList((prev) => [...prev, ...response.data.candidates]);
         setHasMore(response.data.hasMore);
         lastId.current = response.data.lastId;
@@ -65,7 +63,7 @@ function CandidateView() {
 
     const observer = new IntersectionObserver(
       async ([entry]) => {
-        console.log("intersecting:", entry.isIntersecting);
+        // console.log("intersecting:", entry.isIntersecting);
         if (!entry.isIntersecting) return;
         await fetchCandidates();
       },
