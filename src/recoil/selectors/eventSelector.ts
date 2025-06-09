@@ -25,7 +25,7 @@ export const eventData = selector({
       });
       const result = await response.json();
       if (result.code === 20000) {
-        console.log(result);
+        // console.log(result);
         return result.data.calendar;
       } else {
         console.log(result.message);
