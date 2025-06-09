@@ -56,8 +56,6 @@ function CalendarView() {
   const [writeAvailable, setWriteAvailable] = useState<boolean>(false); //사용자 정의 일정 입력 태그 활성화여부
   const [modalAvailable, setModalAvailable] = useState<boolean>(false); //모달창 활성화여부
 
-  // etc
-
   const formattedDate = Array.isArray(selectedDate)
     ? `${formatDateToKorean(selectedDate[0])} ~ ${formatDateToKorean(selectedDate[1])}`
     : formatDateToKorean(selectedDate); // 모달창에 표시될 텍스트
