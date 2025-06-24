@@ -7,35 +7,6 @@ function Notification() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
-  // const mockNotify = [
-  //   {
-  //     id: 1,
-  //     title: "첫 공지사항",
-  //     writer: "운영자",
-  //     time: new Date()
-  //       .toLocaleDateString("ko-KR", {
-  //         year: "numeric",
-  //         month: "2-digit",
-  //         day: "2-digit",
-  //       })
-  //       .replace(/\. /g, "/")
-  //       .replace(/\.$/, ""),
-  //   },
-  //   {
-  //     id: 2,
-  //     title: "두번째 공지사항",
-  //     writer: "운영자",
-  //     time: new Date()
-  //       .toLocaleDateString("ko-KR", {
-  //         year: "numeric",
-  //         month: "2-digit",
-  //         day: "2-digit",
-  //       })
-  //       .replace(/\. /g, "/")
-  //       .replace(/\.$/, ""),
-  //   },
-  // ];
-
   useEffect(() => {
     const getNotification = async () => {
       const response = await fetch("http://13.124.154.53:80/api/notification", {

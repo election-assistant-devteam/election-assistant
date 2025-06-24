@@ -5,8 +5,7 @@ import { PiQuestionBold } from "react-icons/pi";
 
 import { BiSolidEnvelope } from "react-icons/bi";
 import { BiEnvelope } from "react-icons/bi";
-import { MdKeyboardArrowRight } from "react-icons/md";
-import { FiSettings } from "react-icons/fi";
+
 import { TbBellFilled } from "react-icons/tb";
 import { TbBell } from "react-icons/tb";
 //
