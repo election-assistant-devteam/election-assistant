@@ -3,9 +3,8 @@ import styles from "./styles/news.module.scss";
 import NavBar from "@/components/common/navigation/NavBar";
 import { useLocation } from "react-router-dom";
 
-function index() {
+function NewsPage() {
   const { state } = useLocation();
-  console.log(state);
 
   return (
     <div className={styles.page}>
@@ -37,4 +36,4 @@ function index() {
   );
 }
 
-export default index;
+export default NewsPage;

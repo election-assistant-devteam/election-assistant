@@ -9,7 +9,7 @@ import CalendarPage from "@/pages/calendar/CalendarView";
 import CandidatePage from "@/pages/candidate/CandidateView";
 import PoliticianPage from "@/pages/politician/PoliticianInfo";
 import EditPage from "@/pages/editprofile";
-import NewsPage from "@/pages/news";
+import NewsPage from "@/pages/news/NewsPage";
 import FaqPage from "@/pages/faq/Faq";
 import InquiryPage from "@/pages/inquiry/Inquiry";
 import CommunityPage from "@/pages/community";
