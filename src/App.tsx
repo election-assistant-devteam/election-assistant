@@ -10,12 +10,12 @@ import CandidatePage from "@/pages/candidate/CandidateView";
 import PoliticianPage from "@/pages/politician/PoliticianInfo";
 import EditPage from "@/pages/editprofile";
 import NewsPage from "@/pages/news";
-import FaqPage from "@/pages/faq";
-import InquiryPage from "@/pages/inquiry";
+import FaqPage from "@/pages/faq/Faq";
+import InquiryPage from "@/pages/inquiry/Inquiry";
 import CommunityPage from "@/pages/community";
 import CommunityUploadPage from "@/pages/community/upload";
 import CommunityPostPage from "@/pages/community/post";
-import NotificationPage from "@/pages/notification";
+import NotificationPage from "@/pages/notification/Notification";
 import NotificationPostPage from "@/pages/notification/post";
 import { RecoilRoot } from "recoil";
 
