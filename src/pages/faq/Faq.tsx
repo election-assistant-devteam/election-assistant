@@ -2,10 +2,10 @@
 import styles from "./styles/faq.module.scss";
 import NavBar from "@/components/common/navigation/NavBar";
 
-function index() {
+function Faq() {
   return (
     <div className={styles.page}>
-      <NavBar text="FAQ"></NavBar>
+      {/* <NavBar text="FAQ"></NavBar> */}
       <div className={styles.page__contents}>
         <div className={styles.page__contents__faqContainer}>
           <div className={styles.page__contents__faqContainer__faqItem}>
@@ -34,4 +34,4 @@ function index() {
   );
 }
 
-export default index;
+export default Faq;

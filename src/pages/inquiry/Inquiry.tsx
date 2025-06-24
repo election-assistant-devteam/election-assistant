@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./styles/inquiry.module.scss";
 import NavBar from "@/components/common/navigation/NavBar";
 
-function index() {
+function Inquiry() {
   const [text, setText] = useState("");
   const [charCount, setCharCount] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -39,17 +39,20 @@ function index() {
   };
 
   const sendInquiry = async () => {
-    const response = await fetch("https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/inquiry", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        category: selectedCategory,
-        text: text,
-      }),
-    });
+    const response = await fetch(
+      "https://d282ffdd-b1e5-4e5a-bebc-2a161c592cb5.mock.pstmn.io/inquiry",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          category: selectedCategory,
+          text: text,
+        }),
+      }
+    );
 
     if (response.status === 200) {
       alert("문의 전송이 완료되었습니다!");
@@ -61,7 +64,7 @@ function index() {
 
   return (
     <div className={styles.page}>
-      <NavBar text="1:1 문의"></NavBar>
+      {/* <NavBar text="1:1 문의"></NavBar> */}
       <div className={styles.page__contents}>
         <div className={styles.page__contents__emailSection}>
           <div className={styles.page__contents__emailSection__head}>답변 받으실 이메일</div>
@@ -116,4 +119,4 @@ function index() {
   );
 }
 
-export default index;
+export default Inquiry;
