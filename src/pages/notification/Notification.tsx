@@ -3,7 +3,7 @@ import styles from "./styles/notification.module.scss";
 import NavBar from "@/components/common/navigation/NavBar";
 import { useNavigate } from "react-router-dom";
 
-function index() {
+function Notification() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
@@ -58,7 +58,7 @@ function index() {
   }, []);
   return (
     <div className={styles.page}>
-      <NavBar text="공지사항"></NavBar>
+      {/* <NavBar text="공지사항"></NavBar> */}
       <div className={styles.page__contents}>
         <div className={styles.page__contents__notifyList}>
           {data.map((item, index) => (
@@ -86,4 +86,4 @@ function index() {
   );
 }
 
-export default index;
+export default Notification;
