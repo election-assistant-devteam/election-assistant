@@ -15,12 +15,11 @@ export type NewsItemType = {
 const LiveNewsSection = () => {
   const navigate = useNavigate();
   const [newsData, setNewsData] = useState<NewsItemType[]>(null);
-  const localUrl = "http://localhost:9001/news";
-  const deployUrl = "http://54.180.165.220/api/news";
+  const PATH = "/news";
 
   useEffect(() => {
     const getNews = async () => {
-      const response = await apiCall(deployUrl, "GET");
+      const response = await apiCall(PATH, "GET");
       setNewsData(response.data);
     };
     getNews();

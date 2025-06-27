@@ -24,18 +24,13 @@ function CandidateView() {
 
   const [candidateList, setCandidateList] = useState([]); // 상태로 candidateList 관리
 
-  // api endpoint
-  const ENDPOINT = `http://54.180.165.220/api/elections/${id}/candidates?lastId=${lastId.current}`;
-  // const ENDPOINT = `http://localhost:9001/elections/${id}/candidates?lastId=${lastId.current}`;
-
   // 데이터 페칭 함수
   const fetchCandidates = async () => {
     if (loading || !hasMore) return;
     setLoading(true);
     try {
-      // const url = `http://localhost:9001/elections/${id}/candidates?lastId=${lastId.current}`;
-      const url = `http://54.180.165.220/api/elections/${id}/candidates?lastId=${lastId.current}`;
-      const response = await apiCall(url, "GET");
+      const PATH = `/elections/${id}/candidates?lastId=${lastId.current}`;
+      const response = await apiCall(PATH, "GET");
 
       if (response.code === 20000) {
         // console.log(response);
