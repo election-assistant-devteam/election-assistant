@@ -1,0 +1,49 @@
+.infoBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 3rem;
+
+  padding: 1rem;
+  border-radius: 15px;
+  box-shadow: 0px 4px 8px $color-gray-200;
+
+  &__title {
+    font-size: 1.5rem;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &__editId {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &__editPw {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    &__editName {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+  }
+}
+
+.errorMsg {
+  color: red;
+  font-size: 0.7rem;
+}
+
+.noErrorMsg {
+  visibility: hidden;
+  font-size: 0.7rem;
+}

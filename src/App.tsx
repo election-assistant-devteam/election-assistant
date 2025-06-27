@@ -1,14 +1,14 @@
 //import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import InitialPage from "@/pages/initial";
-import LoginPage from "@/pages/login";
+import LoginPage from "@/pages/login/LoginPage";
 import RecallPage from "@/pages/recall";
-import RegisterPage from "@/pages/register";
+import RegisterPage from "@/pages/register/RegisterPage";
 import MainPage from "@/pages/main";
 import CalendarPage from "@/pages/calendar/CalendarView";
 import CandidatePage from "@/pages/candidate/CandidateView";
 import PoliticianPage from "@/pages/politician/PoliticianInfo";
-import EditPage from "@/pages/editprofile";
+import EditPage from "@/pages/editprofile/EditProfilePage";
 import NewsPage from "@/pages/news/NewsPage";
 import FaqPage from "@/pages/faq/Faq";
 import InquiryPage from "@/pages/inquiry/Inquiry";
