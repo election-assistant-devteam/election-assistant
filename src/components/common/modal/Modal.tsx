@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Modal.module.scss";
 import { GiCancel } from "react-icons/gi";
 import { FaSearch } from "react-icons/fa";
+import { apiCall } from "@/services/authServices";
 
 interface Props {
   type: string;
@@ -10,39 +11,29 @@ interface Props {
 }
 
 function Modal({ type, available, data }: Props) {
-  const partyArray = ["더불어민주당", "국민의힘", "정의당", "기본소득당", "진보당", "녹색당", "우리공화당", "민생당", "개혁신당", "조국혁신당"];
-  const politicianArray = [
-    "윤석열",
-    "이재명",
-    "한동훈",
-    "김기현",
-    "이정미",
-    "심상정",
-    "김재연",
-    "용혜인",
-    "조국",
-    "허은아",
-    "김동연",
-    "오세훈",
-    "박영선",
-    "안철수",
-    "유승민",
-    "홍준표",
-    "박지원",
-    "김부겸",
-    "정세균",
-    "황교안",
-    "김종인",
-    "박근혜",
-    "문재인",
-    "이명박",
-    "노무현",
-    "김대중",
-    "김영삼",
-    "전두환",
-    "노태우",
-    "박정희",
-  ];
+  const [partyArray, setPartyArray] = useState<string[]>();
+  const [politicianArray, setPoliticianArray] = useState<string[]>();
+  const [inputValidity, setInputValidity] = useState<boolean>(true);
+  const POLITICIAN_PATH = "/politicians";
+  const PARTY_PATH = "/parties";
+
+  useEffect(() => {
+    const getData = async () => {
+      if (type === "정당") {
+        const response = await apiCall(PARTY_PATH, "GET");
+        setPartyArray(response.data);
+      } else if (type === "정치인") {
+        const response = await apiCall(POLITICIAN_PATH, "GET");
+        console.log(response.data);
+
+        setPoliticianArray(response.data);
+      } else {
+        console.error("modal type error");
+      }
+    };
+    getData();
+  }, []);
+
   const sampleArray = type === "정당" ? partyArray : politicianArray;
 
   const [inputValue, setInputValue] = useState("");
@@ -71,14 +62,14 @@ function Modal({ type, available, data }: Props) {
   };
 
   const handleDropDownKey = (event) => {
-    // console.log(event);
     //input에 값이 있을때만 작동
     if (isHaveInputValue) {
       if (event.key === "ArrowDown" && dropDownList.length - 1 > dropDownItemIndex) {
         setDropDownItemIndex(dropDownItemIndex + 1);
       }
 
-      if (event.key === "ArrowUp" && dropDownItemIndex >= 0) setDropDownItemIndex(dropDownItemIndex - 1);
+      if (event.key === "ArrowUp" && dropDownItemIndex >= 0)
+        setDropDownItemIndex(dropDownItemIndex - 1);
       if (event.key === "Enter" && dropDownItemIndex >= 0) {
         clickDropDownItem(dropDownList[dropDownItemIndex]);
         setDropDownItemIndex(-1);
@@ -93,7 +84,9 @@ function Modal({ type, available, data }: Props) {
       <div className={styles.page__contents}>
         <div className={styles.page__contents__head}>
           <div className={styles.page__contents__head__titleBox}>
-            <div className={styles.page__contents__head__titleBox__title}>{`관심 ${type} 수정`}</div>
+            <div
+              className={styles.page__contents__head__titleBox__title}
+            >{`관심 ${type} 수정`}</div>
             <GiCancel
               color="#21005d"
               size="30"
@@ -112,11 +105,19 @@ function Modal({ type, available, data }: Props) {
               onKeyUp={handleDropDownKey}
               className={styles.page__contents__head__inputBox__input}
             />
-            <FaSearch size="25" color="#21005d" className={styles.page__contents__head__inputBox__icon}></FaSearch>
+            <FaSearch
+              size="25"
+              color="#21005d"
+              className={styles.page__contents__head__inputBox__icon}
+            ></FaSearch>
           </div>
           {isHaveInputValue && (
             <div className={styles.page__contents__head__dropDownBox}>
-              {dropDownList.length === 0 && <div className={styles.page__contents__head__dropDownBox__dropDownItem}>해당하는 값이 없습니다</div>}
+              {dropDownList.length === 0 && (
+                <div className={styles.page__contents__head__dropDownBox__dropDownItem}>
+                  해당하는 값이 없습니다
+                </div>
+              )}
               {dropDownList.map((dropDownItem, dropDownIndex) => {
                 return (
                   <div
@@ -140,6 +141,9 @@ function Modal({ type, available, data }: Props) {
           <button
             className={styles.page__contents__tail__button}
             onClick={() => {
+              if (isHaveInputValue && dropDownList.length === 0) {
+                return;
+              }
               data(inputValue);
               available(false);
             }}

@@ -1,0 +1,132 @@
+.profileSection {
+  background-color: $color-purple-500;
+
+  width: 100%;
+  height: 20rem;
+
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+
+  &__name {
+    color: white;
+    font-size: 2.5rem;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    // @include mobile {
+    //   padding-top: 30px;
+    // }
+  }
+
+  &__dataBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+
+    font-size: clamp(10px, 4vw, 16px);
+
+    &__prefer {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+
+      color: white;
+
+      &__party {
+        width: 50%;
+
+        &__data {
+          color: $color-purple-300;
+        }
+      }
+      &__politician {
+        width: 50%;
+
+        &__data {
+          color: $color-purple-300;
+        }
+      }
+    }
+    &__info {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      align-items: center;
+
+      color: white;
+      border-top-style: solid;
+      border-top-width: 1px;
+
+      padding-top: 15px;
+      &__edit {
+        width: 50%;
+
+        display: flex;
+        flex-direction: row;
+
+        cursor: pointer;
+      }
+      &__logout {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__status {
+    width: 100%;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 10px;
+    // flex: 1;
+
+    font-size: clamp(10px, 4vw, 16px);
+
+    &__post {
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      // flex-shrink: 1.5;
+      // min-height: 0;
+
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px;
+    }
+    &__donate {
+      width: 100%;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      // flex-shrink: 1.5;
+      // min-height: 0;
+
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px;
+    }
+  }
+}
+
+.viewAll {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
