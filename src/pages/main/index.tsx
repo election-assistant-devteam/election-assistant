@@ -51,7 +51,7 @@ function index() {
       case 1:
         return <CenterView />;
       case 2:
-        console.log(sessionStorage.getItem("access-token"));
+        // console.log(sessionStorage.getItem("access-token"));
         if (sessionStorage.getItem("access-token") === null) {
           alert("로그인이 필요합니다!");
           setCurView(1);

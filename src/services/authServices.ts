@@ -1,7 +1,7 @@
-// const ENDPOINT = "http://13.124.154.53:80/api/auth/login";
+export const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
-export async function apiCall(endpoint: string, method: string, data?) {
-  const response = await fetch(endpoint, {
+export async function apiCall(path: string, method: string, data?) {
+  const response = await fetch(`${API_BASE}${path}`, {
     method: method,
     headers: {
       "Content-Type": "application/json",
