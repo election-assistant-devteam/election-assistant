@@ -1,5 +1,6 @@
 import { selector } from "recoil";
 import { yearState } from "../atoms/year";
+import { apiCall } from "@/services/authServices";
 
 const userId = sessionStorage.getItem("id");
 
@@ -8,27 +9,14 @@ export const eventData = selector({
   get: async ({ get }) => {
     const yearValue = get(yearState);
     const PATH = `/calendar/schedules?userId=${userId}&year=${yearValue}`;
-    const access_token = sessionStorage.getItem("access-token");
 
-    const headers = {
-      "Content-Type": "application/json",
-      ...(access_token && { Authorizaton: `Bearer ${access_token}` }),
-    };
+    const response = await apiCall(PATH, "GET", undefined, true);
 
-    try {
-      const response = await fetch(PATH, {
-        method: "GET",
-        headers,
-      });
-      const result = await response.json();
-      if (result.code === 20000) {
-        // console.log(result);
-        return result.data.calendar;
-      } else {
-        console.log(result.message);
-      }
-    } catch (e) {
-      console.error(e);
+    if (response.code === 20000) {
+      console.log("데이터 요청 성공");
+      return response.data.calendar;
+    } else {
+      console.error(response.error);
     }
   },
 });
