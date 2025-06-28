@@ -1,0 +1,40 @@
+.infoBox {
+  width: 100%;
+  height: 70%;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+  border-radius: 10px;
+  padding: 7px;
+  gap: 7px;
+
+  &__categoryBox {
+    overflow: hidden;
+    user-select: none;
+
+    &__window {
+      // width: 100%;
+      width: calc(20% * 6);
+      height: 2rem;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      gap: 10px;
+    }
+  }
+
+  &__view {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $color-gray-200;
+    border-radius: 10px;
+  }
+}

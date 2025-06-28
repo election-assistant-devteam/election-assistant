@@ -1,0 +1,19 @@
+.category {
+  height: 2rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 19%;
+
+  background-color: $color-purple-300;
+  border-radius: 10px;
+  font-size: 0.9rem;
+
+  cursor: pointer;
+}
+
+.active {
+  background-color: $color-purple-500;
+  color: white;
+}
