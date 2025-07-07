@@ -106,6 +106,7 @@ const DetailInfoContainer = ({ data }: Props) => {
         >
           {categoryArray.map((item, index) => (
             <CategoryButton
+              key={index}
               label={item.label}
               viewNum={viewNum}
               setViewNum={setViewNum}

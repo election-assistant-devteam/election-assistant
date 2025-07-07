@@ -12,6 +12,7 @@ const ProfileBox = () => {
   const [curView, setCurView] = useRecoilState(curMainNum);
 
   const logout = () => {
+    sessionStorage.removeItem("id");
     sessionStorage.removeItem("access-token");
     sessionStorage.removeItem("refresh-token");
     sessionStorage.removeItem("nickname");

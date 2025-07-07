@@ -69,8 +69,13 @@
     &__icon {
       position: absolute;
       left: 3px;
+      color: $color-gray-200;
 
       cursor: pointer;
     }
   }
+}
+
+.observe {
+  color: $color-purple-500;
 }
