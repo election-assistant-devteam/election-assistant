@@ -15,6 +15,8 @@ const FreeSectionView = () => {
   const lastId = useRef(0);
   // 무한 스크롤 트리거 관찰용 div 태그에 대한 참조 변수
   const loadMoreRef = useRef<HTMLDivElement | null>(null);
+  // 무한 스크롤 트리거를 위한 리스트 참조 변수
+  const contentsRef = useRef<HTMLDivElement>(null);
 
   const fetchPosts = async () => {
     if (loading || !hasMore) return;
@@ -24,7 +26,7 @@ const FreeSectionView = () => {
       const response = await apiCall(PATH, "GET");
 
       if (response.code === 20000) {
-        // console.log(response);
+        console.log(response);
         setPostList((prev) => [...prev, ...response.data.posts]);
         setHasMore(response.data.hasMore);
         lastId.current = response.data.lastId;
@@ -42,20 +44,35 @@ const FreeSectionView = () => {
     fetchPosts();
   }, []);
 
+  // Intersection Observer 설정 (loadMoreRef태그를 탐지하면서, 뷰포트에 해당 태그가 걸리면 함수호출)
+  useEffect(() => {
+    if (!loadMoreRef.current) return;
+
+    const observer = new IntersectionObserver(
+      async ([entry]) => {
+        if (!entry.isIntersecting) return;
+        await fetchPosts();
+      },
+      { root: null, rootMargin: "0px 0px 0px 0px", threshold: 0 }
+    );
+
+    observer.observe(loadMoreRef.current);
+  }, [fetchPosts]);
+
   return (
     <div className={styles.freeSectionView}>
       <div className={styles.freeSectionView__header}>
         <div>자유게시판</div>
         <Button text="글 작성" className={styles.button} />
       </div>
-      <div className={styles.freeSectionView__postList}>
+      <div className={styles.freeSectionView__postList} ref={contentsRef}>
         {postList?.map((item, _) => (
           <CommunityPostRow data={item} key={item.postId} />
         ))}
+        {loading && <Loading />}
+        {/* 무한 스크롤 트리거용 div 태그 */}
+        <div ref={loadMoreRef} style={{ height: "10px", color: "white" }}></div>
       </div>
-      {loading && <Loading />}
-      {/* 무한 스크롤 트리거용 div 태그 */}
-      <div ref={loadMoreRef} style={{ height: "10px", color: "red" }}></div>
     </div>
   );
 };

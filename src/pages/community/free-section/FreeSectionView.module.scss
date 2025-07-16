@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  gap: 21px;
 
   &__header {
     width: 100%;
@@ -20,10 +21,15 @@
 
   &__postList {
     width: 100%;
+
+    flex: 1;
+    min-height: 0;
   }
 }
 
 .button {
   width: 70px;
   height: 30px;
+
+  font-size: 1rem;
 }
