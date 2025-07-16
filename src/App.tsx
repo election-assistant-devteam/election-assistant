@@ -12,7 +12,7 @@ import EditPage from "@/pages/editprofile/EditProfilePage";
 import NewsPage from "@/pages/news/NewsPage";
 import FaqPage from "@/pages/faq/Faq";
 import InquiryPage from "@/pages/inquiry/Inquiry";
-import CommunityPage from "@/pages/community";
+import CommunityPage from "@/pages/community/CommunityPage";
 import CommunityUploadPage from "@/pages/community/upload";
 import CommunityPostPage from "@/pages/community/post";
 import NotificationPage from "@/pages/notification/Notification";
