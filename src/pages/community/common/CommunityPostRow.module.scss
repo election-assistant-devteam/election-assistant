@@ -6,7 +6,11 @@
   align-items: start;
   justify-content: space-around;
 
-  padding: 9px;
+  border-top-color: black;
+  border-top-width: 1px;
+  border-top-style: solid;
+
+  padding: 9px 0;
   &__title {
     width: 100%;
 
@@ -36,4 +40,10 @@
       gap: 5px;
     }
   }
+}
+
+.communityPostRow:last-child {
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
 }
