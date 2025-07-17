@@ -45,6 +45,7 @@ const CommunityWritePage = () => {
     const accessToken = sessionStorage.getItem("access-token");
     if (!accessToken) {
       alert("로그인 후 글 작성이 가능합니다!");
+      return;
     }
 
     try {

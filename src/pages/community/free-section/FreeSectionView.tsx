@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 const FreeSectionView = () => {
   const [postList, setPostList] = useState<PostType[]>([]);
   const [hasMore, setHasMore] = useState(true);
-  const [loading, setLoading] = useState(false);
+  const isFetching = useRef(false);
   const navigate = useNavigate();
 
   // 무한 스크롤을 위한 배치 데이터 인덱스
@@ -21,8 +21,11 @@ const FreeSectionView = () => {
   const contentsRef = useRef<HTMLDivElement>(null);
 
   const fetchPosts = async () => {
-    if (loading || !hasMore) return;
-    setLoading(true);
+    // 1) 이미 요청 중이면 무시
+    if (isFetching.current || !hasMore) return;
+
+    // 2) 즉시 락 걸기
+    isFetching.current = true;
     try {
       const params = new URLSearchParams();
       if (lastId.current != null) {
@@ -42,7 +45,7 @@ const FreeSectionView = () => {
     } catch (err) {
       console.error(err);
     } finally {
-      setLoading(false);
+      isFetching.current = false;
     }
   };
 
@@ -63,7 +66,11 @@ const FreeSectionView = () => {
     );
 
     observer.observe(loadMoreRef.current);
-  }, [fetchPosts]);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <div className={styles.freeSectionView}>
@@ -79,7 +86,7 @@ const FreeSectionView = () => {
         {postList?.map((item, _) => (
           <CommunityPostRow data={item} key={item.postId} />
         ))}
-        {loading && <Loading />}
+        {isFetching.current && <Loading />}
         {/* 무한 스크롤 트리거용 div 태그 */}
         <div ref={loadMoreRef} style={{ height: "10px", color: "white" }}></div>
       </div>
