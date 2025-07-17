@@ -13,11 +13,11 @@ import NewsPage from "@/pages/news/NewsPage";
 import FaqPage from "@/pages/faq/Faq";
 import InquiryPage from "@/pages/inquiry/Inquiry";
 import CommunityPage from "@/pages/community/CommunityPage";
-import CommunityUploadPage from "@/pages/community/upload";
 import CommunityPostPage from "@/pages/community/post";
 import NotificationPage from "@/pages/notification/Notification";
 import NotificationPostPage from "@/pages/notification/post";
 import { RecoilRoot } from "recoil";
+import CommunityWritePage from "./pages/community/upload/CommunityWritePage";
 
 function App() {
   return (
@@ -37,7 +37,7 @@ function App() {
           <Route path="/faq" element={<FaqPage />}></Route>
           <Route path="/inquiry" element={<InquiryPage />}></Route>
           <Route path="/community" element={<CommunityPage />}></Route>
-          <Route path="/community/upload" element={<CommunityUploadPage />}></Route>
+          <Route path="/community/write" element={<CommunityWritePage />}></Route>
           <Route path="/community/post/:id" element={<CommunityPostPage />}></Route>
           <Route path="/notification" element={<NotificationPage />}></Route>
           <Route path="/notification/post/:id" element={<NotificationPostPage />}></Route>
