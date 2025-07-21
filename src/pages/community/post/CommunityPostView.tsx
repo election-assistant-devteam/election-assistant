@@ -8,6 +8,7 @@ import ImgContainer from "./ImgContainer";
 import { apiCall } from "@/services/authServices";
 import { useAPI } from "@/hooks/useAPI";
 import CommunityCommentRow from "./CommunityCommentRow";
+import CommunityCommentList from "./CommunityCommentList";
 
 interface Props {
   data: DetailPostType;
@@ -15,27 +16,46 @@ interface Props {
 
 const CommunityPostView = ({ data }: Props) => {
   const [comments, setComments] = useState<CommentType[]>(null);
+  const [clickedCommentId, setClickedCommentId] = useState<number>(null);
 
-  const PATH = data ? `/posts/${data.postId}/comments` : null;
-  console.log(data);
+  // const PATH = data ? `/posts/${data.postId}/comments` : null;
+  const PATH = `/posts/${data?.postId}/comments`;
+  console.log("data:", data);
 
-  const {
-    response: commentsResponse,
-    error,
-    loading,
-  } = useAPI<{ comments: CommentType[] }>({
-    method: "GET",
-    url: PATH,
-    data: null,
-    addAuth: true,
-  });
+  // const {
+  //   response: commentsResponse,
+  //   error,
+  //   loading,
+  // } = useAPI<{ comments: CommentType[] }>({
+  //   method: "GET",
+  //   url: PATH,
+  //   data: null,
+  //   addAuth: true,
+  // });
+
+  const fetchComments = async () => {
+    const response = await apiCall(PATH, "GET", null, true);
+
+    switch (response.code) {
+      case 20000:
+        setComments(response.data.comments);
+        console.log(response.data);
+        break;
+      default:
+        alert("에러가 발생했습니다...");
+    }
+  };
 
   useEffect(() => {
-    if (commentsResponse) {
-      console.log(commentsResponse);
-      setComments(commentsResponse.comments);
-    }
-  }, [commentsResponse]);
+    fetchComments();
+  }, [data]);
+
+  // useEffect(() => {
+  //   if (commentsResponse) {
+  //     console.log(commentsResponse);
+  //     setComments(commentsResponse.comments);
+  //   }
+  // }, [commentsResponse]);
 
   return (
     <div className={styles.communityPostView}>
@@ -48,12 +68,12 @@ const CommunityPostView = ({ data }: Props) => {
         {data?.content}
       </div>
       <PostReactionRow heartNum={data?.likeCount} />
-      <div className={styles.communityPostView__commentList}>
-        {comments?.map((item, _) => (
-          <CommunityCommentRow commentData={item} key={item.commentId} />
-        ))}
-      </div>
-      <InputRow />
+      <CommunityCommentList comments={comments} setClickedCommentId={setClickedCommentId} />
+      <InputRow
+        postId={data?.postId}
+        clickedCommentId={clickedCommentId}
+        onCommentSubmit={fetchComments}
+      />
     </div>
   );
 };
