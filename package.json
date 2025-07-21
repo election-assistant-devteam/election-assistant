@@ -13,6 +13,7 @@
     "@types/node": "^22.10.5",
     "axios": "^1.7.9",
     "classnames": "^2.5.1",
+    "dayjs": "^1.11.13",
     "framer-motion": "^12.0.5",
     "localforage": "^1.10.0",
     "match-sorter": "^8.0.0",
