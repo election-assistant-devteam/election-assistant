@@ -6,6 +6,10 @@
   align-items: center;
   justify-content: start;
 
+  overflow-y: scroll;
+
+  padding-bottom: 3.5rem;
+
   &__post {
     width: 100%;
 

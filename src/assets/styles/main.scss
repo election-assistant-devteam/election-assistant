@@ -25,3 +25,8 @@
 a {
   text-decoration: none;
 }
+
+input:focus {
+  border: 2px solid #d0bcff; /* 원하는 색상으로 변경 */
+  outline: none;
+}
