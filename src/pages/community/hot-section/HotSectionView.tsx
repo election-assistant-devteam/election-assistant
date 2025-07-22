@@ -8,21 +8,22 @@ import Loading from "@/components/common/loading/Loading";
 const HotSectionView = () => {
   const [postList, setPostList] = useState<PostType[]>([]);
   const [loading, setLoading] = useState(false);
+  const PATH = `/posts/popular-posts`;
 
   const fetchPosts = async () => {
     setLoading(true);
+
     try {
-      const PATH = `/posts/popular-posts`;
       const response = await apiCall(PATH, "GET");
 
-      if (response.code === 20000) {
-        console.log(response);
-        setPostList(response.data.popularPosts);
-      } else {
-        console.error("API error", response.code, response.message);
+      switch (response.code) {
+        case 20000:
+          setPostList(response.data.popularPosts);
+          break;
+        default:
+          alert(response.message);
       }
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
     } finally {
       setLoading(false);
     }

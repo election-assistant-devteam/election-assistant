@@ -1,7 +1,6 @@
 import { CommentType } from "@/types/post";
 import styles from "./CommunityCommentList.module.scss";
 import CommunityCommentRow from "./CommunityCommentRow";
-import { useState } from "react";
 
 interface Props {
   comments: CommentType[];

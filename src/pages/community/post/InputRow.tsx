@@ -8,6 +8,7 @@ interface Props {
   postId: number;
   clickedCommentId: number;
   onCommentSubmit: () => void;
+  displayInput: boolean;
 }
 
 interface CommentReqData {
@@ -17,10 +18,12 @@ interface CommentReqData {
   parentId: number | null;
 }
 
-const InputRow = ({ postId, clickedCommentId, onCommentSubmit }: Props) => {
+const InputRow = ({ postId, clickedCommentId, onCommentSubmit, displayInput }: Props) => {
   const [inputValue, setInputValue] = useState("");
   const [anonymous, setAnonymous] = useState<boolean>(false);
   const PATH = `/posts/${postId}/comments`;
+
+  console.log(displayInput);
 
   const addComment = async () => {
     const data: CommentReqData = {
@@ -29,6 +32,7 @@ const InputRow = ({ postId, clickedCommentId, onCommentSubmit }: Props) => {
       content: inputValue,
       parentId: clickedCommentId,
     };
+    console.log(data);
     const response = await apiCall(PATH, "POST", data, true);
 
     if (response.code === 20000) {
@@ -42,7 +46,7 @@ const InputRow = ({ postId, clickedCommentId, onCommentSubmit }: Props) => {
     }
   };
   return (
-    <div className={styles.inputRow}>
+    <div className={displayInput ? styles.inputRow : styles.invisible}>
       <div
         className={
           anonymous ? `${styles.inputRow__anonymous} ${styles.active}` : styles.inputRow__anonymous

@@ -6,8 +6,6 @@ import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import ImgContainer from "./ImgContainer";
 import { apiCall } from "@/services/authServices";
-import { useAPI } from "@/hooks/useAPI";
-import CommunityCommentRow from "./CommunityCommentRow";
 import CommunityCommentList from "./CommunityCommentList";
 
 interface Props {
@@ -17,32 +15,21 @@ interface Props {
 const CommunityPostView = ({ data }: Props) => {
   const [comments, setComments] = useState<CommentType[]>(null);
   const [clickedCommentId, setClickedCommentId] = useState<number>(null);
+  const [displayInput, setDisplayInput] = useState<boolean>(false);
+  const PATH = data ? `/posts/${data.postId}/comments` : null;
 
-  // const PATH = data ? `/posts/${data.postId}/comments` : null;
-  const PATH = `/posts/${data?.postId}/comments`;
-  console.log("data:", data);
-
-  // const {
-  //   response: commentsResponse,
-  //   error,
-  //   loading,
-  // } = useAPI<{ comments: CommentType[] }>({
-  //   method: "GET",
-  //   url: PATH,
-  //   data: null,
-  //   addAuth: true,
-  // });
+  console.log(data);
 
   const fetchComments = async () => {
+    if (!PATH) return;
     const response = await apiCall(PATH, "GET", null, true);
 
     switch (response.code) {
       case 20000:
         setComments(response.data.comments);
-        console.log(response.data);
         break;
       default:
-        alert("에러가 발생했습니다...");
+        alert(response.message);
     }
   };
 
@@ -50,15 +37,12 @@ const CommunityPostView = ({ data }: Props) => {
     fetchComments();
   }, [data]);
 
-  // useEffect(() => {
-  //   if (commentsResponse) {
-  //     console.log(commentsResponse);
-  //     setComments(commentsResponse.comments);
-  //   }
-  // }, [commentsResponse]);
-
   return (
-    <div className={styles.communityPostView}>
+    <div
+      className={
+        displayInput ? styles.communityPostView : `${styles.communityPostView} ${styles.noInputBar}`
+      }
+    >
       <div className={styles.communityPostView__post}>
         <div className={styles.communityPostView__post__postInfo}>
           <div>{data?.writer}</div>
@@ -67,12 +51,18 @@ const CommunityPostView = ({ data }: Props) => {
         <ImgContainer imgUrls={data?.images} />
         {data?.content}
       </div>
-      <PostReactionRow heartNum={data?.likeCount} />
+      <PostReactionRow
+        hasLiked={data?.hasLiked}
+        postId={data?.postId}
+        heartNum={data?.likeCount}
+        setDisplayInput={setDisplayInput}
+      />
       <CommunityCommentList comments={comments} setClickedCommentId={setClickedCommentId} />
       <InputRow
         postId={data?.postId}
         clickedCommentId={clickedCommentId}
         onCommentSubmit={fetchComments}
+        displayInput={displayInput}
       />
     </div>
   );
