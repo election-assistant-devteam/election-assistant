@@ -58,7 +58,6 @@ function CandidateView() {
 
     const observer = new IntersectionObserver(
       async ([entry]) => {
-        // console.log("intersecting:", entry.isIntersecting);
         if (!entry.isIntersecting) return;
         await fetchCandidates();
       },
