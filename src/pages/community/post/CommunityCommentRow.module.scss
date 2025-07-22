@@ -26,6 +26,13 @@
       gap: 10px;
     }
   }
+
+  &__tail {
+    color: $color-gray-200;
+
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
 }
 
 .reactionBox {

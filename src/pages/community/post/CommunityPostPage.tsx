@@ -1,6 +1,6 @@
 import NavBar from "@/components/common/navigation/NavBar";
 import styles from "./CommunityPostPage.module.scss";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import CommunityPostView from "./CommunityPostView";
 import { useEffect, useState } from "react";
 import { apiCall } from "@/services/authServices";
@@ -15,11 +15,9 @@ const CommunityPostPage = () => {
     const response = await apiCall(PATH, "GET", undefined, true);
 
     if (response.code === 20000) {
-      console.log("data successfully fetched");
-      console.log(response.data);
       setDetailData(response.data);
     } else {
-      console.log("error happened");
+      alert(response.message);
     }
   };
 
@@ -29,7 +27,7 @@ const CommunityPostPage = () => {
 
   return (
     <div className={styles.postPage}>
-      <NavBar text={"zz"} />
+      <NavBar text={detailData?.title} />
       <CommunityPostView data={detailData} />
     </div>
   );

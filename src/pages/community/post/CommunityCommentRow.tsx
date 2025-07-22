@@ -4,6 +4,7 @@ import { CommentType } from "@/types/post";
 import Heart from "@assets/heart.svg?react";
 import WordBaloon from "@assets/wordBaloon.svg?react";
 import { apiCall } from "@/services/authServices";
+import dayjs from "dayjs";
 
 interface Props {
   commentData: CommentType;
@@ -30,7 +31,6 @@ const CommunityCommentRow = ({ commentData, setClicked }: Props) => {
     } else if (response.code === 40000) {
       alert(`${response.message}`);
     } else {
-      console.log(response);
       alert("오류가 발생했습니다... 잠시 후 다시 시도하세요!");
     }
 
@@ -57,7 +57,9 @@ const CommunityCommentRow = ({ commentData, setClicked }: Props) => {
         </div>
       </div>
       <div className={styles.communityCommentRow__body}>{commentData.content}</div>
-      <div className={styles.communityCommentRow__tail}>{commentData.createdAt}</div>
+      <div className={styles.communityCommentRow__tail}>
+        {dayjs(commentData?.createdAt).format("YYYY-MM-DD HH:mm")}
+      </div>
     </div>
   );
 };

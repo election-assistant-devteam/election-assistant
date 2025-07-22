@@ -4,13 +4,13 @@
 @font-face {
   font-family: "LINESeedKR";
   font-weight: 400;
-  src: url("/src/assets/fonts/LINESeedKR-Rg.ttf") format("truetype");
+  src: url("/public/fonts/LINESeedKR-Rg.ttf") format("truetype");
 }
 
 @font-face {
   font-family: "LINESeedKR";
   font-weight: 700;
-  src: url("/src/assets/fonts/LINESeedKR-Bd.ttf") format("truetype");
+  src: url("/public/fonts/LINESeedKR-Bd.ttf") format("truetype");
 }
 
 * {
@@ -18,6 +18,9 @@
   margin: 0;
 
   box-sizing: border-box;
+}
+
+body {
   font-family: "LINESeedKR", sans-serif;
   font-weight: 700;
 }
