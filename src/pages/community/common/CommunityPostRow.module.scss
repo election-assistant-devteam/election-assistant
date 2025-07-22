@@ -1,0 +1,49 @@
+.communityPostRow {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-around;
+
+  border-top-color: black;
+  border-top-width: 1px;
+  border-top-style: solid;
+
+  padding: 9px 0;
+  &__title {
+    width: 100%;
+
+    font-size: 16px;
+    font-weight: bold;
+  }
+  &__content {
+    width: 100%;
+
+    font-size: 14px;
+    font-weight: lighter;
+  }
+  &__reactSection {
+    width: 30%;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+
+    &__area {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: start;
+      gap: 5px;
+    }
+  }
+}
+
+.communityPostRow:last-child {
+  border-bottom-color: black;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
