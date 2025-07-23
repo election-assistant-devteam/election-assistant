@@ -17,12 +17,14 @@ import { RecoilRoot } from "recoil";
 import CommunityWritePage from "./pages/community/write/CommunityWritePage";
 import CommunityPostPage from "./pages/community/post/CommunityPostPage";
 import PrivacyPage from "./pages/privacy/PrivacyPage";
+import TosPage from "./pages/tos/TosPage";
 
 function App() {
   return (
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
+          <Route index path="/tos" element={<TosPage />}></Route>
           <Route index path="/privacy" element={<PrivacyPage />}></Route>
           <Route index path="/" element={<MainPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>

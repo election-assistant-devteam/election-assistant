@@ -45,7 +45,12 @@ const CenterView = () => {
             >
               개인정보 처리방침
             </div>
-            <div className={styles.page__contents__creditSection__contents__item}>이용약관</div>
+            <div
+              className={styles.page__contents__creditSection__contents__item}
+              onClick={() => navigate("/tos")}
+            >
+              이용약관
+            </div>
             <div className={styles.page__contents__creditSection__contents__item}>
               ©RunningMate ALL RIGHTS RESERVED
             </div>
