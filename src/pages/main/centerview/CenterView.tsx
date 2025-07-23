@@ -7,8 +7,10 @@ import LiveNewsSection from "./LiveNewsSection";
 import HotPoliticianSection from "./HotPoliticianSection";
 import TopNav from "@/components/common/TopNav/TopNav";
 import { useAPI } from "@/hooks/useAPI";
+import { useNavigate } from "react-router-dom";
 
 const CenterView = () => {
+  const navigate = useNavigate();
   const [userName, setUserName] = useState<string | null>(null);
   const PATH = `/home`;
 
@@ -37,7 +39,10 @@ const CenterView = () => {
         </div>
         <div className={styles.page__contents__creditSection}>
           <div className={styles.page__contents__creditSection__contents}>
-            <div className={styles.page__contents__creditSection__contents__item}>
+            <div
+              className={styles.page__contents__creditSection__contents__item}
+              onClick={() => navigate("/privacy")}
+            >
               개인정보 처리방침
             </div>
             <div className={styles.page__contents__creditSection__contents__item}>이용약관</div>

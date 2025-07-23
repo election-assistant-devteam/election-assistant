@@ -41,7 +41,7 @@ const CommunityWritePage = () => {
       formData.append("images", file);
     });
 
-    const PATH = `http://localhost:9001/posts`;
+    const PATH = `/posts`;
     const accessToken = sessionStorage.getItem("access-token");
     if (!accessToken) {
       alert("로그인 후 글 작성이 가능합니다!");
