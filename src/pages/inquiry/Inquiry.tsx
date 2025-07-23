@@ -64,7 +64,6 @@ function Inquiry() {
 
   return (
     <div className={styles.page}>
-      {/* <NavBar text="1:1 문의"></NavBar> */}
       <div className={styles.page__contents}>
         <div className={styles.page__contents__emailSection}>
           <div className={styles.page__contents__emailSection__head}>답변 받으실 이메일</div>

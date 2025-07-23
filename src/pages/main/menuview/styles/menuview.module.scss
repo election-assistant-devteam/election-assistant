@@ -1,6 +1,6 @@
 .page {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -8,11 +8,16 @@
 
   &__contents {
     width: 100%;
+    height: 100%;
 
     display: flex;
     flex-direction: column;
     justify-content: start;
-    flex: 1;
+
+    @include mobile {
+      flex: 1;
+      min-height: 0;
+    }
 
     color: $color-purple-500;
 
@@ -23,7 +28,7 @@
 
     &__topNav {
       width: 100%;
-      height: 15%;
+      // height: 15%;
       padding: 1rem;
       gap: 7px;
 
@@ -38,10 +43,17 @@
 
     &__menuList {
       width: 100%;
-      height: 85%;
+
+      flex: 1;
+      // min-height: 0;
 
       display: flex;
       flex-direction: column;
+
+      overflow-y: scroll;
+
+      // padding: 1rem;
+      padding: 0 1rem;
 
       &__item {
         position: relative;

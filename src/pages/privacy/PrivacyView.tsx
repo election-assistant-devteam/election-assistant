@@ -1,11 +1,12 @@
 import React from "react";
 import styles from "./PrivacyView.module.scss";
+import PrivacyRow from "./PrivacyRow";
 
 const PrivacyView = () => {
   const privacyPolicyItems = [
     {
       title: "개인정보 수집",
-      content: "서비스 제공을 위해 최소한의 개인정보(예: 이름, 이메일)를 수집합니다.",
+      content: "서비스 제공을 위해 최소한의 개인정보(이메일)를 수집합니다.",
     },
     {
       title: "이용 목적",
@@ -29,7 +30,7 @@ const PrivacyView = () => {
     },
     {
       title: "문의",
-      content: "개인정보 관련 문의는 [이메일 주소 또는 연락처]로 보내주세요.",
+      content: "개인정보 관련 문의는 1:1 문의 페이지를 사용해 보내주세요.",
     },
   ];
   return (
@@ -37,10 +38,7 @@ const PrivacyView = () => {
       <div className={styles.privacyView__title}>개인정보 처리방침</div>
       <div className={styles.privacyView__content}>
         {privacyPolicyItems.map((item, index) => (
-          <div key={index}>
-            <div>{item.title}</div>
-            <div>{item.content}</div>
-          </div>
+          <PrivacyRow data={item} key={index} />
         ))}
       </div>
     </div>
