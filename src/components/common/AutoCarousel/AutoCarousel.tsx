@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AutoCarousel.module.scss";
 import { motion } from "framer-motion";
 import { HotPolitician } from "@/types/centerview";
+import PersonSillhouette from "@assets/personSilhouette.svg?react";
 
 interface Props {
   data: HotPolitician[];
@@ -34,11 +35,16 @@ function AutoCarousel({ data }: Props) {
             }}
             transition={{ duration: 0.5 }}
           >
-            <img
-              src={item.imageUrl}
-              alt={`${item.name} 사진`}
-              className={styles.contents__imageWrapper__image}
-            />
+            {item.imageUrl ? (
+              <img
+                src={item.imageUrl}
+                alt={`${item.name} 사진`}
+                className={styles.contents__imageWrapper__image}
+              />
+            ) : (
+              <PersonSillhouette className={styles.contents__imageWrapper__image} />
+            )}
+
             <div className={styles.contents__imageWrapper__nameTag}>{item.name}</div>
           </motion.div>
         );

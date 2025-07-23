@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./styles/inquiry.module.scss";
-import NavBar from "@/components/common/navigation/NavBar";
 
 function Inquiry() {
   const [text, setText] = useState("");
