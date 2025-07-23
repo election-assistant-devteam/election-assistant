@@ -18,8 +18,6 @@ const CommunityPostView = ({ data }: Props) => {
   const [displayInput, setDisplayInput] = useState<boolean>(false);
   const PATH = data ? `/posts/${data.postId}/comments` : null;
 
-  console.log(data);
-
   const fetchComments = async () => {
     if (!PATH) return;
     const response = await apiCall(PATH, "GET", null, true);

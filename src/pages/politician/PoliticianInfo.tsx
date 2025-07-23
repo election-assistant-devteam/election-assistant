@@ -20,11 +20,9 @@ function PoliticianInfo() {
       const result = await apiCall(PATH, "GET");
 
       if (result.code === 20000) {
-        console.log(result.message);
-        console.log(result.data);
         setData(result.data);
       } else if (result.code === 40400) {
-        console.log(result.message);
+        alert(result.message);
       }
     };
     getPoliticanData();

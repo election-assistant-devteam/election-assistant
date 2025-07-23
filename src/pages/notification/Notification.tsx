@@ -19,7 +19,6 @@ function Notification() {
       const result = await response.json();
 
       if (result.code === 20000) {
-        console.log(result);
         setData(result.data.notifications);
       } else {
         alert(result.code);

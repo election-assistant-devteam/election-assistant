@@ -33,6 +33,7 @@ export const useAPI = <T = any>({ method = "GET", url, data, addAuth }: APIOptio
 
     switch (res.code) {
       case 20000:
+        console.log(res.data);
         setResponse(res.data);
         setLoading(false);
         break;
