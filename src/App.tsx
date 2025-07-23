@@ -18,17 +18,18 @@ import NotificationPostPage from "@/pages/notification/post";
 import { RecoilRoot } from "recoil";
 import CommunityWritePage from "./pages/community/write/CommunityWritePage";
 import CommunityPostPage from "./pages/community/post/CommunityPostPage";
+import PrivacyPage from "./pages/privacy/PrivacyPage";
 
 function App() {
   return (
     <RecoilRoot>
       <BrowserRouter>
         <Routes>
+          <Route index path="/privacy" element={<PrivacyPage />}></Route>
           <Route index path="/" element={<MainPage />}></Route>
           <Route path="/login" element={<LoginPage />}></Route>
           <Route path="/recall" element={<RecallPage />}></Route>
           <Route path="/register" element={<RegisterPage />}></Route>
-          {/* <Route path="/main" element={<MainPage />}></Route> */}
           <Route path="/calendar" element={<CalendarPage />}></Route>
           <Route path="/candidate/:id" element={<CandidatePage />}></Route>
           <Route path="/politician/:id" element={<PoliticianPage />}></Route>
