@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import AutoCarousel from "@/components/common/AutoCarousel/AutoCarousel";
 import { MdArrowForwardIos } from "react-icons/md";
 import SearchBar from "@/components/common/SearchBar/SearchBar";
+import { HotPolitician } from "@/types/centerview";
 
 type Props = {
   userName: string;
+  hotPoliData: HotPolitician[];
 };
 
-const HotPoliticianSection = ({ userName }: Props) => {
+const HotPoliticianSection = ({ userName, hotPoliData }: Props) => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = React.useState(false);
   const accessToken = sessionStorage.getItem("access-token");
@@ -21,6 +23,10 @@ const HotPoliticianSection = ({ userName }: Props) => {
       setIsLogin(false);
     }
   }, [accessToken]);
+
+  // useEffect(() => {
+  //   console.log(hotPoliData);
+  // }, [hotPoliData]);
 
   return (
     <div className={styles.searchSection}>
@@ -78,7 +84,7 @@ const HotPoliticianSection = ({ userName }: Props) => {
         )}
 
         <div className={styles.searchSection__interest__imageArea}>
-          <AutoCarousel></AutoCarousel>
+          <AutoCarousel data={hotPoliData} />
         </div>
       </div>
     </div>

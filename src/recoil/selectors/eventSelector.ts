@@ -13,7 +13,7 @@ export const eventData = selector({
     const response = await apiCall(PATH, "GET", undefined, true);
 
     if (response.code === 20000) {
-      console.log("데이터 요청 성공");
+      console.log(response);
       return response.data.calendar;
     } else {
       console.error(response.error);

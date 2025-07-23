@@ -68,7 +68,6 @@ const BriefInfoContainer = ({ data }: Props) => {
       if (response.code === 20000) {
         setObserve(!observe);
       } else {
-        console.log(response);
         alert("서버 에러... 나중에 다시 시도하세요");
       }
     } else {
@@ -76,7 +75,6 @@ const BriefInfoContainer = ({ data }: Props) => {
       if (response.code === 20000) {
         setObserve(!observe);
       } else {
-        console.log(response);
         alert("서버 에러... 나중에 다시 시도하세요");
       }
     }
