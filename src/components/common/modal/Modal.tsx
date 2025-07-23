@@ -24,7 +24,6 @@ function Modal({ type, available, data }: Props) {
         setPartyArray(response.data);
       } else if (type === "정치인") {
         const response = await apiCall(POLITICIAN_PATH, "GET");
-        console.log(response.data);
 
         setPoliticianArray(response.data);
       } else {

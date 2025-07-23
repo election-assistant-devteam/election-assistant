@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import AutoCarousel from "@/components/common/AutoCarousel/AutoCarousel";
 import { MdArrowForwardIos } from "react-icons/md";
 import SearchBar from "@/components/common/SearchBar/SearchBar";
+import { HotPolitician } from "@/types/centerview";
 
 type Props = {
   userName: string;
+  hotPoliData: HotPolitician[];
 };
 
-const HotPoliticianSection = ({ userName }: Props) => {
+const HotPoliticianSection = ({ userName, hotPoliData }: Props) => {
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = React.useState(false);
   const accessToken = sessionStorage.getItem("access-token");
@@ -21,6 +23,10 @@ const HotPoliticianSection = ({ userName }: Props) => {
       setIsLogin(false);
     }
   }, [accessToken]);
+
+  // useEffect(() => {
+  //   console.log(hotPoliData);
+  // }, [hotPoliData]);
 
   return (
     <div className={styles.searchSection}>
@@ -43,10 +49,10 @@ const HotPoliticianSection = ({ userName }: Props) => {
         {isLogin ? (
           <div className={styles.searchSection__interest__textArea}>
             <div className={styles.searchSection__interest__textArea__text}>
-              {userName}님이 <br />
-              관심있을만한
+              {userName}님 환영합니다
               <br />
-              정치인이에요
+              <br />
+              사용자들이 많이 지켜보는 정치인을 확인하세요!
             </div>
             <div
               className={styles.searchSection__interest__textArea__edit}
@@ -78,7 +84,7 @@ const HotPoliticianSection = ({ userName }: Props) => {
         )}
 
         <div className={styles.searchSection__interest__imageArea}>
-          <AutoCarousel></AutoCarousel>
+          <AutoCarousel data={hotPoliData} />
         </div>
       </div>
     </div>

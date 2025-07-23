@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AutoCarousel.module.scss";
 import { motion } from "framer-motion";
+import { HotPolitician } from "@/types/centerview";
+import PersonSillhouette from "@assets/personSilhouette.svg?react";
 
-function AutoCarousel() {
-  const images = [
-    {
-      name: "추미애",
-      img: "images/sample1.png",
-    },
-    {
-      name: "이재명",
-      img: "images/sample2.png",
-    },
-    {
-      name: "원희룡",
-      img: "images/sample3.png",
-    },
-  ];
+interface Props {
+  data: HotPolitician[];
+}
+
+function AutoCarousel({ data }: Props) {
   const [index, setIndex] = useState(0);
-  const total = images.length;
+  const total = data?.length;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -29,7 +21,7 @@ function AutoCarousel() {
 
   return (
     <div className={styles.contents}>
-      {images.map((item, i) => {
+      {data?.map((item, i) => {
         const offset = (i - index + total) % total;
         return (
           <motion.div
@@ -43,7 +35,16 @@ function AutoCarousel() {
             }}
             transition={{ duration: 0.5 }}
           >
-            <img src={item.img} alt="" className={styles.contents__imageWrapper__image} />
+            {item.imageUrl ? (
+              <img
+                src={item.imageUrl}
+                alt={`${item.name} 사진`}
+                className={styles.contents__imageWrapper__image}
+              />
+            ) : (
+              <PersonSillhouette className={styles.contents__imageWrapper__image} />
+            )}
+
             <div className={styles.contents__imageWrapper__nameTag}>{item.name}</div>
           </motion.div>
         );

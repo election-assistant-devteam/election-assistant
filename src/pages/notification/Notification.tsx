@@ -7,26 +7,25 @@ function Notification() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const getNotification = async () => {
-      const response = await fetch("http://13.124.154.53:80/api/notification", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+  // useEffect(() => {
+  //   const getNotification = async () => {
+  //     const response = await fetch("http://13.124.154.53:80/api/notification", {
+  //       method: "GET",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
 
-      const result = await response.json();
+  //     const result = await response.json();
 
-      if (result.code === 20000) {
-        console.log(result);
-        setData(result.data.notifications);
-      } else {
-        alert(result.code);
-      }
-    };
-    getNotification();
-  }, []);
+  //     if (result.code === 20000) {
+  //       setData(result.data.notifications);
+  //     } else {
+  //       alert(result.code);
+  //     }
+  //   };
+  //   getNotification();
+  // }, []);
   return (
     <div className={styles.page}>
       {/* <NavBar text="공지사항"></NavBar> */}

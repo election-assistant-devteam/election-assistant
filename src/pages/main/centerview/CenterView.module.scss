@@ -1,15 +1,12 @@
 .page {
   width: 100%;
   min-width: 351px;
-  // min-height: 100vh;
   height: 100vh;
 
   display: flex;
   flex-direction: column;
-  // align-items: center;
-  // justify-content: space-between;
 
-  // overflow-y: auto;
+  overflow-y: scroll;
 
   &__contents {
     width: 100%;
@@ -82,11 +79,10 @@
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        flex: 1;
+        flex: none;
 
         width: 100%;
         height: 15rem;
-        // min-height: 20rem;
 
         background-color: $color-gray-200;
 
@@ -99,6 +95,8 @@
           &__item {
             font-weight: lighter;
             font-size: smaller;
+
+            cursor: pointer;
           }
         }
       }

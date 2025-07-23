@@ -7,6 +7,8 @@ import CommunityRuleText from "./CommunityRuleText";
 import { apiCall } from "@/services/authServices";
 import { useNavigate } from "react-router-dom";
 
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
+
 const CommunityWritePage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -41,7 +43,7 @@ const CommunityWritePage = () => {
       formData.append("images", file);
     });
 
-    const PATH = `http://localhost:9001/posts`;
+    const PATH = `${API_BASE}/posts`;
     const accessToken = sessionStorage.getItem("access-token");
     if (!accessToken) {
       alert("로그인 후 글 작성이 가능합니다!");

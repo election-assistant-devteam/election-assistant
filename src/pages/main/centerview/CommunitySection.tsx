@@ -1,29 +1,15 @@
-import React from "react";
 import styles from "./CommunitySection.module.scss";
 import { FaHotjar } from "react-icons/fa";
 import { MdArrowForwardIos } from "react-icons/md";
 import CommunityHotPost from "./CommunityHotPost";
 import { useNavigate } from "react-router-dom";
+import { HotPost } from "@/types/centerview";
 
-const hotPostTitles = [
-  {
-    id: 0,
-    title: "나라꼴 개판이네",
-    link: "",
-  },
-  {
-    id: 1,
-    title: "그 분 깜빵가서 속 시원하면 개추 ㅋㅋㅋ",
-    link: "",
-  },
-  {
-    id: 2,
-    title: "계엄은 선 넘었지...",
-    link: "",
-  },
-];
+interface Props {
+  hotPosts: HotPost[];
+}
 
-const CommunitySection = () => {
+const CommunitySection = ({ hotPosts }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -38,18 +24,16 @@ const CommunitySection = () => {
         </div>
       </div>
       <div className={styles.community__body}>
-        {hotPostTitles.map((item, index) => (
-          <CommunityHotPost title={item.title} key={item.id}></CommunityHotPost>
+        {hotPosts?.map((item, index) => (
+          <CommunityHotPost title={item.title} key={index}></CommunityHotPost>
         ))}
       </div>
 
       <div className={styles.community__foot} onClick={() => navigate("/community")}>
-        {/* <div className={styles.community__foot__button}> */}
         <div className={styles.community__foot__button__text}>커뮤니티 바로가기</div>
         <div className={styles.community__foot__button__icon}>
           <MdArrowForwardIos />
         </div>
-        {/* </div> */}
       </div>
     </div>
   );

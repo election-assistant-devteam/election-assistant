@@ -23,8 +23,6 @@ const InputRow = ({ postId, clickedCommentId, onCommentSubmit, displayInput }: P
   const [anonymous, setAnonymous] = useState<boolean>(false);
   const PATH = `/posts/${postId}/comments`;
 
-  console.log(displayInput);
-
   const addComment = async () => {
     const data: CommentReqData = {
       writerId: Number(sessionStorage.getItem("id")),
@@ -32,17 +30,14 @@ const InputRow = ({ postId, clickedCommentId, onCommentSubmit, displayInput }: P
       content: inputValue,
       parentId: clickedCommentId,
     };
-    console.log(data);
     const response = await apiCall(PATH, "POST", data, true);
 
     if (response.code === 20000) {
       alert("댓글이 성공적으로 작성되었습니다");
       setInputValue("");
       onCommentSubmit();
-      console.log(response.data);
     } else {
       alert("에러");
-      console.log(response.code);
     }
   };
   return (
