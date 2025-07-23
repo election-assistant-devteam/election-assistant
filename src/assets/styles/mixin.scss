@@ -3,6 +3,12 @@ $mobile2: 430px;
 $desktop1: 901px;
 $desktop2: 1400px;
 
+@mixin non-desktop {
+  @media (max-width: $desktop1) {
+    @content;
+  }
+}
+
 @mixin mobile {
   @media (min-width: $mobile1) and (max-width: $mobile2) {
     @content;

@@ -49,10 +49,10 @@ const HotPoliticianSection = ({ userName, hotPoliData }: Props) => {
         {isLogin ? (
           <div className={styles.searchSection__interest__textArea}>
             <div className={styles.searchSection__interest__textArea__text}>
-              {userName}님이 <br />
-              관심있을만한
+              {userName}님 환영합니다
               <br />
-              정치인이에요
+              <br />
+              사용자들이 많이 지켜보는 정치인을 확인하세요!
             </div>
             <div
               className={styles.searchSection__interest__textArea__edit}

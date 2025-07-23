@@ -1,10 +1,8 @@
-//import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import InitialPage from "@/pages/initial";
 import LoginPage from "@/pages/login/LoginPage";
 import RecallPage from "@/pages/recall";
 import RegisterPage from "@/pages/register/RegisterPage";
-import MainPage from "@/pages/main";
+import MainPage from "@/pages/main/MainPage";
 import CalendarPage from "@/pages/calendar/CalendarView";
 import CandidatePage from "@/pages/candidate/CandidateView";
 import PoliticianPage from "@/pages/politician/PoliticianInfo";
