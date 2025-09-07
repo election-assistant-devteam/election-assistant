@@ -61,7 +61,6 @@ function Modal({ type, available, data }: Props) {
   };
 
   const handleDropDownKey = (event) => {
-    //input에 값이 있을때만 작동
     if (isHaveInputValue) {
       if (event.key === "ArrowDown" && dropDownList.length - 1 > dropDownItemIndex) {
         setDropDownItemIndex(dropDownItemIndex + 1);
