@@ -16,7 +16,6 @@ function NavBar({ text, className }: Props) {
 
   return (
     <div className={`${styles.navBar} ${className}`}>
-      {/* <SlArrowLeft /> */}
       <MdKeyboardArrowLeft size="25" className={styles.navBar__goBackButton} onClick={goBack} />
       <div className={styles.navBar__innerText}>{text}</div>
     </div>
