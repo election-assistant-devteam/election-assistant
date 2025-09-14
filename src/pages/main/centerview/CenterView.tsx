@@ -39,21 +39,13 @@ const CenterView = () => {
         </div>
         <div className={styles.page__contents__creditSection}>
           <div className={styles.page__contents__creditSection__contents}>
-            <div
-              className={styles.page__contents__creditSection__contents__item}
-              onClick={() => navigate("/privacy")}
-            >
+            <div className={styles.page__contents__creditSection__contents__item} onClick={() => navigate("/privacy")}>
               개인정보 처리방침
             </div>
-            <div
-              className={styles.page__contents__creditSection__contents__item}
-              onClick={() => navigate("/tos")}
-            >
+            <div className={styles.page__contents__creditSection__contents__item} onClick={() => navigate("/tos")}>
               이용약관
             </div>
-            <div className={styles.page__contents__creditSection__contents__item}>
-              ©RunningMate ALL RIGHTS RESERVED
-            </div>
+            <div className={styles.page__contents__creditSection__contents__item}>©RunningMate ALL RIGHTS RESERVED</div>
           </div>
         </div>
       </div>
